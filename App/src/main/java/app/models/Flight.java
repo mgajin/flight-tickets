@@ -6,7 +6,9 @@ public class Flight {
 
     private Integer id;
     private List<Ticket> tickets;
-    private City origin;
-    private City destination;
+    public City origin;
+    public City destination;
+
+
 
 }

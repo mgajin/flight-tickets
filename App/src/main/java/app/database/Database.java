@@ -1,6 +1,7 @@
 package app.database;
 
 import app.models.Company;
+import app.models.Flight;
 import app.models.Ticket;
 import app.models.User;
 
@@ -16,11 +17,18 @@ public class Database {
     private static List<User> USERS;
     private static List<Ticket> TICKETS;
     private static List<Company> COMPANIES;
+    private static List<Flight> FLIGHTS;
 
     static {
         USERS = new ArrayList<>();
+        FLIGHTS = generateFlights();
         TICKETS = generateTickets();
         COMPANIES = generateCompanies();
+    }
+
+    private static List<Flight> generateFlights() {
+
+        return new ArrayList<>();
     }
 
     private static List<Ticket> generateTickets() {
@@ -53,6 +61,10 @@ public class Database {
 
     public synchronized static List<Ticket> getAllTickets() {
         return TICKETS;
+    }
+
+    public synchronized static List<Flight> getFlights() {
+        return FLIGHTS;
     }
 
     public synchronized static List<Ticket> getOneWayTickets() {
