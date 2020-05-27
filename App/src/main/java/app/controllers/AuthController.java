@@ -39,10 +39,21 @@ public class AuthController {
         return gson.toJson(user);
     };
 
-//    TODO Implement register system
     public static Route register = (Request req, Response res) -> {
 
-        return "";
+        String body = req.body();
+        User user = gson.fromJson(body, User.class);
+
+        if (UserService.getUser(user.getUsername()) != null) {
+            res.status(401);
+            return "User already exists!";
+        }
+
+        AuthService.registerUser(user);
+        res.type("application/json");
+        res.status(201);
+
+        return gson.toJson(user);
     };
 
 }

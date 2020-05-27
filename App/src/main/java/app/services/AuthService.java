@@ -1,5 +1,6 @@
 package app.services;
 
+import app.database.Database;
 import app.models.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,6 +17,11 @@ public class AuthService {
 
     public static void login(User user) {
         user.setToken(generateToken(user));
+    }
+
+    public static void registerUser(User user) {
+        user.setToken(generateToken(user));
+        Database.addUser(user);
     }
 
     private static String generateToken(User user) {
