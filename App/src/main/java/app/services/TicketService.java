@@ -8,6 +8,25 @@ import java.util.stream.Collectors;
 
 public class TicketService {
 
+    public static void createTicket(Ticket ticket) {
+        Database.addTicket(ticket);
+    }
+
+    public static Ticket getTicket(int id) {
+
+        for (Ticket ticket : Database.getTickets()) {
+            if (ticket.getId() == id) {
+                return ticket;
+            }
+        }
+
+        return null;
+    }
+
+    public static void deleteTicket(Ticket ticket) {
+        Database.getTickets().remove(ticket);
+    }
+
     public static List<Ticket> getAllTickets() {
         return Database.getTickets();
     }

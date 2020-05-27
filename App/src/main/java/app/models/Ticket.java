@@ -16,4 +16,27 @@ public class Ticket {
         return oneWay;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public Date getDepartDate() {
+        return departDate;
+    }
+
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public Integer getFlightId() {
+        return flightId;
+    }
+
+    public Long getCount() {
+        return count;
+    }
 }
