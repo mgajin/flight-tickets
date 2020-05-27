@@ -1,5 +1,6 @@
 package app.server;
 
+import app.routes.AuthRoutes;
 import app.routes.FlightRoutes;
 import app.routes.TicketRoutes;
 
@@ -15,5 +16,6 @@ public class Server {
 
         TicketRoutes ticketRoutes = new TicketRoutes();
         FlightRoutes flightRoutes = new FlightRoutes();
+        AuthRoutes authRoutes = new AuthRoutes();
     }
 }
