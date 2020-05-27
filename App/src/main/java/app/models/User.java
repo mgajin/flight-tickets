@@ -9,6 +9,15 @@ public class User {
     private String password;
     private UserType type;
     private List<Reservation> bookings;
+    private String token;
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
 
     public Integer getId() {
         return id;

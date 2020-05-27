@@ -14,7 +14,11 @@ public class AuthService {
 
     static Key key = MacProvider.generateKey();
 
-    public static String generateToken(User user) {
+    public static void login(User user) {
+        user.setToken(generateToken(user));
+    }
+
+    private static String generateToken(User user) {
 
         String token;
         Map<String, Object> claims = new HashMap<>();
