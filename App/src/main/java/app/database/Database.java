@@ -7,7 +7,6 @@ import app.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Database {
 
@@ -51,28 +50,20 @@ public class Database {
         USERS.add(user);
     }
 
-    public synchronized static List<User> getUsers() {
-        return USERS;
-    }
-
     public synchronized static void addTicket(Ticket ticket) {
         TICKETS.add(ticket);
     }
 
-    public synchronized static List<Ticket> getAllTickets() {
+    public synchronized static List<User> getUsers() {
+        return USERS;
+    }
+
+    public synchronized static List<Ticket> getTickets() {
         return TICKETS;
     }
 
     public synchronized static List<Flight> getFlights() {
         return FLIGHTS;
-    }
-
-    public synchronized static List<Ticket> getOneWayTickets() {
-        return TICKETS.stream().filter(Ticket::isOneWay).collect(Collectors.toList());
-    }
-
-    public synchronized static List<Ticket> getTwoWayTickets() {
-        return TICKETS.stream().filter(ticket -> !ticket.isOneWay()).collect(Collectors.toList());
     }
 
     public synchronized static List<Company> getCompanies() {

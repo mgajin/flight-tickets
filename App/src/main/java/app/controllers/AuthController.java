@@ -1,13 +1,12 @@
-package app.services;
+package app.controllers;
 
-import app.database.Database;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
-public class AuthService {
+public class AuthController {
 
-    public static Route getMe = (Request req, Response res) -> {
+    public static Route getUser = (Request req, Response res) -> {
 
         return "";
     };

@@ -1,15 +1,15 @@
 package app.routes;
 
-import app.services.AuthService;
+import app.controllers.AuthController;
 
 import static spark.Spark.*;
 
 public class AuthRoutes {
 
     static {
-        get("app/auth/user", AuthService.getMe);
-        post("app/auth/login", AuthService.login);
-        post("app/auth/register", AuthService.register);
+        get("app/auth/user", AuthController.getUser);
+        post("app/auth/login", AuthController.login);
+        post("app/auth/register", AuthController.register);
     }
 
 }
