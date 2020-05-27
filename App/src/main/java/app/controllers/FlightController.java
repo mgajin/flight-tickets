@@ -3,6 +3,7 @@ package app.controllers;
 import app.database.Database;
 import app.models.Flight;
 import app.services.FlightService;
+import com.google.gson.Gson;
 import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
@@ -11,6 +12,8 @@ import spark.Route;
 import java.util.List;
 
 public class FlightController {
+
+    private static Gson gson = new Gson();
 
     public static Route getFlights = (Request req, Response res) -> {
 
@@ -29,7 +32,7 @@ public class FlightController {
             flights = Database.getFlights();
         }
 
-        return flights;
+        return gson.toJson(flights);
     };
 
 }

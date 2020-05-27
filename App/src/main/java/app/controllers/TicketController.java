@@ -7,13 +7,17 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.util.List;
+
 public class TicketController {
 
     private static Gson gson = new Gson();
 
     public static Route getTickets = (Request req, Response res) -> {
 
-        return TicketService.getAllTickets();
+        List<Ticket> tickets = TicketService.getAllTickets();
+
+        return gson.toJson(tickets);
     };
 
     public static Route createTicket = (Request req, Response res) -> {
