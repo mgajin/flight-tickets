@@ -1,0 +1,36 @@
+#landing {
+    height: 90vh;
+    position: relative;
+
+    .img-holder {
+        background-image: url('../images/landpage.jpg');
+        
+        height: 50%;
+        width: 100%;
+    }
+}
+
+.booking-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    min-height: 15em;
+    max-width: 50em;
+    // border-radius: 5px;
+    background: $main-blue;
+    color: $light;
+    box-shadow: $shadow;
+
+    h5 {
+        margin-top: .8em;
+    }
+
+    input {
+        background: $blue;
+        border: none;
+        color: $light;
+    }
+}
+

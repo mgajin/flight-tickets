@@ -1,1 +1,94 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+p {
+  margin: 0;
+}
+
+footer {
+  height: 20vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.img-holder {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.btn {
+  width: 100%;
+  text-transform: uppercase;
+  background: #AD2D4E;
+  color: #E5F0FF;
+}
+
+.btn:hover {
+  color: #E5F0FF;
+}
+
+#landing {
+  height: 90vh;
+  position: relative;
+}
+
+#landing .img-holder {
+  background-image: url("../images/landpage.jpg");
+  height: 50%;
+  width: 100%;
+}
+
+.booking-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  min-height: 15em;
+  max-width: 50em;
+  background: #154481;
+  color: #E5F0FF;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+.booking-card h5 {
+  margin-top: .8em;
+}
+
+.booking-card input {
+  background: #5474B6;
+  border: none;
+  color: #E5F0FF;
+}
+/*# sourceMappingURL=main.css.map */
