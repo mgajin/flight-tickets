@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "main.scss",
+        "modules/_colors.scss",
+        "styles/_base.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}
