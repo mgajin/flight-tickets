@@ -34,3 +34,32 @@
     }
 }
 
+#flight-table {
+
+    div {
+        padding: 0;
+    }
+
+    .table-item {
+        display: flex;
+        justify-content: space-between;
+    
+        margin: .5em;
+        padding: .5em .8em;
+        box-shadow: $basic-shadow;
+        
+        h5 {
+            font-weight: bold;
+        }
+    
+        &:hover {
+            h5 {
+                color: $blue;
+            }
+            cursor: pointer;
+        }
+    }
+}
+
+
+

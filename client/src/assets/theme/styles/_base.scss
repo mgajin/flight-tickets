@@ -66,3 +66,53 @@ footer {
         color: $light;   
     }
 }
+
+.btn-submit {
+
+    padding: .5em;
+    background: $blue;
+    border: none;
+    color: $light;
+    text-transform: uppercase;
+    margin: .5em;
+
+    &:hover {
+        background: $main-blue;
+    }
+}
+
+section {    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    width: 10em;
+
+    &::after {
+        content: '';
+        background: $gray;
+        display: block;
+        width: 20%;
+        margin: .5em;
+        height: 1px;
+    }
+}
+
+.color-blue {
+    color: $blue;
+}
+
+.color-main {
+    color: $main-blue;
+}
+
+.color-light {
+    color: $gray;
+}
