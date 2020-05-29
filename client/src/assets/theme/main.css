@@ -2,6 +2,28 @@ p {
   margin: 0;
 }
 
+.navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  color: #154481;
+  background: white;
+  z-index: 2;
+}
+
+.navbar-light .navbar-brand {
+  color: #154481;
+}
+
+.navbar-light .navbar-brand:hover {
+  color: #154481;
+}
+
+.navbar-light .nav-item.active .nav-link,
+.navbar-light .nav-item .nav-link:hover {
+  color: #154481;
+}
+
 footer {
   height: 20vh;
   display: -webkit-box;
@@ -43,6 +65,7 @@ footer {
   text-transform: uppercase;
   background: #AD2D4E;
   color: #E5F0FF;
+  border-radius: 0;
 }
 
 .btn:hover {
@@ -90,5 +113,6 @@ footer {
   background: #5474B6;
   border: none;
   color: #E5F0FF;
+  border-radius: 0;
 }
 /*# sourceMappingURL=main.css.map */

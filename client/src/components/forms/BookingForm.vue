@@ -5,19 +5,19 @@
                 <div class="form-row">
                     <div class="col-6 col-lg form-group">
                         <label for="from">From</label>
-                        <input type="text" id="from" class="form-control" placeholder="From">
+                        <input type="text" id="from" class="form-control">
                     </div>
                     <div class="col-6 col-lg form-group">
                         <label for="to">To</label>
-                        <input type="text" id="to" class="form-control" placeholder="To">
+                        <input type="text" id="to" class="form-control">
                     </div>
                     <div class="col-6 col-lg form-group">
                         <label for="departureDate">Departure date</label>
-                        <input type="date" id="departureDate" class="form-control" placeholder="Departure date">
+                        <input type="date" id="departureDate" class="form-control">
                     </div>
                     <div class="col-6 col-lg form-group">
                         <label for="returnDate">Return date</label>
-                        <input type="date"  class="form-control" placeholder="Return date">
+                        <input type="date"  class="form-control">
                     </div>
                     <div class="col-12 form-group">
                         <button class="btn">search</button>

@@ -2,6 +2,32 @@ p {
     margin: 0;
 }
 
+.navbar {
+    position: sticky;
+    top: 0;
+    color: $main-blue;
+    background: white;
+    z-index: 2;
+}
+
+.navbar-light {
+
+    .navbar-brand {
+        color: $main-blue;
+
+        &:hover {
+            color: $main-blue;
+        }
+    }
+
+    .nav-item {
+        &.active .nav-link, 
+        .nav-link:hover {
+            color: $main-blue;
+        }
+    }
+}
+
 footer {
     height: 20vh;
     display: flex;
@@ -34,6 +60,7 @@ footer {
     text-transform: uppercase;
     background: $red;
     color: $light;
+    border-radius: 0;
 
     &:hover {
         color: $light;   
