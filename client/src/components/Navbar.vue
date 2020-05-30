@@ -28,9 +28,6 @@
                 <router-link to="/login" class="nav-link">Login</router-link>
             </li>
             <li class="nav-item">
-                <router-link to="/register" class="nav-link">Register</router-link>
-            </li>
-            <li class="nav-item">
                 <router-link to="/profile" class="nav-link">Profile</router-link>
             </li>
             <!-- <li v-if="this.isLogged" class="nav-item">
