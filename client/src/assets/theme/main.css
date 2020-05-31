@@ -164,8 +164,8 @@ section {
   max-width: 50em;
   background: #154481;
   color: #E5F0FF;
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
-          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .booking-card h5 {
@@ -284,5 +284,61 @@ section {
 #login-form a:hover {
   text-decoration: none;
   color: #154481;
+}
+
+#radio-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+#flight-ticket {
+  margin: .5em;
+  padding: .8em;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+#flight-ticket .btn {
+  background: #154481;
+}
+
+#flight-ticket label {
+  margin: 0;
+}
+
+#flight-ticket h5 {
+  font-weight: bold;
+  margin: 0;
+}
+
+#flight-ticket:hover {
+  cursor: pointer;
+}
+
+#flight-ticket:hover h5 {
+  color: #5474B6;
+}
+
+.flight-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.flight-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=main.css.map */

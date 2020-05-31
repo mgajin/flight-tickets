@@ -1,0 +1,43 @@
+#radio-group {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#flight-ticket {
+
+    margin: .5em;
+    padding: .8em;
+    box-shadow: $shadow;
+
+    .btn {
+        background: $main-blue;
+    }
+    
+    label {
+        margin: 0;
+    }
+
+    h5 {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    &:hover {
+        h5 {
+            color: $blue;
+        }
+        cursor: pointer;
+    }
+}
+
+.flight-title {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 1em;
+}
+
+.flight-info {
+    display: flex;
+    justify-content: space-between;
+}
