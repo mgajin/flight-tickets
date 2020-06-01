@@ -292,13 +292,63 @@ section {
   color: #154481;
 }
 
-#radio-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+#filter-menu {
+  margin: .5em;
+}
+
+#filter-menu #filter {
+  margin: 1em 0;
+  margin-bottom: 0;
+  height: 2.5em;
+  color: #154481;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
+#filter-menu label {
+  color: #a0a0a0;
+}
+
+#filter-menu .form-control, #filter-menu select {
+  height: 2em;
+  padding: 0;
+  padding-left: .5em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  border-bottom: 1.5px solid #154481;
+  border-radius: 0;
+}
+
+#booking-collapse .btn {
+  border-radius: 2px;
+  background: #154481;
+}
+
+#booking-collapse .btn:hover {
+  background: #5474B6;
+}
+
+#booking-collapse .collapse-btn {
+  background: white;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+  color: #154481;
+}
+
+#booking-collapse .collapse-btn:hover {
+  color: #5474B6;
+  background: white;
+}
+
+#booking-collapse .form-row {
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  margin: 1em .5em;
+  padding: .5em 0;
 }
 
 #flight-ticket {
