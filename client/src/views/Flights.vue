@@ -14,7 +14,7 @@
 <script>
 
 import FlightTickets from '../components/flights/FlightTickets'
-import FilterMenu from '../components/forms/SideMenu'
+import FilterMenu from '../components/forms/FilterMenu'
 
 import { mapActions, mapGetters } from "vuex"
 

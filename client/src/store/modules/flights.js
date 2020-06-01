@@ -32,6 +32,17 @@ const actions = {
         } catch (error) {
             alert(error.message);
         }
+    },
+
+    // Get filtered tickets from server
+    async FILTER_TICKETS({ commit }, filter) {
+        try {
+            const response = await Axios.get(`http://localhost:3000/app/tickets?oneWay=${filter}`);
+
+            commit('set_tickets', response.data);
+        } catch (error) {
+            alert(error.message);
+        }
     }
 };
 

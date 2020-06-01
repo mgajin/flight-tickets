@@ -2,6 +2,15 @@
 
     margin: .5em;
 
+    #filter {
+        margin: 1em 0;
+        margin-bottom: 0;
+        height: 2.5em;
+        color: $main-blue;
+        box-shadow: $shadow;
+        border: none;
+    }
+
     label {
         color: $gray;
     }
@@ -49,16 +58,11 @@
     }
 }
 
-.filters {
-    display: flex;
-    margin: 1em;
-    margin-bottom: 0;
+// .custom-select {
+//     height: 2em;
+// }
 
-    div {
-        text-align: center;
-        width: 50%;
-    }
-}
+
 
 #flight-ticket {
 
