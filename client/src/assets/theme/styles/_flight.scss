@@ -1,6 +1,63 @@
-#radio-group {
+#filter-menu {
+
+    margin: .5em;
+
+    label {
+        color: $gray;
+    }
+    
+    .form-control, select {
+        height: 2em;
+        padding: 0;
+        padding-left: .5em;
+        align-items: center;
+        border: none;
+        border-bottom: 1.5px solid $main-blue;
+        border-radius: 0;
+    }
+}
+
+#booking-collapse {
+
+
+    .btn {
+        border-radius: 2px;
+        background: $main-blue;
+
+        &:hover {
+            background: $blue;
+        }
+    }
+
+    .collapse-btn {
+        background: white;
+        box-shadow: $shadow;
+        border-radius: 0;
+        color: $main-blue;
+
+        &:hover {
+            color: $blue;
+            background: white;
+        }
+
+    }
+    
+    .form-row {
+        box-shadow: $shadow;
+        margin: 1em .5em;
+        padding: .5em 0;
+    }
+}
+
+.filters {
     display: flex;
-    justify-content: space-evenly;
+    margin: 1em;
+    margin-bottom: 0;
+
+    div {
+        text-align: center;
+        width: 50%;
+    }
 }
 
 #flight-ticket {

@@ -3,13 +3,17 @@
         <div class="form-row border">
             <div class="col-6 form-group">
                 <label for="from">From</label>
-                <section class="custom-select">
-                    <option value="">Belgrade</option>
-                </section>
+                <input type="text" value="Belgrade" id="to" class="form-control">
             </div>
             <div class="col-6 form-group">
                 <label for="to">To</label>
-                <input type="text" id="to" class="form-control">
+                <select class="custom-select">
+                    <option>Miami</option>
+                    <option>New York</option>
+                    <option>Los Angeles</option>
+                    <option>London</option>
+                    <option>Boston</option>
+                </select>
             </div>
             <div class="col-12 form-group" id="radio-group">
                 <div class="form-check">

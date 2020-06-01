@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-3" id="filter-form">
-                <FilterForm />
+            <div class="col-12 col-md-4 col-lg-3">
+                <FilterMenu />
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-8 col-lg-9">
                 <FlightTickets :tickets="getTickets" :flights="getFlights"/>
             </div>
         </div>
@@ -13,16 +13,16 @@
 
 <script>
 
-import FilterForm from '../components/forms/FilterForm'
 import FlightTickets from '../components/flights/FlightTickets'
+import FilterMenu from '../components/forms/SideMenu'
 
 import { mapActions, mapGetters } from "vuex"
 
 export default {
     name: 'Flights',
     components: {
-        FilterForm,
-        FlightTickets
+        FlightTickets,
+        FilterMenu
     },
     methods: {
         ...mapActions(['GET_TICKETS', 'GET_FLIGHTS'])

@@ -13,7 +13,7 @@
       <FlightTable :flights="getFlights"/>
       <button class="btn-submit" @click="this.seeOffers">see all offers</button>
     </section>
-
+    
   </div>
 </template>
 
