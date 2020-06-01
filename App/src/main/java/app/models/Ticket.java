@@ -12,6 +12,34 @@ public class Ticket {
     private Integer flightId;
     private Long count;
 
+    public Ticket(Integer id) {
+        this.id = id;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void setOneWay(boolean oneWay) {
+        this.oneWay = oneWay;
+    }
+
+    public void setDepartDate(Date departDate) {
+        this.departDate = departDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public void setFlightId(Integer flightId) {
+        this.flightId = flightId;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+
     public boolean isOneWay() {
         return oneWay;
     }

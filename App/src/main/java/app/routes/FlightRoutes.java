@@ -7,7 +7,7 @@ import static spark.Spark.*;
 public class FlightRoutes {
 
     static {
-        get("app/routes", FlightController.getFlights);
+        get("app/flights", FlightController.getFlights);
     }
 
 }

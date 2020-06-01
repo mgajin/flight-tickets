@@ -18,11 +18,11 @@ public class Database {
     private static List<Reservation> RESERVATIONS;
 
     static {
-        USERS = generateUsers();
+        COMPANIES = generateCompanies();
         CITIES = generateCities();
+        USERS = generateUsers();
         TICKETS = generateTickets();
         FLIGHTS = generateFlights();
-        COMPANIES = generateCompanies();
         RESERVATIONS = new ArrayList<>();
     }
 
@@ -56,12 +56,34 @@ public class Database {
 
     private static List<Flight> generateFlights() {
 
-        return new ArrayList<>();
+        List<Flight> list = new ArrayList<>();
+
+        for (int i=0; i < 10; i++) {
+            Flight flight = new Flight();
+
+            flight.setOrigin(new City(i,"Belgrade"));
+            flight.setDestination(CITIES.get(i%CITIES.toArray().length));
+            list.add(flight);
+        }
+
+        return list;
     }
 
     private static List<Ticket> generateTickets() {
 
-        return new ArrayList<>();
+        List<Ticket> list = new ArrayList<>();
+
+        for (int i=0; i < 12; i++) {
+            Ticket ticket = new Ticket(i);
+            ticket.setCompany(COMPANIES.get(i%3));
+            ticket.setCount(100L);
+            ticket.setOneWay(true);
+            ticket.setFlightId(0);
+
+            list.add(ticket);
+        }
+
+        return list;
     }
 
     private static List<Company> generateCompanies() {

@@ -35,4 +35,11 @@ public class FlightController {
         return gson.toJson(flights);
     };
 
+//    public static Route getFlight = (Request req, Response res) -> {
+//
+//        Flight flight = FlightService.
+//
+//        return ;
+//    }
+
 }

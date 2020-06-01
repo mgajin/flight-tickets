@@ -8,6 +8,12 @@ import java.util.stream.Collectors;
 
 public class FlightService {
 
+//    public static Flight getbyId(int id) {
+//
+////        for (Flight flight : Database.getFlights())
+//
+//    }
+
     //    Get flights from database filtered by origin city
     public static List<Flight> getByOrigin(String city) {
         List<Flight> flights = Database.getFlights();
