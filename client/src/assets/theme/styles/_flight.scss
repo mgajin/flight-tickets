@@ -9,6 +9,10 @@
     padding: .8em;
     box-shadow: $shadow;
 
+    .fas {
+        font-size: 12pt;
+    }
+
     .btn {
         background: $main-blue;
     }
@@ -23,9 +27,6 @@
     }
 
     &:hover {
-        h5 {
-            color: $blue;
-        }
         cursor: pointer;
     }
 }

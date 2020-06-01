@@ -8,6 +8,8 @@ p {
     color: $main-blue;
     background: white;
     z-index: 2;
+
+    box-shadow: $shadow;
 }
 
 .navbar-light {

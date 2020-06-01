@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="row border">
-            <div class="col-3">
+        <div class="row">
+            <div class="col-3" id="filter-form">
                 <FilterForm />
             </div>
             <div class="col-9">

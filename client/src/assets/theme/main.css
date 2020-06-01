@@ -9,6 +9,8 @@ p {
   color: #154481;
   background: white;
   z-index: 2;
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-light .navbar-brand {
@@ -306,6 +308,10 @@ section {
           box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+#flight-ticket .fas {
+  font-size: 12pt;
+}
+
 #flight-ticket .btn {
   background: #154481;
 }
@@ -321,10 +327,6 @@ section {
 
 #flight-ticket:hover {
   cursor: pointer;
-}
-
-#flight-ticket:hover h5 {
-  color: #5474B6;
 }
 
 .flight-title {

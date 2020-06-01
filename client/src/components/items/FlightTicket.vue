@@ -1,7 +1,7 @@
 <template>
     <div id="flight-ticket">
         <div class="flight-title">
-            <h5 class="color-main">{{flight.origin.name}} - {{flight.destination.name}}</h5>
+            <h5 class="color-main">{{flight.origin.name}} <i class="fas fa-plane"></i> {{flight.destination.name}}</h5>
             <label class="color-light">{{ticket.company.name}}</label>
         </div>
         <div class="flight-info">
