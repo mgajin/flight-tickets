@@ -179,6 +179,10 @@ section {
   border-radius: 0;
 }
 
+#flight-table {
+  width: 100%;
+}
+
 #flight-table div {
   padding: 0;
 }

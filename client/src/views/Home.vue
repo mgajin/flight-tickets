@@ -10,8 +10,8 @@
 
     <section class="container">
       <h5 class="title">Flights</h5>
-      <FlightTable :flights="flights"/>
-      <button class="btn-submit">see all offers</button>
+      <FlightTable :flights="getFlights"/>
+      <button class="btn-submit" @click="this.seeOffers">see all offers</button>
     </section>
 
   </div>
@@ -22,37 +22,23 @@
 import BookingForm from '../components/forms/BookingForm'; 
 import FlightTable from '../components/flights/FlightTable';
 
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: 'Home',
   components: {
     BookingForm,
     FlightTable
   },
-  data() {
-    return {
-      flights: []
-    }
-  },
   methods: {
-    getFlights() {
-
-      let list = Array();
-      for (let i=0; i<12; i++) {
-
-        let flight = {
-          type: 'One Way',
-          to: 'New York',
-          from: 'Belgrade'
-        }
-
-        list[i] = flight
-      }
-
-      return list;
+    ...mapActions(['GET_FLIGHTS']),
+    seeOffers() {
+      this.$router.push('flights');
     }
   },
+  computed: mapGetters(['getFlights']),
   created() {
-    this.flights = this.getFlights();
+    this.GET_FLIGHTS();
   }
 }
 </script>

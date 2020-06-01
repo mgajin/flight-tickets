@@ -1,9 +1,9 @@
 <template>
     <div class="table-item">
         <div>
-            <p class="color-light">{{flight.type}}</p>
-            <h5 class="color-main">{{flight.to}}</h5>
-            <p class="color-main">From {{flight.from}}</p>
+            <p class="color-light">One Way</p>
+            <h5 class="color-main">{{flight.destination.name}}</h5>
+            <p class="color-main">From {{flight.origin.name}}</p>
         </div>
         <div>
             <p class="color-light">EUR</p>
@@ -15,7 +15,9 @@
 <script>
 export default {
     name: 'Flight',
-    props: ['flight']
+    props: {
+        flight: {}
+    }
 
 }
 </script>

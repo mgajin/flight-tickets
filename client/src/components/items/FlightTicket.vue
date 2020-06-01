@@ -1,8 +1,8 @@
 <template>
     <div id="flight-ticket">
         <div class="flight-title">
-            <h5 class="color-main">Belgrade - New York</h5>
-            <label class="color-light">Air Serbia</label>
+            <h5 class="color-main">{{flight.origin.name}} - {{flight.destination.name}}</h5>
+            <label class="color-light">{{ticket.company.name}}</label>
         </div>
         <div class="flight-info">
             <div>
@@ -20,6 +20,7 @@
 
 <script>
 export default {
-    name: 'FlightTicket'
+    name: 'FlightTicket',
+    props: ['ticket', 'flight']
 }
 </script>
