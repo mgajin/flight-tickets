@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.models.User;
+import app.models.UserType;
 import app.services.AuthService;
 import app.services.UserService;
 import com.google.gson.Gson;
@@ -48,6 +49,8 @@ public class AuthController {
             res.status(401);
             return "User already exists!";
         }
+
+        user.setType(UserType.USER);
 
         AuthService.registerUser(user);
         res.type("application/json");

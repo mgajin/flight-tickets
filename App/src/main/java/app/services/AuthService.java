@@ -24,7 +24,7 @@ public class AuthService {
         Database.addUser(user);
     }
 
-    private static String generateToken(User user) {
+    public static String generateToken(User user) {
 
         String token;
         Map<String, Object> claims = new HashMap<>();
@@ -33,14 +33,14 @@ public class AuthService {
         claims.put("password", user.getPassword());
         claims.put("user", user);
 
-        token = Jwts.builder().setSubject(user.getUsername())
-                .setClaims(claims)
+        token =  Jwts.builder().setSubject(user.getUsername())
+//                .setClaims(claims)
                 .setExpiration(new Date(new Date().getTime() + 1000*60*60L))
                 .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.ES512, key)
+                .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
 
-        return token;
+        return  token;
     }
 
 }

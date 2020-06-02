@@ -5,12 +5,16 @@ import app.models.User;
 
 public class UserService {
 
+    private static final Object LOCK = new Object();
+
     //    Get user from database by username
     public static User getUser(String username) {
 
-        for (User user : Database.getUsers()) {
-            if (user.getUsername().equals(username)) {
-                return user;
+        synchronized (LOCK) {
+            for (User user : Database.getUsers()) {
+                if (user.getUsername().equals(username)) {
+                    return user;
+                }
             }
         }
 
