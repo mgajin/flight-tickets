@@ -1,7 +1,7 @@
 package app.server;
 
+import app.authentication.AuthRoutes;
 import app.database.Postgres;
-import app.routes.AuthRoutes;
 import app.routes.FlightRoutes;
 import app.routes.TicketRoutes;
 

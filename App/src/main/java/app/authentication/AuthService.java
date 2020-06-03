@@ -1,7 +1,7 @@
-package app.services;
+package app.authentication;
 
-import app.database.Database;
-import app.models.User;
+import app.user.User;
+import app.user.UserType;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;
@@ -15,16 +15,22 @@ public class AuthService {
 
     static Key key = MacProvider.generateKey();
 
+    public static boolean matchPassword(String password, User user) {
+        return password.equals(user.getPassword());
+    }
+
     public static void login(User user) {
         user.setToken(generateToken(user));
     }
 
     public static void registerUser(User user) {
+        user.setType(UserType.USER);
         user.setToken(generateToken(user));
-        Database.addUser(user);
+
+//        TODO get data from database
     }
 
-    public static String generateToken(User user) {
+    private static String generateToken(User user) {
 
         String token;
         Map<String, Object> claims = new HashMap<>();
@@ -42,5 +48,4 @@ public class AuthService {
 
         return  token;
     }
-
 }
