@@ -1,6 +1,7 @@
 package app.server;
 
 import app.authentication.AuthRoutes;
+import app.city.CityRoutes;
 import app.database.Database;
 import app.flight.FlightRoutes;
 import app.ticket.TicketRoutes;
@@ -39,6 +40,7 @@ public class Server {
         FlightRoutes flightRoutes = new FlightRoutes();
         AuthRoutes authRoutes = new AuthRoutes();
         UserRoutes userRoutes = new UserRoutes();
+        CityRoutes cityRoutes = new CityRoutes();
     }
 
     private static void enableCORS() {
