@@ -1,8 +1,8 @@
-package app.routes;
+package app.ticket;
 
-import app.controllers.TicketController;
-
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.delete;
 
 public class TicketRoutes {
 

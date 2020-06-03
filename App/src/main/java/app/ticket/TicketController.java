@@ -1,7 +1,5 @@
-package app.controllers;
+package app.ticket;
 
-import app.models.Ticket;
-import app.services.TicketService;
 import com.google.gson.Gson;
 import spark.QueryParamsMap;
 import spark.Request;
@@ -16,14 +14,14 @@ public class TicketController {
 
     public static Route getTickets = (Request req, Response res) -> {
 
-        List<Ticket> tickets;
+        List<app.models.Ticket> tickets;
         QueryParamsMap queries = req.queryMap();
 
         if (queries.hasKey("oneWay")) {
             boolean isOneWay = Boolean.parseBoolean(queries.get("oneWay").value());
             tickets = (isOneWay) ? TicketService.getOneWayTickets() : TicketService.getTwoWayTickets();
         } else {
-            tickets = TicketService.getAllTickets();
+            tickets = TicketService.getTickets();
         }
 
         return gson.toJson(tickets);
@@ -32,7 +30,7 @@ public class TicketController {
     public static Route createTicket = (Request req, Response res) -> {
 
         String body = req.body();
-        Ticket ticket = gson.fromJson(body, Ticket.class);
+        app.models.Ticket ticket = gson.fromJson(body, app.models.Ticket.class);
         TicketService.createTicket(ticket);
 
         return "";
@@ -41,11 +39,10 @@ public class TicketController {
     public static Route deleteTicket = (Request req, Response res) -> {
 
         int ticketId = Integer.parseInt(req.params(":id"));
-        Ticket ticket = TicketService.getTicket(ticketId);
-
-        TicketService.deleteTicket(ticket);
+        TicketService.deleteTicket(ticketId);
 
         return "";
     };
+
 
 }

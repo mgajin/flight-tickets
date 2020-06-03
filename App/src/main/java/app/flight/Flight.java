@@ -1,7 +1,7 @@
 package app.flight;
 
-import app.models.City;
-import app.models.Ticket;
+import app.city.City;
+import app.ticket.Ticket;
 
 import java.util.List;
 
