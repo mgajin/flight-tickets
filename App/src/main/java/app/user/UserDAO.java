@@ -53,8 +53,8 @@ public class UserDAO {
     }
 
     public List<User> getUsers() {
-        String query = "SELECT * FROM users";
         List<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);

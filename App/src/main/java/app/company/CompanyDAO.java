@@ -1,6 +1,5 @@
 package app.company;
 
-import app.city.City;
 import app.database.Database;
 
 import java.sql.Connection;
