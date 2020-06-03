@@ -10,6 +10,10 @@ public class CityService {
         repository.createCity(city);
     }
 
+    public static City getCity(City city) {
+        return repository.getCity(city.getName());
+    }
+
     public static List<City> getCities() {
         return repository.getCities();
     }

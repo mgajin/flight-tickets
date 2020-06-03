@@ -25,6 +25,30 @@ public class CityDAO {
         }
     }
 
+    public City getCity(String name) {
+        City city = null;
+        String query = "SELECT * FROM cities WHERE name= ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String cityName = resultSet.getString("name");
+                city = new City();
+                city.setName(cityName);
+                city.setId(id);
+            }
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return city;
+    }
+
     public List<City> getCities() {
         List<City> cities = new ArrayList<>();
         String query = "SELECT * FROM cities";

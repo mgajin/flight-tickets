@@ -1,6 +1,8 @@
 package app.flight;
 
+import app.city.City;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class FlightController {
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public static Route getFlights = (Request req, Response res) -> {
 
@@ -29,6 +31,31 @@ public class FlightController {
         }
 
         response = gson.toJson(flights);
+
+        return response;
+    };
+
+    public static Route createFlight = (Request req, Response res) -> {
+
+        String response;
+        String body = req.body();
+        JsonObject json = gson.fromJson(body, JsonObject.class);
+
+        City origin = new City();
+        origin.setName(json.get("origin").getAsString());
+
+        City destination = new City();
+        destination.setName(json.get("destination").getAsString());
+
+        Flight flight = new Flight();
+        flight.setOrigin(origin);
+        flight.setDestination(destination);
+
+        FlightService.createFlight(flight);
+
+        response = gson.toJson(flight);
+        res.type("application/json");
+        res.status(201);
 
         return response;
     };
