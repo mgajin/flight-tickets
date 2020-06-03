@@ -1,10 +1,14 @@
 package app.flight;
 
+import app.city.City;
 import app.database.Database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlightDAO {
 
@@ -20,6 +24,37 @@ public class FlightDAO {
             statement.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+        }
+    }
+
+    public List<Flight> getFlights() {
+        List<Flight> flights = new ArrayList<>();
+        String query = "SELECT * FROM flights";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            readResultSet(resultSet, flights);
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return flights;
+    }
+
+    private void readResultSet(ResultSet resultSet, List<Flight> flights) throws SQLException {
+        while (resultSet.next()) {
+            Flight flight = new Flight();
+            int id = resultSet.getInt("id");
+            String origin = resultSet.getString("origin");
+            String destination = resultSet.getString("destination");
+
+            flight.setId(id);
+            flight.setOrigin(new City(origin));
+            flight.setDestination(new City(destination));
+            flights.add(flight);
         }
     }
 }

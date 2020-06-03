@@ -3,8 +3,8 @@ package app.flight;
 import app.city.City;
 import app.city.CityService;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightService {
 
@@ -22,20 +22,29 @@ public class FlightService {
 
 //    Returns all flights in database
     public static List<Flight> getFlights() {
-        // TODO implement DAO
-        return new ArrayList<>();
+        return repository.getFlights();
     }
 
-//    Returns flights with given origin city
+//    Filter flights by given origin city
     public static List<Flight> getByOrigin(String origin) {
-        // TODO implement DAO
-        return new ArrayList<>();
+        List<Flight> flights;
+
+        flights = repository.getFlights().stream().filter(flight ->
+                flight.getOrigin().getName().equals(origin)
+        ).collect(Collectors.toList());
+
+        return flights;
     }
 
-    //    Returns flights with given destination city
+    //    Filter flights by given destination city
     public static List<Flight> getByDestination(String destination) {
-        // TODO implement DAO
-        return new ArrayList<>();
+        List<Flight> flights;
+
+        flights = repository.getFlights().stream().filter(flight ->
+                flight.getDestination().getName().equals(destination)
+        ).collect(Collectors.toList());
+
+        return flights;
     }
 
 }

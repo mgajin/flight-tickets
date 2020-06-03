@@ -31,6 +31,8 @@ public class FlightController {
         }
 
         response = gson.toJson(flights);
+        res.type("application/json");
+        res.status(200);
 
         return response;
     };
@@ -41,11 +43,8 @@ public class FlightController {
         String body = req.body();
         JsonObject json = gson.fromJson(body, JsonObject.class);
 
-        City origin = new City();
-        origin.setName(json.get("origin").getAsString());
-
-        City destination = new City();
-        destination.setName(json.get("destination").getAsString());
+        City origin = new City(json.get("origin").getAsString());
+        City destination = new City(json.get("destination").getAsString());
 
         Flight flight = new Flight();
         flight.setOrigin(origin);

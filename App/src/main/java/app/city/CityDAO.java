@@ -37,8 +37,7 @@ public class CityDAO {
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String cityName = resultSet.getString("name");
-                city = new City();
-                city.setName(cityName);
+                city = new City(cityName);
                 city.setId(id);
             }
 
@@ -62,9 +61,8 @@ public class CityDAO {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
 
-                City city = new City();
+                City city = new City(name);
                 city.setId(id);
-                city.setName(name);
                 cities.add(city);
             }
         } catch (SQLException throwable) {
