@@ -14,7 +14,7 @@ public class TicketController {
 
     public static Route getTickets = (Request req, Response res) -> {
 
-        List<app.models.Ticket> tickets;
+        List<Ticket> tickets;
         QueryParamsMap queries = req.queryMap();
 
         if (queries.hasKey("oneWay")) {
@@ -30,7 +30,7 @@ public class TicketController {
     public static Route createTicket = (Request req, Response res) -> {
 
         String body = req.body();
-        app.models.Ticket ticket = gson.fromJson(body, app.models.Ticket.class);
+        Ticket ticket = gson.fromJson(body, Ticket.class);
         TicketService.createTicket(ticket);
 
         return "";

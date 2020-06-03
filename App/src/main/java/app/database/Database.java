@@ -6,7 +6,7 @@ import java.util.Properties;
 public class Database {
 
     protected static Properties props;
-    protected static Connection connection;
+    private static Connection connection;
 
     public static void init(Properties properties) {
         props = properties;
@@ -16,6 +16,10 @@ public class Database {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    public static Connection getConnection() {
+        return connection;
     }
 
     private static Connection connect() throws SQLException {

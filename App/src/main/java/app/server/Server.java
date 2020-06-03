@@ -4,6 +4,7 @@ import app.authentication.AuthRoutes;
 import app.database.Database;
 import app.flight.FlightRoutes;
 import app.ticket.TicketRoutes;
+import app.user.UserRoutes;
 
 import java.util.Properties;
 
@@ -37,6 +38,7 @@ public class Server {
         TicketRoutes ticketRoutes = new TicketRoutes();
         FlightRoutes flightRoutes = new FlightRoutes();
         AuthRoutes authRoutes = new AuthRoutes();
+        UserRoutes userRoutes = new UserRoutes();
     }
 
     private static void enableCORS() {

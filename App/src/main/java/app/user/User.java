@@ -15,7 +15,8 @@ public class User {
     private String token;
 
     public User() {
-        bookings = new ArrayList<>();
+//        this.username = username;
+//        this.password = password;
     }
 
     public void setId(Integer id) {

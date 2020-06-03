@@ -1,6 +1,7 @@
 package app.authentication;
 
 import app.user.User;
+import app.user.UserService;
 import app.user.UserType;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,7 +28,7 @@ public class AuthService {
         user.setType(UserType.USER);
         user.setToken(generateToken(user));
 
-//        TODO get data from database
+        UserService.addUser(user);
     }
 
     private static String generateToken(User user) {

@@ -1,7 +1,5 @@
 package app.ticket;
 
-import app.models.Ticket;
-
 import java.util.ArrayList;
 import java.util.List;
 
