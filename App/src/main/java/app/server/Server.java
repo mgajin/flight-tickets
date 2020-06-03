@@ -1,28 +1,42 @@
 package app.server;
 
-import app.controllers.AuthController;
+import app.database.Postgres;
 import app.routes.AuthRoutes;
 import app.routes.FlightRoutes;
 import app.routes.TicketRoutes;
+
+import java.util.Properties;
 
 import static spark.Spark.*;
 
 public class Server {
 
     private static final int PORT = 3000;
+    private static final String database = "jdbc:postgresql://localhost:5432/online_tickets";
+    private static final String username = "postgres";
+    private static final String password = "tringusija4";
 
     public static void main(String[] args) {
 
         port(PORT);
-
+        initDatabase();
         enableCORS();
+        initRoutes();
+    }
 
+    private static void initDatabase() {
+        Properties props = new Properties();
+        props.put("url", database);
+        props.put("user", username);
+        props.put("password", password);
+
+        Postgres.init(props);
+    }
+
+    private static void initRoutes() {
         TicketRoutes ticketRoutes = new TicketRoutes();
         FlightRoutes flightRoutes = new FlightRoutes();
-//        AuthRoutes authRoutes = new AuthRoutes();
-
-        get("/app/auth/login", AuthController.login);
-
+        AuthRoutes authRoutes = new AuthRoutes();
     }
 
     private static void enableCORS() {
