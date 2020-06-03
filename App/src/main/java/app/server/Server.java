@@ -1,7 +1,7 @@
 package app.server;
 
 import app.authentication.AuthRoutes;
-import app.database.Postgres;
+import app.database.Database;
 import app.flight.FlightRoutes;
 import app.ticket.TicketRoutes;
 
@@ -30,7 +30,7 @@ public class Server {
         props.put("user", username);
         props.put("password", password);
 
-        Postgres.init(props);
+        Database.init(props);
     }
 
     private static void initRoutes() {

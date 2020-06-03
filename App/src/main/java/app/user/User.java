@@ -1,6 +1,6 @@
 package app.user;
 
-import app.models.Reservation;
+import app.reservation.Reservation;
 
 import java.util.ArrayList;
 import java.util.List;

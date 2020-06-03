@@ -10,7 +10,7 @@ public class Queries {
     public static ResultSet getFlights() throws SQLException {
 
         String query = "SELECT * FROM flights";
-        PreparedStatement statement = Postgres.connection.prepareStatement(query);
+        PreparedStatement statement = Database.connection.prepareStatement(query);
         statement.execute();
 
         return statement.getResultSet();
@@ -20,7 +20,7 @@ public class Queries {
     public static ResultSet getTickets() throws SQLException {
 
         String query = "SELECT * FROM tickets";
-        PreparedStatement statement = Postgres.connection.prepareStatement(query);
+        PreparedStatement statement = Database.connection.prepareStatement(query);
         statement.execute();
 
         return statement.getResultSet();
@@ -30,7 +30,7 @@ public class Queries {
     public static ResultSet getFilteredTickets(boolean filter) throws SQLException {
 
         String query = "SELECT * FROM tickets WHERE oneWay= ?";
-        PreparedStatement statement = Postgres.connection.prepareStatement(query);
+        PreparedStatement statement = Database.connection.prepareStatement(query);
         statement.setBoolean(1, filter);
         statement.execute();
 
