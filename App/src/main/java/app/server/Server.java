@@ -2,7 +2,7 @@ package app.server;
 
 import app.authentication.AuthRoutes;
 import app.database.Postgres;
-import app.routes.FlightRoutes;
+import app.flight.FlightRoutes;
 import app.routes.TicketRoutes;
 
 import java.util.Properties;

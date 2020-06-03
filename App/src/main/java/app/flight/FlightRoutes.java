@@ -1,13 +1,10 @@
-package app.routes;
+package app.flight;
 
-import app.controllers.FlightController;
-
-import static spark.Spark.*;
+import static spark.Spark.get;
 
 public class FlightRoutes {
 
     static {
         get("app/flights", FlightController.getFlights);
     }
-
 }
