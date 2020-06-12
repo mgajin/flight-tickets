@@ -27,6 +27,26 @@ public class TicketController {
         return gson.toJson(tickets);
     };
 
+    public static Route getTicket = (Request req, Response res) -> {
+
+        int id = Integer.parseInt(req.params("id"));
+        String response;
+        int status;
+
+        Ticket ticket = TicketService.getTicket(id);
+
+        if (ticket != null) {
+            response = gson.toJson(ticket);
+            status = 200;
+        } else {
+            response = "";
+            status = 401;
+        }
+        res.status(status);
+
+        return response;
+    };
+
     public static Route createTicket = (Request req, Response res) -> {
 
         String body = req.body();

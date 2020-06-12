@@ -8,6 +8,7 @@ public class TicketRoutes {
 
     static {
         get("/app/tickets", TicketController.getTickets);
+        get("/app/tickets/:id", TicketController.getTicket);
         post("/app/tickets", TicketController.createTicket);
         delete("/app/tickets/:id", TicketController.deleteTicket);
     }
