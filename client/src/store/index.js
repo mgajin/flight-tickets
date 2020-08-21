@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import flights from './modules/flights'
 import auth from './modules/auth'
+import tickets from './modules/tickets'
+import companies from './modules/companies'
+import flights from './modules/flights'
 
-import styles from '../assets/theme/main.scss'
-
-Vue.use(styles)
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules: {
-    flights,
-    auth
-  }
+    modules: {
+        auth,
+        tickets,
+        companies,
+        flights
+    }
 })

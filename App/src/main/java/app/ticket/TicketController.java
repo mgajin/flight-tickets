@@ -48,12 +48,14 @@ public class TicketController {
     };
 
     public static Route createTicket = (Request req, Response res) -> {
-
         String body = req.body();
+
+        System.out.println("Got: " + body);
         Ticket ticket = gson.fromJson(body, Ticket.class);
         TicketService.createTicket(ticket);
 
-        return "";
+        res.status(201);
+        return gson.toJson(ticket);
     };
 
     public static Route deleteTicket = (Request req, Response res) -> {

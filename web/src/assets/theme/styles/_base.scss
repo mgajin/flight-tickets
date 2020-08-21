@@ -8,22 +8,18 @@ p {
     color: $main-blue;
     background: white;
     z-index: 2;
-
     box-shadow: $shadow;
 }
 
 .navbar-light {
-
     .navbar-brand {
         color: $main-blue;
-
         &:hover {
             color: $main-blue;
         }
     }
-
     .nav-item {
-        &.active .nav-link, 
+        &.active .nav-link,
         .nav-link:hover {
             color: $main-blue;
         }
@@ -33,7 +29,6 @@ p {
 footer {
     height: 20vh;
     display: flex;
-    
     align-items: center;
     justify-content: center;
 }
@@ -42,16 +37,14 @@ footer {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;    
+    background-attachment: fixed;
 }
 
 .overlay {
     position: absolute;
     top: 0;
-
     height: 100%;
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,27 +56,24 @@ footer {
     background: $red;
     color: $light;
     border-radius: 0;
-
     &:hover {
-        color: $light;   
+        color: $light;
     }
 }
 
 .btn-submit {
-
     padding: .5em;
     background: $blue;
     border: none;
     color: $light;
     text-transform: uppercase;
     margin: .5em;
-
     &:hover {
         background: $main-blue;
     }
 }
 
-section {    
+section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,7 +86,6 @@ section {
     align-items: center;
     margin: 0;
     width: 10em;
-
     &::after {
         content: '';
         background: $gray;

@@ -1,44 +1,18 @@
 <template>
   <div class="home">
-
-    <div id="landing">
-      <div class="img-holder"></div>
-      <div class="overlay">
-        <BookingForm />
-      </div>
-    </div>
-
-    <section class="container">
-      <h5 class="title">Flights</h5>
-      <FlightTable :flights="getFlights"/>
-      <button class="btn-submit" @click="this.seeOffers">see all offers</button>
-    </section>
-    
+    <img alt="Vue logo" src="../assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-
-import BookingForm from '../components/forms/BookingForm'; 
-import FlightTable from '../components/flights/FlightTable';
-
-import { mapActions, mapGetters } from "vuex";
+// @ is an alias to /src
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
   components: {
-    BookingForm,
-    FlightTable
-  },
-  methods: {
-    ...mapActions(['GET_FLIGHTS']),
-    seeOffers() {
-      this.$router.push('flights');
-    }
-  },
-  computed: mapGetters(['getFlights']),
-  created() {
-    this.GET_FLIGHTS();
+    HelloWorld
   }
 }
 </script>
