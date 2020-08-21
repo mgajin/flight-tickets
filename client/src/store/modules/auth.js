@@ -1,5 +1,5 @@
 import Axios from 'axios'
-const URL = "http://localhost:3000/v1/auth"
+const URL = "http://localhost:3000/v1/app"
 
 const state = {
     user: window.localStorage.getItem('user'),
@@ -44,7 +44,7 @@ const actions = {
                 commit('set_token', token)
             })
             .catch(err => {
-                const { message } = err.response.message
+                const { message } = err.response.data
                 alert(message)
             })
     },
@@ -57,7 +57,7 @@ const actions = {
                 commit('set_token', token)
             })
             .catch(err => {
-                const { message } = err.response.message
+                const { message } = err.response.data
                 alert(message)
             })
     }

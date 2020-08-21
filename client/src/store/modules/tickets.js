@@ -1,5 +1,5 @@
 import Axios from 'axios'
-const URL = "http://localhost:3000/v1/tickets"
+const URL = "http://localhost:3000/app/tickets"
 
 
 const state = {
@@ -23,7 +23,7 @@ const actions = {
                 commit('set_tickets', tickets)
             })
             .catch(err => {
-                const { message } = err.response.message
+                const { message } = err.response.data
                 alert(message)
             })
     },
@@ -38,7 +38,7 @@ const actions = {
                 commit('set_tickets', tickets)
             })
             .catch(err => {
-                const { message } = err.response.message
+                const { message } = err.response.data
                 alert(message)
             })
     }
