@@ -4,6 +4,7 @@ import auth from './modules/auth'
 import tickets from './modules/tickets'
 import companies from './modules/companies'
 import flights from './modules/flights'
+import cities from './modules/cities'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         auth,
         tickets,
         companies,
-        flights
+        flights,
+        cities
     }
 })

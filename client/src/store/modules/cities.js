@@ -1,25 +1,25 @@
 import Axios from 'axios'
-const URL = 'http://localhost:3000/app/flights'
+const URL = 'http://localhost:3000/app/cities'
 
 const state = {
-    flights: []
+    cities: []
 }
 
 const getters = {
-    getFlights: state => state.flights
+    getCities: state => state.cities
 }
 
 const mutations = {
-    set_flights: (state, flights) => state.flights = flights
+    set_cities: (state, cities) => state.cities = cities
 }
 
 const actions = {
 
-    async GET_FLIGHTS({ commit }) {
+    async GET_CITIES({ commit }) {
         Axios.get(URL)
             .then(response => {
-                const flights = response.data
-                commit('set_flights', flights)
+                const cities = response.data
+                commit('set_cities', cities)
             })
             .catch(err => {
                 const message = err.response
@@ -27,11 +27,11 @@ const actions = {
             })
     },
 
-    async CREATE_FLIGHT({ commit }, payload) {
+    async ADD_CITY({ commit }, payload) {
         Axios.post(URL, payload)
             .then(response => {
-                const flights = response.data
-                commit('set_flights', flights)
+                const cities = response.data
+                commit('set_cities', cities)
             })
             .catch(err => {
                 const message = err.response
