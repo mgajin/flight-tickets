@@ -21,9 +21,6 @@ export default {
     components: {
         NewTicketForm,
         NewFlightForm
-    },
-    created() {
-        
-    },
+    }
 }
 </script>

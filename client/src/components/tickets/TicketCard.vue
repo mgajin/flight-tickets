@@ -1,7 +1,7 @@
 <template>
   <v-card id="ticket-card">
       <v-card-title>
-          <h3 class="primary--text"><v-icon color=primary>mdi-airplane</v-icon> {{ ticket.companyName }}</h3>
+          <h4 class="primary--text"><v-icon color=primary style="transform: rotate(45deg);">mdi-airplane</v-icon> {{ ticket.companyName }}</h4>
       </v-card-title>
       <v-card-text class="d-flex flex-column">
           <div class="d-flex justify-space-between pb-1">

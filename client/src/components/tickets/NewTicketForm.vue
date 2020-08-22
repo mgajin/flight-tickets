@@ -1,5 +1,6 @@
 <template>
     <v-card>
+        <v-card-title v-text="'Create New Ticket'"></v-card-title>
         <v-form>
             <v-container>
                 <v-row>
