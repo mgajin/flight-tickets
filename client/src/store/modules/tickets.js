@@ -1,6 +1,5 @@
 import Axios from 'axios'
-const URL = "http://localhost:3000/app/tickets"
-
+const URL = 'http://localhost:3000/app/tickets'
 
 const state = {
     tickets: []
@@ -19,7 +18,7 @@ const actions = {
     async GET_TICKETS({ commit }, query = '') {
         Axios.get(URL + query)
             .then(response => {
-                const { tickets } = response.data
+                const tickets = response.data
                 commit('set_tickets', tickets)
             })
             .catch(err => {
@@ -34,7 +33,7 @@ const actions = {
 
         Axios.post(URL, body, { headers })
             .then(response => {
-                const { tickets } = response.data
+                const tickets = response.data
                 commit('set_tickets', tickets)
             })
             .catch(err => {
