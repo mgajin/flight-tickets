@@ -28,10 +28,8 @@ const actions = {
     },
 
     async CREATE_TICKET({ commit }, payload) {
-        const body = {}
-        const headers = { Authorization: `Bearer ${payload.token}` }
-
-        Axios.post(URL, body, { headers })
+        // const headers = { Authorization: `Bearer ${payload.token}` }
+        Axios.post(URL, payload)
             .then(response => {
                 const tickets = response.data
                 commit('set_tickets', tickets)

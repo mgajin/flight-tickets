@@ -53,6 +53,7 @@ export default {
             drawer: false,
             links: [
                 { icon: '', title: 'Home', link: '/' },
+                { icon: '', title: 'Admin', link: '/admin' },
                 { icon: '', title: 'Tickets', link: '/tickets' }
             ]
         }

@@ -18,11 +18,11 @@ const actions = {
     async GET_COMPANIES({ commit }) {
         Axios.get(URL)
             .then(response => {
-                const { companies } = response.data
+                const companies = response.data
                 commit('set_companies', companies)
             })
             .catch(err => {
-                const { message } = err.response.data
+                const message = err.response
                 alert(message)
             })
     }
