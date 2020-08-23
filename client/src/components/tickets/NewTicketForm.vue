@@ -75,7 +75,6 @@
                                 ></v-text-field>
                             </template>
                             <v-date-picker
-                                locale="en-in"
                                 v-model="returnDate"
                                 :min="departDate"
                                 no-title
@@ -134,7 +133,6 @@ export default {
         createTicket: function (ticket) {
             const payload = JSON.stringify(ticket)
             this.CREATE_TICKET(payload)
-            // alert(payload)
         }
     },
     created() {

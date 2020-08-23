@@ -1,16 +1,18 @@
 package app.ticket;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.sql.Date;
 import java.util.List;
 
 public class TicketController {
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public static Route getTickets = (Request req, Response res) -> {
 
@@ -49,22 +51,37 @@ public class TicketController {
 
     public static Route createTicket = (Request req, Response res) -> {
         String body = req.body();
-
         System.out.println("Got: " + body);
-        Ticket ticket = gson.fromJson(body, Ticket.class);
-        TicketService.createTicket(ticket);
+        JsonObject json = gson.fromJson(body, JsonObject.class);
+
+        String departDateStr = (json.get("departDate").getAsString());
+        String returnDateStr = (json.get("returnDate").getAsString());
+        String companyName = (json.get("companyName").getAsString());
+        boolean oneWay = (json.get("oneWay").getAsBoolean());
+        int flightId = (json.get("flightId").getAsInt());
+        int count = (json.get("count").getAsInt());
+
+        Ticket ticket = new Ticket();
+        ticket.setFlightId(flightId);
+        ticket.setOneWay(oneWay);
+        ticket.setDepartDate(Date.valueOf(departDateStr));
+        ticket.setReturnDate(Date.valueOf(returnDateStr));
+        ticket.setCompanyName(companyName);
+        ticket.setCount(count);
+
+        List<Ticket> tickets = TicketService.createTicket(ticket);
 
         res.status(201);
-        return gson.toJson(ticket);
+        return gson.toJson(tickets);
     };
 
     public static Route deleteTicket = (Request req, Response res) -> {
 
         int ticketId = Integer.parseInt(req.params(":id"));
-        TicketService.deleteTicket(ticketId);
+        List<Ticket> tickets = TicketService.deleteTicket(ticketId);
 
-        return "";
+        res.status(201);
+        return gson.toJson(tickets);
     };
-
 
 }

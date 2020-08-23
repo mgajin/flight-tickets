@@ -12,23 +12,23 @@ public class TicketService {
     }
 
     public static List<Ticket> getOneWayTickets() {
-
         return new ArrayList<>();
     }
 
     public static List<Ticket> getTwoWayTickets() {
-
-
         return new ArrayList<>();
     }
 
-    public static void createTicket(Ticket ticket) {
+    public static List<Ticket> createTicket(Ticket ticket) {
         repository.insert(ticket);
+        return repository.getAll();
     }
 
     public static Ticket getTicket(int ticketId) {
         return repository.getById(ticketId);
     }
 
-    public static void deleteTicket(int ticketId) {}
+    public static List<Ticket> deleteTicket(int ticketId) {
+        return repository.getAll();
+    }
 }

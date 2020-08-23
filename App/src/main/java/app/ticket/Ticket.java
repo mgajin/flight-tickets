@@ -1,6 +1,6 @@
 package app.ticket;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Ticket {
 
@@ -44,7 +44,7 @@ public class Ticket {
         this.departDate = departDate;
     }
 
-    public Date getReturnDate() {
+    public java.sql.Date getReturnDate() {
         return returnDate;
     }
 

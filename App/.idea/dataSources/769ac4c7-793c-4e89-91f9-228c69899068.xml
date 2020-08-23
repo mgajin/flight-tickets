@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="markogajiin@gmail.com">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.18">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.19">
     <root id="1">
-      <ServerVersion>12.3</ServerVersion>
+      <ServerVersion>12.4</ServerVersion>
       <DateStyle>mdy</DateStyle>
       <TimeZones>true ACDT
 true ACSST
@@ -1408,12 +1408,12 @@ true posix/WET
 false posix/Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1591989924</StartupTime>
+      <StartupTime>1598174985</StartupTime>
     </root>
     <database id="2" parent="1" name="online_tickets">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>555</IntrospectionStateNumber>
+      <IntrospectionStateNumber>587</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16385|16387|1
 sequence|table|16396|16398|1
@@ -1476,7 +1476,7 @@ sequence|table|16458|16460|1
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>556</IntrospectionStateNumber>
+      <IntrospectionStateNumber>588</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
@@ -1550,40 +1550,30 @@ sequence|table|16458|16460|1
       <ObjectId>16396</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>497</StateNumber>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="29" parent="15" name="companies_id_seq">
       <ObjectId>16407</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>510</StateNumber>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="30" parent="15" name="flights_id_seq">
       <ObjectId>16438</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>533</StateNumber>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="31" parent="15" name="tickets_id_seq">
       <ObjectId>16458</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>540</StateNumber>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="32" parent="15" name="users_id_seq">
       <ObjectId>16385</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>488</StateNumber>
-      <SequenceIdentity>1</SequenceIdentity>
-      <CacheSize>1</CacheSize>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="33" parent="15" name="cities">
@@ -1604,7 +1594,7 @@ sequence|table|16458|16460|1
     <table id="36" parent="15" name="tickets">
       <ObjectId>16460</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>554</StateNumber>
+      <StateNumber>569</StateNumber>
     </table>
     <table id="37" parent="15" name="users">
       <ObjectId>16387</ObjectId>
@@ -1717,10 +1707,10 @@ sequence|table|16458|16460|1
       <DefaultExpression>nextval(&apos;tickets_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="53" parent="36" name="oneWay">
+    <column id="53" parent="36" name="one_way">
       <Position>2</Position>
       <DataType>boolean|0s</DataType>
-      <StateNumber>540</StateNumber>
+      <StateNumber>584</StateNumber>
       <DefaultExpression>true</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
@@ -1743,13 +1733,25 @@ sequence|table|16458|16460|1
       <StateNumber>554</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="57" parent="36" name="tickets_id_uindex">
+    <column id="57" parent="36" name="depart_date">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>578</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="58" parent="36" name="return_date">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>581</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <index id="59" parent="36" name="tickets_id_uindex">
       <ObjectId>16470</ObjectId>
       <StateNumber>548</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <foreign-key id="58" parent="36" name="flight">
+    <foreign-key id="60" parent="36" name="flight">
       <ObjectId>16465</ObjectId>
       <StateNumber>540</StateNumber>
       <ColNames>flight</ColNames>
@@ -1758,7 +1760,7 @@ sequence|table|16458|16460|1
       <RefTableName>flights</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="59" parent="36" name="company">
+    <foreign-key id="61" parent="36" name="company">
       <ObjectId>16481</ObjectId>
       <StateNumber>551</StateNumber>
       <ColNames>company</ColNames>
@@ -1767,7 +1769,7 @@ sequence|table|16458|16460|1
       <RefTableName>companies</RefTableName>
       <RefColNames>name</RefColNames>
     </foreign-key>
-    <column id="60" parent="37" name="id">
+    <column id="62" parent="37" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1775,25 +1777,25 @@ sequence|table|16458|16460|1
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="61" parent="37" name="username">
+    <column id="63" parent="37" name="username">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>488</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="62" parent="37" name="password">
+    <column id="64" parent="37" name="password">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <StateNumber>488</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="63" parent="37" name="users_id_uindex">
+    <index id="65" parent="37" name="users_id_uindex">
       <ObjectId>16394</ObjectId>
       <StateNumber>489</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="64" parent="37" name="users_username_uindex">
+    <index id="66" parent="37" name="users_username_uindex">
       <ObjectId>16395</ObjectId>
       <StateNumber>490</StateNumber>
       <ColNames>username</ColNames>
