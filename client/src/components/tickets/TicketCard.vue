@@ -6,11 +6,11 @@
       <v-card-text class="d-flex flex-column">
           <div class="d-flex justify-space-between pb-1">
             <p>From <br> <span class="text-uppercase">{{ flight.origin.name }}</span></p>
-            <p>Depart <br> <span class="text-uppercase">some date</span></p>
+            <p>Depart <br> <span class="text-uppercase">{{ ticket.departDate }}</span></p>
           </div>
           <div class="d-flex justify-space-between pt-1">
             <p>To <br> <span class="text-uppercase">{{ flight.destination.name }}</span></p>
-            <p>Return <br> <span class="text-uppercase">some date</span></p>
+            <p>Return <br> <span class="text-uppercase">{{ this.returnDate }}</span></p>
           </div>
       </v-card-text>
   </v-card>
@@ -24,6 +24,9 @@ export default {
     computed: {
         flight: function () {
             return this.getFlight(this.ticket.flightId)
+        },
+        returnDate: function () {
+            return this.ticket.oneWay ? 'one-way' : this.ticket.returnDate
         }
     },
     methods: {
@@ -34,12 +37,8 @@ export default {
                     ticketFlight = flight
                 }
             })
-
             return ticketFlight
         }
-    },
-    created() {
-        // this.flight = this.getFlight(this.ticket.flightId)
     }
 }
 </script>

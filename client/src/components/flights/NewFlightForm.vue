@@ -4,7 +4,7 @@
         <v-form>
             <v-container>
                 <v-row>
-                    <v-col cols=6>
+                    <v-col cols=12 sm=6>
                         <v-select
                             v-model="origin"
                             :items="getCities"
@@ -13,9 +13,10 @@
                             :rules="[v => !!v || 'Origin city is required']"
                             label="Origin city"
                             required
+                            prepend-icon="mdi-city"
                         ></v-select>
                     </v-col>
-                    <v-col cols=6>
+                    <v-col cols=12 sm=6>
                         <v-select
                             v-model="destination"
                             :items="getCities"
@@ -24,6 +25,7 @@
                             :rules="[v => !!v || 'Destination city is required']"
                             label="Destination city"
                             required
+                            prepend-icon="mdi-city"
                         ></v-select>
                     </v-col>
                 </v-row>
