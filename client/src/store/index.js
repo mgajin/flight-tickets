@@ -5,6 +5,7 @@ import tickets from './modules/tickets'
 import companies from './modules/companies'
 import flights from './modules/flights'
 import cities from './modules/cities'
+import dialogs from './helpers/dialogs'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
         tickets,
         companies,
         flights,
-        cities
+        cities,
+        dialogs
     }
 })

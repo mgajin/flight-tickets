@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-app-bar color=primary>
+        <v-app-bar dark>
             <v-container>
-                <v-toolbar color=primary dark flat>
+                <v-toolbar dark flat>
                     <v-toolbar-title>
                         <router-link to="/" tag="span" style="cursor: pointer">Flight Tickets</router-link>
                     </v-toolbar-title>
