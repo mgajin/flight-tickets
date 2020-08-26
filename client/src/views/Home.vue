@@ -1,22 +1,22 @@
 <template>
   <div class="home">
-    <TicketsTable />
-    <FlightsTable />
+    <Tickets />
+    <Flights />
   </div>
 </template>
 
 <script>
 
-import TicketsTable from '../components/tickets/TicketsTable'
-import FlightsTable from '../components/flights/FlightsTable'
+import Tickets from '../components/tickets/Tickets'
+import Flights from '../components/flights/Flights'
 
 import { mapActions } from 'vuex' 
 
 export default {
   name: 'Home',
   components: {
-    TicketsTable,
-    FlightsTable
+    Tickets,
+    Flights
   },
   methods: {
     ...mapActions(['GET_FLIGHTS', 'GET_TICKETS'])
