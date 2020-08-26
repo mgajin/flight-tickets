@@ -58,4 +58,12 @@ public class FlightController {
 
         return response;
     };
+
+    public static Route deleteFlight = (Request req, Response res) -> {
+        int flightId = Integer.parseInt(req.params(":id"));
+        List<Flight> flights = FlightService.deleteFlight(flightId);
+
+        res.status(201);
+        return gson.toJson(flights);
+    };
 }

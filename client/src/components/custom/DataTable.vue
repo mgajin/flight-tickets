@@ -1,10 +1,13 @@
 <template>
   <v-data-table :headers="headers" :items="items" class="elevation-1">
     <template v-slot:top>
-      <v-toolbar flat color="white">
+      <v-toolbar flat color=white>
         <v-toolbar-title v-text="title"></v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
+        <v-card-actions>
+            <v-btn text color=primary @click="addItem"><v-icon>mdi-plus</v-icon> new</v-btn>
+        </v-card-actions>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
@@ -19,6 +22,9 @@
 export default {
     props: ['title', 'headers', 'items'],
     methods: {
+        addItem: function () {
+            this.$emit('new')
+        },
         editItem: function (item) {
             this.$emit('edit', item)
         },

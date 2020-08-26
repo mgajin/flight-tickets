@@ -44,6 +44,28 @@ public class FlightDAO {
         return flights;
     }
 
+    public void deleteFlightTickets(int id) {
+        String query = "DELETE FROM tickets WHERE flight = (?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public void deleteFlight(int id) {
+        String query = "DELETE FROM flights WHERE id = (?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
     private void readResultSet(ResultSet resultSet, List<Flight> flights) throws SQLException {
         while (resultSet.next()) {
             Flight flight = new Flight();
