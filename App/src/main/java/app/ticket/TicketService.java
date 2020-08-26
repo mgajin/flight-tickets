@@ -29,6 +29,7 @@ public class TicketService {
     }
 
     public static List<Ticket> deleteTicket(int ticketId) {
+        repository.delete(ticketId);
         return repository.getAll();
     }
 }

@@ -28,7 +28,7 @@ public class TicketDao {
 
     public Ticket getById(int id) {
         Ticket ticket = null;
-        String query = "SELECT * FROM tickets WHERE id == (?)";
+        String query = "SELECT * FROM tickets WHERE id = (?)";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -65,7 +65,14 @@ public class TicketDao {
     public void update() {}
 
     public void delete(int id) {
-
+        String query = "DELETE FROM tickets WHERE id = (?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     private void readResultSet(ResultSet resultSet, List<Ticket> tickets) throws SQLException {
@@ -94,5 +101,4 @@ public class TicketDao {
 
         return ticket;
     }
-
 }

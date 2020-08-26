@@ -76,7 +76,6 @@ public class TicketController {
     };
 
     public static Route deleteTicket = (Request req, Response res) -> {
-
         int ticketId = Integer.parseInt(req.params(":id"));
         List<Ticket> tickets = TicketService.deleteTicket(ticketId);
 

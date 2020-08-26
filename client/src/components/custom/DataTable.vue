@@ -17,6 +17,14 @@
 <script>
 
 export default {
-    props: ['title', 'headers', 'items']
+    props: ['title', 'headers', 'items'],
+    methods: {
+        editItem: function (item) {
+            this.$emit('edit', item)
+        },
+        deleteItem: function (item) {
+            this.$emit('delete', item)
+        }
+    }
 }
 </script>

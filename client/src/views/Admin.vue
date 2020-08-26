@@ -22,7 +22,7 @@
                 <DataTable :title="'Flights'" :headers="flightsTableHeaders" :items="getFlights" />
             </v-col>
             <v-col cols=12>
-                <DataTable :title="'Tickets'" :headers="ticketsTableHeaders" :items="getTickets" />
+                <DataTable :title="'Tickets'" :headers="ticketsTableHeaders" :items="getTickets" @delete="deleteTicket"/>
             </v-col>
             <v-col cols=12>
                 <DataTable :title="'Users'" :headers="usersTableHeaders" :items="getUsers" />
@@ -109,7 +109,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_FLIGHTS', 'GET_TICKETS', 'GET_COMPANIES', 'GET_USERS']),
+        ...mapActions(['GET_FLIGHTS', 'GET_TICKETS', 'GET_COMPANIES', 'GET_USERS', 'DELETE_TICKET']),
         openFlightDialog: function () {
             this.$store.commit('show_flight_dialog')
         },
@@ -118,6 +118,10 @@ export default {
         },
         openCompanyDialog: function () {
             alert('Company dialog not implemented')
+        },
+        deleteTicket: function (ticket) {
+            const payload = { id: ticket.id, token: '' }
+            this.DELETE_TICKET(payload)
         }
     },
     created() {

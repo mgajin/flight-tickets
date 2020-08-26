@@ -38,6 +38,17 @@ const actions = {
                 const { message } = err.response.data
                 alert(message)
             })
+    },
+
+    async DELETE_TICKET({ commit }, payload) {
+        Axios.delete(`${URL}/${payload.id}`)
+            .then(response => {
+                const tickets = response.data
+                commit('set_tickets', tickets)
+            })
+            .catch(err => {
+                alert(err)
+            })
     }
 }
 
