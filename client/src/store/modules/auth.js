@@ -1,5 +1,5 @@
 import Axios from 'axios'
-const URL = "http://localhost:3000/v1/app"
+const URL = "http://localhost:3000/app/auth"
 
 const state = {
     user: window.localStorage.getItem('user'),
