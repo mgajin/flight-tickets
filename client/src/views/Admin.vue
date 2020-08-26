@@ -101,7 +101,14 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_FLIGHTS', 'GET_TICKETS', 'GET_COMPANIES', 'GET_USERS']),
+        ...mapActions([
+            'GET_FLIGHTS', 
+            'GET_TICKETS', 
+            'GET_COMPANIES', 
+            'GET_USERS', 
+            'DELETE_FLIGHT', 
+            'DELETE_TICKET'
+        ]),
         openFlightDialog: function () {
             this.$store.commit('show_flight_dialog')
         },
@@ -113,11 +120,11 @@ export default {
         },
         deleteFlight: function (flight) {
             const payload = { id: flight.id, token: '' }
-            this.$store.dispatch('DELETE_FLIGHT', payload)
+            this.DELETE_FLIGHT(payload)
         },
         deleteTicket: function (ticket) {
             const payload = { id: ticket.id, token: '' }
-            this.$store.dispatch('DELETE_TICKET', payload)
+            this.DELETE_TICKET(payload)
         }
     },
     created() {

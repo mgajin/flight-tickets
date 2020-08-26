@@ -98,7 +98,7 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'NewTicketForm',
@@ -110,11 +110,8 @@ export default {
             returnDate: null
         }
     },
-    computed: {
-        ...mapGetters(['getFlights', 'getCompanies']),    
-    },
+    computed: mapGetters(['getFlights', 'getCompanies']),    
     methods: {
-        ...mapActions(['GET_FLIGHTS', 'GET_COMPANIES', 'CREATE_TICKET']),
         validateForm: function () {
             if (this.flight == null || this.company == null || this.departDate == null) {
                 const message = 'Form is not valid!'
@@ -137,7 +134,7 @@ export default {
         },
         createTicket: function (ticket) {
             const payload = JSON.stringify(ticket)
-            this.CREATE_TICKET(payload)
+            this.$store.dispatch('CREATE_TICKET', payload)
             this.close()
         },
         close: function () {

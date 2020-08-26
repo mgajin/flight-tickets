@@ -44,13 +44,12 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'NewFlightForm',
     computed: mapGetters(['getCities']),
     methods: {
-        ...mapActions(['GET_CITIES', 'CREATE_FLIGHT']),
         validateForm: function () {
             if (this.origin == undefined || this.destination == undefined) {
                 const message = 'Form is not valid!'
@@ -71,7 +70,7 @@ export default {
         },
         createFlight: function (flight) {
             const paylaod = JSON.stringify(flight)
-            this.CREATE_FLIGHT(paylaod)
+            this.$store.dispatch('CREATE_FLIGHT', paylaod)
             this.close()
         },
         close: function () {
@@ -79,7 +78,7 @@ export default {
         }
     },
     created() {
-        this.GET_CITIES()
+        this.$store.dispatch('GET_CITIES')
     }
 }
 </script>
