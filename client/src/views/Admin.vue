@@ -11,6 +11,7 @@
                 <ColorCard :data="companiesCardData" @action="openCompanyDialog" />
             </v-col>
         </v-row>
+        <v-divider class="mt-3 mb-3"></v-divider>
         <FlightDialog />
         <TicketDialog />
     </v-container>

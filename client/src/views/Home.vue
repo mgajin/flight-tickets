@@ -9,6 +9,7 @@
 
 import TicketsTable from '../components/tickets/TicketsTable'
 import FlightsTable from '../components/flights/FlightsTable'
+
 import { mapActions } from 'vuex' 
 
 export default {

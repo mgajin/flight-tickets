@@ -12,13 +12,8 @@ import TheNavbar from './layouts/TheNavbar'
 
 export default {
   name: 'App',
-
   components: {
-    TheNavbar,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+    TheNavbar
+  }
+}
 </script>
