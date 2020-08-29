@@ -9,7 +9,7 @@ import spark.Route;
 
 public class AuthController {
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public static Route login = (Request req, Response res) -> {
 

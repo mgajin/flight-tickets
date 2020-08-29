@@ -24,6 +24,11 @@ public class TicketService {
         return repository.getAll();
     }
 
+    public static List<Ticket> updateTicket(Ticket ticket) {
+        repository.update(ticket);
+        return repository.getAll();
+    }
+
     public static Ticket getTicket(int ticketId) {
         return repository.getById(ticketId);
     }

@@ -54,8 +54,8 @@ public class TicketController {
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
 
-        String departDateStr = (json.get("departDate").getAsString());
-        String returnDateStr = (json.get("returnDate").getAsString());
+        String departDate = (json.get("departDate").getAsString());
+        String returnDate = (json.get("returnDate").getAsString());
         String companyName = (json.get("companyName").getAsString());
         boolean oneWay = (json.get("oneWay").getAsBoolean());
         int flightId = (json.get("flightId").getAsInt());
@@ -64,12 +64,40 @@ public class TicketController {
         Ticket ticket = new Ticket();
         ticket.setFlightId(flightId);
         ticket.setOneWay(oneWay);
-        ticket.setDepartDate(Date.valueOf(departDateStr));
-        ticket.setReturnDate(Date.valueOf(returnDateStr));
+        ticket.setDepartDate(Date.valueOf(departDate));
+        ticket.setReturnDate(Date.valueOf(returnDate));
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
         List<Ticket> tickets = TicketService.createTicket(ticket);
+
+        res.status(201);
+        return gson.toJson(tickets);
+    };
+
+    public static Route updateTicket = (Request req, Response res) -> {
+        String body = req.body();
+        System.out.println("Got: " + body);
+        JsonObject json = gson.fromJson(body, JsonObject.class);
+
+        String departDate = (json.get("departDate").getAsString());
+        String returnDate = (json.get("returnDate").getAsString());
+        String companyName = (json.get("companyName").getAsString());
+        boolean oneWay = (json.get("oneWay").getAsBoolean());
+        int id = (json.get("id").getAsInt());
+        int flightId = (json.get("flightId").getAsInt());
+        int count = (json.get("count").getAsInt());
+
+        Ticket ticket = new Ticket();
+        ticket.setId(id);
+        ticket.setFlightId(flightId);
+        ticket.setOneWay(oneWay);
+        ticket.setDepartDate(Date.valueOf(departDate));
+        ticket.setReturnDate(Date.valueOf(returnDate));
+        ticket.setCompanyName(companyName);
+        ticket.setCount(count);
+
+        List<Ticket> tickets = TicketService.updateTicket(ticket);
 
         res.status(201);
         return gson.toJson(tickets);
@@ -82,5 +110,4 @@ public class TicketController {
         res.status(201);
         return gson.toJson(tickets);
     };
-
 }
