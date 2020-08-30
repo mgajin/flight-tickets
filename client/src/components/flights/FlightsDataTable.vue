@@ -3,14 +3,19 @@
         :title="title" 
         :headers="headers" 
         :items="flights" 
-        @new="openFlightDialog"
-        @edit="openFlightDialog" 
+        @new="openFlightDialog" 
         @delete="deleteFlight"
     />
 </template>
 
 <script>
+
+import DataTable from '../custom/DataTable'
+
 export default {
+    components: {
+        DataTable
+    },
     data: () => ({
         title: 'Flights',
         headers: [
@@ -22,7 +27,7 @@ export default {
     }),
     computed: {
         flights: function () {
-            return this.$store.getters('getFlights')
+            return this.$store.getters.getFlights
         }
     },
     methods: {

@@ -10,7 +10,13 @@
 </template>
 
 <script>
+
+import DataTable from '../custom/DataTable'
+
 export default {
+    components: {
+        DataTable
+    },
     data: () => ({
         title: 'Tickets',
         headers: [
@@ -25,7 +31,7 @@ export default {
     }),
     computed: {
         tickets: function () {
-            return this.$store.getters('getTickets')
+            return this.$store.getters.getTickets
         }
     },
     methods: {
