@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="ticketDialog" persistent max-width="700" >
+    <v-dialog v-model="dialog" persistent max-width="700" >
         <TicketForm />
     </v-dialog>
 </template>
@@ -13,7 +13,7 @@ export default {
     components: {
         TicketForm
     },
-    computed: mapGetters({ ticketDialog: 'getTicketDialog' })
+    computed: mapGetters({ dialog: 'getTicketDialog' })
     
 }
 </script>

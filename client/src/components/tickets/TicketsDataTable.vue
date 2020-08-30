@@ -8,7 +8,7 @@
             @edit="openTicketDialog" 
             @delete="deleteTicket"
         />
-        <TicketDialog :ticket="ticket"/>
+        <TicketDialog />
     </div>
 </template>
 
@@ -33,19 +33,17 @@ export default {
             { text: 'One-Way', value: 'oneWay' },
             { text: 'Company', value: 'companyName' },
             { text: 'Actions', value: 'actions', sortable: false }
-        ],
-        ticket: null
+        ]
     }),
     computed: {
-        ...mapGetters({ ticketDialog: 'getTicketDialog', tickets: 'getTickets', defTicket: 'getDefaultTicket' })
+        ...mapGetters({ 
+            ticketDialog: 'getTicketDialog', 
+            tickets: 'getTickets', 
+            ticketData: 'getDefaultTicket' 
+        })
     },
     watch: {
-        ticketDialog: function (value) {
-            if (!value) {
-                this.ticket = null 
-            }
-        },
-        defTicket :function () {
+        ticketData :function () {
             this.$store.commit('change_ticket_form') 
         }
     },

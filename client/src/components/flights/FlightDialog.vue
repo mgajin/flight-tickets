@@ -1,18 +1,18 @@
 <template>
-    <v-dialog v-model="getFlightDialog" persistent max-width="700">
-        <NewFlightForm />
+    <v-dialog v-model="dialog" persistent max-width="700">
+        <FlightForm />
     </v-dialog>
 </template>
 
 <script>
 
-import NewFlightForm from './NewFlightForm'
+import FlightForm from './FlightForm'
 import { mapGetters } from 'vuex'
 
 export default {
     components: {
-        NewFlightForm
+        FlightForm
     },
-    computed: mapGetters(['getFlightDialog'])
+    computed: mapGetters({ dialog: 'getFlightDialog' })
 }
 </script>

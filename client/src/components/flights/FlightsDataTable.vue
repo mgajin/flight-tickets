@@ -1,20 +1,26 @@
 <template>
-    <DataTable 
-        :title="title" 
-        :headers="headers" 
-        :items="flights" 
-        @new="openFlightDialog" 
-        @delete="deleteFlight"
-    />
+    <div>
+        <DataTable 
+            :title="title" 
+            :headers="headers" 
+            :items="flights" 
+            @new="openFlightDialog" 
+            @delete="deleteFlight"
+        />
+        <FlightDialog />
+    </div>
 </template>
 
 <script>
 
 import DataTable from '../custom/DataTable'
+import FlightDialog from './FlightDialog'
+import { mapGetters } from 'vuex'
 
 export default {
     components: {
-        DataTable
+        DataTable,
+        FlightDialog
     },
     data: () => ({
         title: 'Flights',
@@ -25,11 +31,7 @@ export default {
             { text: 'Actions', value: 'actions', sortable: false }
         ],
     }),
-    computed: {
-        flights: function () {
-            return this.$store.getters.getFlights
-        }
-    },
+    computed: mapGetters({ flights: 'getFlights' }),
     methods: {
         openFlightDialog: function () {
             this.$store.commit('show_flight_dialog')

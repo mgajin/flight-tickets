@@ -102,13 +102,11 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: 'NewTicketForm',
-    data() {
-        return {
-            departMenu: false,
-            returnMenu: false,
-            id: null
-        }
-    },
+    data: () => ({
+        departMenu: false,
+        returnMenu: false,
+        id: null
+    }),
     computed: {
         ...mapGetters({
             flights: 'getFlights', 
