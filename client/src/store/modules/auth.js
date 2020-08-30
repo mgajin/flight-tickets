@@ -11,7 +11,7 @@ const state = {
 const getters = {
     getUser: state => state.user,
     getToken: state => state.token,
-    getLoading: state => state.loading,
+    isLoading: state => state.loading,
     getError: state => state.error
 }
 
@@ -39,9 +39,9 @@ const actions = {
     async SIGN_IN({ commit }, payload) {
         Axios.get(`${URL}/login`, payload)
             .then(response => {
-                const { user, token } = response.data
+                const user = response.data
                 commit('set_user', user)
-                commit('set_token', token)
+                    // commit('set_token', token)
             })
             .catch(err => {
                 const { message } = err.response.data
@@ -52,9 +52,9 @@ const actions = {
     async SIGN_UP({ commit }, payload) {
         Axios.post(`${URL}/register`, payload)
             .then(response => {
-                const { user, token } = response.data
+                const user = response.data
                 commit('set_user', user)
-                commit('set_token', token)
+                    // commit('set_token', token)
             })
             .catch(err => {
                 const { message } = err.response.data
