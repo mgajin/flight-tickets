@@ -15,8 +15,6 @@
             </v-col>
         </v-row>
         <v-divider class="mt-3 mb-3"></v-divider>
-        <FlightDialog />
-        <TicketDialog />
         <v-row>
             <v-col cols=12>
                 <FlightsDataTable />
@@ -34,8 +32,6 @@
 <script>
 
 import StatusCard from '../components/custom/StatusCard'
-import FlightDialog from '../components/flights/FlightDialog'
-import TicketDialog from '../components/tickets/TicketDialog'
 import TicketsDataTable from '../components/tickets/TicketsDataTable'
 import FlightsDataTable from '../components/flights/FlightsDataTable'
 import UsersDataTable from '../components/users/UsersDataTable'
@@ -46,8 +42,6 @@ export default {
     name: 'Admin',
     components: {
         StatusCard,
-        FlightDialog,
-        TicketDialog,
         TicketsDataTable,
         FlightsDataTable,
         UsersDataTable

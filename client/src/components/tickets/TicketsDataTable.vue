@@ -1,21 +1,27 @@
 <template>
-    <DataTable 
-        :title="title" 
-        :headers="headers" 
-        :items="tickets" 
-        @new="openTicketDialog"
-        @edit="openTicketDialog" 
-        @delete="deleteTicket"
-    />
+    <div>
+        <DataTable 
+            :title="title" 
+            :headers="headers" 
+            :items="tickets" 
+            @new="openTicketDialog"
+            @edit="openTicketDialog" 
+            @delete="deleteTicket"
+        />
+        <TicketDialog :ticket="ticket"/>
+    </div>
 </template>
 
 <script>
 
 import DataTable from '../custom/DataTable'
+import TicketDialog from './TicketDialog'
+import {mapGetters } from 'vuex'
 
 export default {
     components: {
-        DataTable
+        DataTable,
+        TicketDialog
     },
     data: () => ({
         title: 'Tickets',
@@ -28,14 +34,24 @@ export default {
             { text: 'Company', value: 'companyName' },
             { text: 'Actions', value: 'actions', sortable: false }
         ],
+        ticket: null
     }),
     computed: {
-        tickets: function () {
-            return this.$store.getters.getTickets
+        ...mapGetters({ ticketDialog: 'getTicketDialog', tickets: 'getTickets', defTicket: 'getDefaultTicket' })
+    },
+    watch: {
+        ticketDialog: function (value) {
+            if (!value) {
+                this.ticket = null 
+            }
+        },
+        defTicket :function () {
+            this.$store.commit('change_ticket_form') 
         }
     },
     methods: {
-        openTicketDialog: function () {
+        openTicketDialog: function (ticket = null) {
+            this.$store.commit('set_default_ticket', ticket)
             this.$store.commit('show_ticket_dialog')
         },
         deleteTicket: function (ticket) {

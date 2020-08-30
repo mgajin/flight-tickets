@@ -1,18 +1,19 @@
 <template>
-    <v-dialog v-model="getTicketDialog" persistent max-width="700" >
-        <NewTicketForm />
+    <v-dialog v-model="ticketDialog" persistent max-width="700" >
+        <TicketForm />
     </v-dialog>
 </template>
 
 <script>
 
-import NewTicketForm from './NewTicketForm'
+import TicketForm from './TicketForm'
 import { mapGetters } from 'vuex'
 
 export default {
     components: {
-        NewTicketForm
+        TicketForm
     },
-    computed: mapGetters(['getTicketDialog'])
+    computed: mapGetters({ ticketDialog: 'getTicketDialog' })
+    
 }
 </script>

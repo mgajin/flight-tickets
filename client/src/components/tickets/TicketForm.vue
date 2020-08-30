@@ -4,12 +4,12 @@
             <v-container>
                 <v-row>
                     <v-col cols=12 class="d-flex justify-center">
-                        <v-card-title v-text="'Create New Ticket'" class="headline"></v-card-title>
+                        <v-card-title v-text="title" class="headline"></v-card-title>
                     </v-col>
                     <v-col cols=12 sm=6>
                         <v-select
                             v-model="company"
-                            :items="getCompanies"
+                            :items="companies"
                             item-value="name"
                             item-text="name"
                             :rules="[v => !!v || 'Company is required']"
@@ -21,7 +21,7 @@
                     <v-col cols=12 sm=6>
                         <v-select
                             v-model="flight"
-                            :items="getFlights"
+                            :items="flights"
                             item-value="id"
                             :item-text="item => `${item.origin.name} - ${item.destination.name}`"
                             :rules="[v => !!v || 'Flight is required']"
@@ -106,13 +106,40 @@ export default {
         return {
             departMenu: false,
             returnMenu: false,
-            departDate: null,
-            returnDate: null
+            id: null
         }
     },
-    computed: mapGetters(['getFlights', 'getCompanies']),    
+    computed: {
+        ...mapGetters({
+            flights: 'getFlights', 
+            companies: 'getCompanies', 
+            ticket: 'getDefaultTicket'
+        }),
+        title: function () {
+            return (this.ticket) ? 'Edit Ticket' : 'Create New Ticket'
+        },
+    },    
+    watch: {
+        ticket: function (val) {
+            this.setValues(val)
+        }
+    },
     methods: {
+        setValues: function (ticket) {
+            if (ticket) {
+                this.id = ticket.id
+                this.flight = ticket.flightId
+                this.company = ticket.companyName
+            } else {
+                this.id = null
+                this.flight = null
+                this.company = null
+                this.departDate = null
+                this.returnDate = null
+            }
+        },
         validateForm: function () {
+            alert
             if (this.flight == null || this.company == null || this.departDate == null) {
                 const message = 'Form is not valid!'
                 alert(message)
@@ -123,6 +150,7 @@ export default {
         newTicket: function () {
             const oneWay = (this.returnDate == null) ? true : false
             const ticket = {
+                id: this.id,
                 companyName: this.company,
                 flightId: this.flight,
                 departDate: this.departDate,
@@ -130,16 +158,31 @@ export default {
                 oneWay: oneWay,
                 count: 5
             }
-            this.createTicket(ticket)
+            this.formAction(ticket)
+        },
+        formAction: function (ticket) {
+            if (this.ticket) {
+                this.editTicket(ticket)
+            } else {
+                this.createTicket(ticket)
+            }
+            this.close()
         },
         createTicket: function (ticket) {
             const payload = JSON.stringify(ticket)
             this.$store.dispatch('CREATE_TICKET', payload)
-            this.close()
+        },
+        editTicket: function (ticket) {
+            const payload = JSON.stringify(ticket)
+            this.$store.dispatch('UPDATE_TICKET', payload)
         },
         close: function () {
             this.$store.commit('hide_ticket_dialog')
+            this.$store.commit('set_default_ticket', null)
         }
+    },
+    created() {
+        this.setValues(this.ticket)
     }
 }
 </script>
