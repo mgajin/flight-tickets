@@ -19,29 +19,13 @@
         <TicketDialog />
         <v-row>
             <v-col cols=12>
-                <DataTable 
-                    :title="'Flights'" 
-                    :headers="flightsTableHeaders" 
-                    :items="getFlights" 
-                    @new="openFlightDialog" 
-                    @delete="deleteFlight" 
-                />
+                <FlightsDataTable />
             </v-col>
             <v-col cols=12>
-                <DataTable 
-                    :title="'Tickets'" 
-                    :headers="ticketsTableHeaders" 
-                    :items="getTickets" 
-                    @new="openTicketDialog" 
-                    @delete="deleteTicket"
-                />
+                <TicketsDataTable />
             </v-col>
             <v-col cols=12>
-                <DataTable 
-                    :title="'Users'" 
-                    :headers="usersTableHeaders" 
-                    :items="getUsers" 
-                />
+                <UsersDataTable />
             </v-col>
         </v-row>
     </v-container>
@@ -52,7 +36,10 @@
 import StatusCard from '../components/custom/StatusCard'
 import FlightDialog from '../components/flights/FlightDialog'
 import TicketDialog from '../components/tickets/TicketDialog'
-import DataTable from '../components/custom/DataTable'
+import TicketsDataTable from '../components/tickets/TicketsDataTable'
+import FlightsDataTable from '../components/flights/FlightsDataTable'
+import UsersDataTable from '../components/users/UsersDataTable'
+
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -61,30 +48,10 @@ export default {
         StatusCard,
         FlightDialog,
         TicketDialog,
-        DataTable
+        TicketsDataTable,
+        FlightsDataTable,
+        UsersDataTable
     },
-    data: () => ({
-        flightsTableHeaders: [
-            { text: 'Flight ID', value: 'id' },
-            { text: 'Origin', value: 'origin.name' },
-            { text: 'Destination', value: 'destination.name' },
-            { text: 'Actions', value: 'actions', sortable: false }
-        ],
-        ticketsTableHeaders: [
-            { text: 'Ticket ID', value: 'id' },
-            { text: 'Flight ID', value: 'flightId' },
-            { text: 'Depart', value: 'departDate' },
-            { text: 'Return', value: 'returnDate' },
-            { text: 'One-Way', value: 'oneWay' },
-            { text: 'Company', value: 'companyName' },
-            { text: 'Actions', value: 'actions', sortable: false }
-        ],
-        usersTableHeaders: [
-            { text: 'User ID', value: 'id' },
-            { text: 'Username', value: 'username' },
-            { text: 'Actions', value: 'actions', sortable: false }
-        ]
-    }),
     computed: {
         ...mapGetters(['getFlights', 'getTickets', 'getCompanies', 'getUsers']),
         totalFlights: function () {
@@ -105,26 +72,10 @@ export default {
             'GET_FLIGHTS', 
             'GET_TICKETS', 
             'GET_COMPANIES', 
-            'GET_USERS', 
-            'DELETE_FLIGHT', 
-            'DELETE_TICKET'
+            'GET_USERS'
         ]),
-        openFlightDialog: function () {
-            this.$store.commit('show_flight_dialog')
-        },
-        openTicketDialog: function () {
-            this.$store.commit('show_ticket_dialog')
-        },
         openCompanyDialog: function () {
             alert('Company dialog not implemented')
-        },
-        deleteFlight: function (flight) {
-            const payload = { id: flight.id, token: '' }
-            this.DELETE_FLIGHT(payload)
-        },
-        deleteTicket: function (ticket) {
-            const payload = { id: ticket.id, token: '' }
-            this.DELETE_TICKET(payload)
         }
     },
     created() {
