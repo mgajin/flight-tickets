@@ -1,11 +1,26 @@
 package app.ticket;
 
+import app.pagination.PageInfo;
+import app.pagination.PaginationResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TicketService {
 
     private static final TicketDao repository = new TicketDao();
+
+    public static List<Ticket> getPaginatedTickets(List<Ticket> tickets, int page) {
+        PageInfo pageInfo = new PageInfo();
+        int totalPages = (tickets.size() + pageInfo.getLimit() - 1) / pageInfo.getLimit();
+        pageInfo.setTotalPages(totalPages);
+        pageInfo.setCurrentPage(page);
+        PaginationResponse paginationResponse = new PaginationResponse();
+        paginationResponse.setModel(tickets);
+        paginationResponse.setPageInfo(pageInfo);
+
+        return paginationResponse.getModel();
+    }
 
     public static List<Ticket> getTickets() {
         return repository.getAll();

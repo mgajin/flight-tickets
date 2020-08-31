@@ -26,6 +26,12 @@ public class TicketController {
             tickets = TicketService.getTickets();
         }
 
+//        Pagination
+        if (queries.hasKey("page")) {
+            int page = Integer.parseInt(queries.get("page").value());
+            tickets = TicketService.getPaginatedTickets(tickets, page);
+        }
+
         return gson.toJson(tickets);
     };
 
