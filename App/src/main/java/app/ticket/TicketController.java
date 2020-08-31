@@ -47,7 +47,7 @@ public class TicketController {
             response = gson.toJson(ticket);
             status = 200;
         } else {
-            response = "";
+            response = "Ticket not found";
             status = 401;
         }
         res.status(status);
@@ -75,10 +75,18 @@ public class TicketController {
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
-        List<Ticket> tickets = TicketService.createTicket(ticket);
+        String response;
+        int status = 201;
+        if (!TicketService.createTicket(ticket)) {
+            response = "Error while creating ticket";
+            status = 500;
+        } else {
+            List<Ticket> tickets = TicketService.getTickets();
+            response = gson.toJson(tickets);
+        }
 
-        res.status(201);
-        return gson.toJson(tickets);
+        res.status(status);
+        return response;
     };
 
     public static Route updateTicket = (Request req, Response res) -> {
@@ -103,17 +111,35 @@ public class TicketController {
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
-        List<Ticket> tickets = TicketService.updateTicket(ticket);
+        String response;
+        int status = 200;
 
-        res.status(201);
-        return gson.toJson(tickets);
+        if (TicketService.updateTicket(ticket)) {
+            response = "Error while updating ticket";
+            status = 500;
+        } else {
+            List<Ticket> tickets = TicketService.getTickets();
+            response = gson.toJson(tickets);
+        }
+
+        res.status(status);
+        return response;
     };
 
     public static Route deleteTicket = (Request req, Response res) -> {
         int ticketId = Integer.parseInt(req.params(":id"));
-        List<Ticket> tickets = TicketService.deleteTicket(ticketId);
+        String response;
+        int status = 200;
 
-        res.status(201);
-        return gson.toJson(tickets);
+        if (TicketService.deleteTicket(ticketId)) {
+            response = "Error while deleting ticket";
+            status = 500;
+        } else {
+            List<Ticket> tickets = TicketService.getTickets();
+            response = gson.toJson(tickets);
+        }
+        
+        res.status(status);
+        return response;
     };
 }

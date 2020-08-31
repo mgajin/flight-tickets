@@ -10,14 +10,17 @@ public class TicketDao {
 
     private static final Connection connection = Database.getConnection();
 
-    public void insert(Ticket ticket) {
+    public boolean insert(Ticket ticket) {
         String query = "INSERT INTO tickets (company, flight, depart_date, return_date, one_way, count) values (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             setTicketData(ticket, statement);
             statement.execute();
+
+            return true;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
     }
 
@@ -57,26 +60,30 @@ public class TicketDao {
         return tickets;
     }
 
-    public void update(Ticket ticket) {
+    public boolean update(Ticket ticket) {
         String query = "UPDATE tickets set company=?, flight=?, depart_date=?, return_date=?, one_way=?, count=? WHERE id=?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             setTicketData(ticket, statement);
             statement.setInt(7, ticket.getId());
             statement.execute();
+            return true;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
     }
 
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM tickets WHERE id = (?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             statement.execute();
+            return true;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
     }
 

@@ -34,22 +34,19 @@ public class TicketService {
         return new ArrayList<>();
     }
 
-    public static List<Ticket> createTicket(Ticket ticket) {
-        repository.insert(ticket);
-        return repository.getAll();
+    public static boolean createTicket(Ticket ticket) {
+        return repository.insert(ticket);
     }
 
-    public static List<Ticket> updateTicket(Ticket ticket) {
-        repository.update(ticket);
-        return repository.getAll();
+    public static boolean updateTicket(Ticket ticket) {
+        return repository.update(ticket);
     }
 
     public static Ticket getTicket(int ticketId) {
         return repository.getById(ticketId);
     }
 
-    public static List<Ticket> deleteTicket(int ticketId) {
-        repository.delete(ticketId);
-        return repository.getAll();
+    public static boolean deleteTicket(int ticketId) {
+        return repository.delete(ticketId);
     }
 }
