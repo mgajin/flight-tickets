@@ -25,6 +25,7 @@ export default {
         headers: [
             { text: 'User ID', value: 'id' },
             { text: 'Username', value: 'username' },
+            { text: 'User type', value: 'type' },
             { text: 'Actions', value: 'actions', sortable: false }
         ],
         user: null

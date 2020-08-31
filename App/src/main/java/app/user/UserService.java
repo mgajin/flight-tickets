@@ -18,4 +18,9 @@ public class UserService {
         repository.addUser(user);
     }
 
+    public static List<User> updateUser(User user) {
+        repository.update(user);
+        return  repository.getUsers();
+    }
+
 }

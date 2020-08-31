@@ -6,5 +6,6 @@ public class UserRoutes {
 
     static {
         get("app/users", UserController.getUsers);
+        put("app/users/:id", UserController.updateUser);
     }
 }

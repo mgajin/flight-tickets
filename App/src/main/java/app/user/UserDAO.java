@@ -66,10 +66,13 @@ public class UserDAO {
                 int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
+                boolean isAdmin = resultSet.getBoolean("is_admin");
+                UserType userType = (isAdmin) ? UserType.ADMIN : UserType.USER;
 
                 User user = new User();
                 user.setUsername(username);
                 user.setPassword(password);
+                user.setType(userType);
                 user.setId(id);
                 users.add(user);
             }
@@ -79,6 +82,19 @@ public class UserDAO {
         }
 
         return users;
+    }
+
+    public void update(User user) {
+        boolean isAdmin = user.getType().equals(UserType.ADMIN);
+        String query = "UPDATE users set is_admin=? WHERE id=?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setBoolean(1, isAdmin);
+            statement.setInt(2, user.getId());
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
     }
 
 }

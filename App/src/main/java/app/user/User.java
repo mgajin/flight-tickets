@@ -2,7 +2,6 @@ package app.user;
 
 import app.reservation.Reservation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -14,10 +13,7 @@ public class User {
     private List<Reservation> bookings;
     private String token;
 
-    public User() {
-//        this.username = username;
-//        this.password = password;
-    }
+    public User() {}
 
     public void setId(Integer id) {
         this.id = id;

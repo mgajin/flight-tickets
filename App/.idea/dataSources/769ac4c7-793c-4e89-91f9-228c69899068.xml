@@ -1408,12 +1408,12 @@ true posix/WET
 false posix/Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1598174985</StartupTime>
+      <StartupTime>1598884994</StartupTime>
     </root>
     <database id="2" parent="1" name="online_tickets">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>587</IntrospectionStateNumber>
+      <IntrospectionStateNumber>617</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16385|16387|1
 sequence|table|16396|16398|1
@@ -1476,7 +1476,7 @@ sequence|table|16458|16460|1
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>588</IntrospectionStateNumber>
+      <IntrospectionStateNumber>618</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
@@ -1599,7 +1599,7 @@ sequence|table|16458|16460|1
     <table id="37" parent="15" name="users">
       <ObjectId>16387</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>488</StateNumber>
+      <StateNumber>613</StateNumber>
     </table>
     <column id="38" parent="33" name="id">
       <Position>1</Position>
@@ -1789,13 +1789,20 @@ sequence|table|16458|16460|1
       <StateNumber>488</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="65" parent="37" name="users_id_uindex">
+    <column id="65" parent="37" name="is_admin">
+      <Position>4</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>616</StateNumber>
+      <DefaultExpression>false</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="66" parent="37" name="users_id_uindex">
       <ObjectId>16394</ObjectId>
       <StateNumber>489</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="66" parent="37" name="users_username_uindex">
+    <index id="67" parent="37" name="users_username_uindex">
       <ObjectId>16395</ObjectId>
       <StateNumber>490</StateNumber>
       <ColNames>username</ColNames>
