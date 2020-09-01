@@ -18,11 +18,11 @@ const actions = {
     async GET_FLIGHTS({ commit }) {
         Axios.get(URL)
             .then(response => {
-                const flights = response.data
+                const { flights } = response.data
                 commit('set_flights', flights)
             })
             .catch(err => {
-                const message = err.response
+                const { message } = err.response.data
                 alert(message)
             })
     },
@@ -30,11 +30,11 @@ const actions = {
     async CREATE_FLIGHT({ commit }, payload) {
         Axios.post(URL, payload)
             .then(response => {
-                const flights = response.data
+                const { flights } = response.data
                 commit('set_flights', flights)
             })
             .catch(err => {
-                const message = err.response
+                const { message } = err.response.data
                 alert(message)
             })
     },
@@ -42,7 +42,7 @@ const actions = {
     async DELETE_FLIGHT({ commit }, payload) {
         Axios.delete(`${URL}/${payload.id}`)
             .then(response => {
-                const flights = response.data
+                const { flights } = response.data
                 commit('set_flights', flights)
             })
             .catch(err => {

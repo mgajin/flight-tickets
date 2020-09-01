@@ -24,7 +24,7 @@ const actions = {
     async GET_TICKETS({ commit }, query = '') {
         Axios.get(URL + query)
             .then(response => {
-                const tickets = response.data
+                const { tickets } = response.data
                 commit('set_tickets', tickets)
             })
             .catch(err => {
@@ -34,10 +34,9 @@ const actions = {
     },
 
     async CREATE_TICKET({ commit }, payload) {
-        // const headers = { Authorization: `Bearer ${payload.token}` }
         Axios.post(URL, payload)
             .then(response => {
-                const tickets = response.data
+                const { tickets } = response.data
                 commit('set_tickets', tickets)
             })
             .catch(err => {
@@ -49,7 +48,7 @@ const actions = {
     async UPDATE_TICKET({ commit }, payload) {
         Axios.put(`${URL}/${payload.id}`, payload)
             .then(response => {
-                const tickets = response.data
+                const { tickets } = response.data
                 commit('set_tickets', tickets)
             })
             .catch(err => {
@@ -61,7 +60,7 @@ const actions = {
     async DELETE_TICKET({ commit }, payload) {
         Axios.delete(`${URL}/${payload.id}`)
             .then(response => {
-                const tickets = response.data
+                const { tickets } = response.data
                 commit('set_tickets', tickets)
             })
             .catch(err => {

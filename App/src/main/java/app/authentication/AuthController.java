@@ -5,6 +5,7 @@ import app.user.UserService;
 import app.utils.ErrorResponse;
 import app.utils.SuccessResponse;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -16,8 +17,12 @@ public class AuthController {
     private static final UserService userService = new UserService();
 
     public static Route login = (Request req, Response res) -> {
-        String username = req.queryParams("username");
-        String password = req.queryParams("password");
+        String body = req.body();
+        System.out.println("Got: " + body);
+        JsonObject json = gson.fromJson(body, JsonObject.class);
+
+        String username = (json.get("username").getAsString());
+        String password = (json.get("password").getAsString());
         User user = userService.getUser(username);
 
         res.type("application/json");

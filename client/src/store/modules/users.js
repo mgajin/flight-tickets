@@ -14,20 +14,22 @@ const mutations = {
 }
 
 const actions = {
+
     async GET_USERS({ commit }) {
         Axios.get(URL)
             .then(response => {
-                const users = response.data
+                const { users } = response.data
                 commit('set_users', users)
             })
             .catch(err => {
                 alert(err)
             })
     },
+
     async UPDATE_USER({ commit }, user) {
         Axios.put(`${URL}/${user.id}`, user)
             .then(response => {
-                const users = response.data
+                const { users } = response.data
                 commit('set_users', users)
             })
             .catch(err => {

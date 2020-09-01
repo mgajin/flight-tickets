@@ -59,7 +59,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getToken']),
+        ...mapGetters(['getToken', 'getUser']),
         navItems() {
             let items
             if (this.getToken) {

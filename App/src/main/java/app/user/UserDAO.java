@@ -29,7 +29,7 @@ public class UserDAO {
     }
 
     public User getByUsername(String username) {
-        User user;
+        User user = null;
         String query = "SELECT * FROM users WHERE username= ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -37,16 +37,18 @@ public class UserDAO {
             statement.execute();
 
             ResultSet resultSet = statement.getResultSet();
-            resultSet.next();
-            int id = resultSet.getInt("id");
-            String password = resultSet.getString("password");
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String password = resultSet.getString("password");
 
-            user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setId(id);
+                user = new User();
+                user.setUsername(username);
+                user.setPassword(password);
+                user.setId(id);
+            }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            System.out.println("EXC");
             return null;
         }
         return user;
