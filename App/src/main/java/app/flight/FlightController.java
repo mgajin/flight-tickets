@@ -1,6 +1,8 @@
 package app.flight;
 
 import app.city.City;
+import app.utils.ErrorResponse;
+import app.utils.SuccessResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import spark.QueryParamsMap;
@@ -30,11 +32,21 @@ public class FlightController {
             flights = FlightService.getFlights();
         }
 
-        response = gson.toJson(flights);
+        if (flights == null) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Flights not found");
+            res.status(404);
+
+            return errorResponse.toJson();
+        }
+
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setFlights(flights);
+
         res.type("application/json");
         res.status(200);
 
-        return response;
+        return successResponse.toJson();
     };
 
     public static Route createFlight = (Request req, Response res) -> {
@@ -52,18 +64,23 @@ public class FlightController {
 
         FlightService.createFlight(flight);
 
-        response = gson.toJson(flight);
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setFlights(FlightService.getFlights());
+
         res.type("application/json");
         res.status(201);
 
-        return response;
+        return successResponse.toJson();
     };
 
     public static Route deleteFlight = (Request req, Response res) -> {
         int flightId = Integer.parseInt(req.params(":id"));
         List<Flight> flights = FlightService.deleteFlight(flightId);
 
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setFlights(FlightService.getFlights());
+
         res.status(201);
-        return gson.toJson(flights);
+        return successResponse.toJson();
     };
 }

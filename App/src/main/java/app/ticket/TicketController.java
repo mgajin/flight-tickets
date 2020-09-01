@@ -1,7 +1,8 @@
 package app.ticket;
 
 import app.pagination.PageInfo;
-import app.utils.TicketsResponse;
+import app.utils.ErrorResponse;
+import app.utils.SuccessResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import spark.QueryParamsMap;
@@ -17,10 +18,8 @@ public class TicketController {
     private static final Gson gson = new Gson();
 
     public static Route getTickets = (Request req, Response res) -> {
-
-        List<Ticket> tickets;
         QueryParamsMap queries = req.queryMap();
-        TicketsResponse ticketsResponse = new TicketsResponse();
+        List<Ticket> tickets;
 
         if (queries.hasKey("oneWay")) {
             boolean isOneWay = Boolean.parseBoolean(queries.get("oneWay").value());
@@ -28,45 +27,48 @@ public class TicketController {
         } else {
             tickets = TicketService.getTickets();
         }
-        ticketsResponse.setTickets(tickets);
 
+        if (tickets == null) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Tickets not found");
+            res.status(404);
+
+            return errorResponse.toJson();
+        }
 //        Pagination
+        SuccessResponse successResponse = new SuccessResponse();
         if (queries.hasKey("page")) {
             int page = Integer.parseInt(queries.get("page").value());
             PageInfo pageInfo = new PageInfo(page);
             tickets = TicketService.getPaginated(tickets, pageInfo);
-            ticketsResponse.setTickets(tickets);
-            ticketsResponse.setPageInfo(pageInfo);
+            successResponse.setPageInfo(pageInfo);
         }
+        successResponse.setTickets(tickets);
 
-        return ticketsResponse.toJson();
+        res.status(200);
+        return successResponse.toJson();
     };
 
     public static Route getTicket = (Request req, Response res) -> {
-
         int id = Integer.parseInt(req.params("id"));
-        String response;
-        int status;
-
         Ticket ticket = TicketService.getTicket(id);
 
-        if (ticket != null) {
-            response = gson.toJson(ticket);
-            status = 200;
-        } else {
-            response = "Ticket not found";
-            status = 401;
-        }
-        res.status(status);
+        if (ticket == null) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Ticket not found");
+            res.status(401);
 
-        return response;
+            return errorResponse.toJson();
+        }
+
+        res.status(200);
+        return gson.toJson(ticket);
     };
 
     public static Route createTicket = (Request req, Response res) -> {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
-        TicketsResponse ticketsResponse = new TicketsResponse();
 
         String departDate = (json.get("departDate").getAsString());
         String returnDate = (json.get("returnDate").getAsString());
@@ -83,26 +85,26 @@ public class TicketController {
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
-        String response;
-        int status = 201;
         if (!TicketService.createTicket(ticket)) {
-            response = "Error while creating ticket";
-            status = 500;
-        } else {
-            List<Ticket> tickets = TicketService.getTickets();
-            ticketsResponse.setTickets(tickets);
-            response = ticketsResponse.toJson();
+            res.status(500);
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while creating ticket");
+
+            return  errorResponse.toJson();
         }
 
-        res.status(status);
-        return response;
+        List<Ticket> tickets = TicketService.getTickets();
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setTickets(tickets);
+
+        res.status(201);
+        return successResponse.toJson();
     };
 
     public static Route updateTicket = (Request req, Response res) -> {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
-        TicketsResponse ticketsResponse = new TicketsResponse();
 
         String departDate = (json.get("departDate").getAsString());
         String returnDate = (json.get("returnDate").getAsString());
@@ -121,38 +123,38 @@ public class TicketController {
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
-        String response;
-        int status = 200;
+        if (!TicketService.updateTicket(ticket)) {
+            res.status(500);
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while updating ticket");
 
-        if (TicketService.updateTicket(ticket)) {
-            response = "Error while updating ticket";
-            status = 500;
-        } else {
-            List<Ticket> tickets = TicketService.getTickets();
-            ticketsResponse.setTickets(tickets);
-            response = ticketsResponse.toJson();
+            return errorResponse.toJson();
         }
 
-        res.status(status);
-        return response;
+        List<Ticket> tickets = TicketService.getTickets();
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setTickets(tickets);
+
+        res.status(200);
+        return successResponse.toJson();
     };
 
     public static Route deleteTicket = (Request req, Response res) -> {
         int ticketId = Integer.parseInt(req.params(":id"));
-        String response;
-        int status = 200;
-        TicketsResponse ticketsResponse = new TicketsResponse();
 
-        if (TicketService.deleteTicket(ticketId)) {
-            response = "Error while deleting ticket";
-            status = 500;
-        } else {
-            List<Ticket> tickets = TicketService.getTickets();
-            ticketsResponse.setTickets(tickets);
-            response = ticketsResponse.toJson();
+        if (!TicketService.deleteTicket(ticketId)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while deleting ticket");
+            res.status(500);
+
+            return errorResponse.toJson();
         }
+
+        List<Ticket> tickets = TicketService.getTickets();
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setTickets(tickets);
         
-        res.status(status);
-        return response;
+        res.status(200);
+        return successResponse.toJson();
     };
 }
