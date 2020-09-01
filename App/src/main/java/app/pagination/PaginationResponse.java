@@ -14,6 +14,11 @@ public class PaginationResponse {
         int currentPage = pageInfo.getCurrentPage();
         int pageLimit = pageInfo.getLimit();
 
+        boolean prev = currentPage > 1;
+        boolean next = currentPage < pageInfo.getTotalPages();
+        pageInfo.setPrevious(prev);
+        pageInfo.setNext(next);
+
         int first = (currentPage - 1) * pageLimit;
         int end = first + pageLimit;
         int last = first;

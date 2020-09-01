@@ -4,17 +4,20 @@ const URL = 'http://localhost:3000/app/tickets'
 const state = {
     tickets: [],
     defaultTicket: null,
-    editTicketForm: false
+    editTicketForm: false,
+    pageInfo: null
 }
 
 const getters = {
     getTickets: state => state.tickets,
+    getPageInfo: state => state.pageInfo,
     getDefaultTicket: state => state.defaultTicket,
     isEditTicketForm: state => state.editTicketForm
 }
 
 const mutations = {
     set_tickets: (state, tickets) => state.tickets = tickets,
+    set_page_info: (state, pageInfo) => state.pageInfo = pageInfo,
     set_default_ticket: (state, ticket) => state.defaultTicket = ticket,
     change_ticket_form: state => state.editTicketForm = !state.editTicketForm
 }
@@ -25,6 +28,10 @@ const actions = {
         Axios.get(URL + query)
             .then(response => {
                 const { tickets } = response.data
+                if (query.includes('?page=')) {
+                    const { pageInfo } = response.data
+                    commit('set_page_info', pageInfo)
+                }
                 commit('set_tickets', tickets)
             })
             .catch(err => {
