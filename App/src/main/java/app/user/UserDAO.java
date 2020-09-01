@@ -13,9 +13,8 @@ public class UserDAO {
 
     private final Connection connection = Database.getConnection();
 
-    public void addUser(User user) {
+    public boolean insert(User user) {
         String query = "INSERT INTO users (username, password) values (?, ?)";
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getUsername());
@@ -24,13 +23,14 @@ public class UserDAO {
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public User getByUsername(String username) {
+        User user;
         String query = "SELECT * FROM users WHERE username= ?";
-        User user = null;
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
@@ -47,15 +47,14 @@ public class UserDAO {
             user.setId(id);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return null;
         }
-
         return user;
     }
 
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM users";
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.execute();
@@ -84,7 +83,7 @@ public class UserDAO {
         return users;
     }
 
-    public void update(User user) {
+    public boolean update(User user) {
         boolean isAdmin = user.getType().equals(UserType.ADMIN);
         String query = "UPDATE users set is_admin=? WHERE id=?";
         try {
@@ -94,7 +93,9 @@ public class UserDAO {
             statement.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 }

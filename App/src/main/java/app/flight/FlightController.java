@@ -15,21 +15,20 @@ import java.util.List;
 public class FlightController {
 
     private static final Gson gson = new Gson();
+    private static final FlightService flightService = new FlightService();
 
     public static Route getFlights = (Request req, Response res) -> {
-
         List<Flight> flights;
-        String response;
         QueryParamsMap queries = req.queryMap();
 
         if (queries.hasKey("origin")) {
             String origin = queries.get("origin").value();
-            flights = FlightService.getByOrigin(origin);
+            flights = flightService.getByOrigin(origin);
         } else if (queries.hasKey("destination")){
             String destination = queries.get("destination").value();
-            flights = FlightService.getByDestination(destination);
+            flights = flightService.getByDestination(destination);
         } else {
-            flights = FlightService.getFlights();
+            flights = flightService.getFlights();
         }
 
         if (flights == null) {
@@ -43,15 +42,12 @@ public class FlightController {
         SuccessResponse successResponse = new SuccessResponse();
         successResponse.setFlights(flights);
 
-        res.type("application/json");
         res.status(200);
-
+        res.type("application/json");
         return successResponse.toJson();
     };
 
     public static Route createFlight = (Request req, Response res) -> {
-
-        String response;
         String body = req.body();
         JsonObject json = gson.fromJson(body, JsonObject.class);
 
@@ -62,25 +58,38 @@ public class FlightController {
         flight.setOrigin(origin);
         flight.setDestination(destination);
 
-        FlightService.createFlight(flight);
+        if (!flightService.createFlight(flight)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while deleting flight");
+            res.status(500);
+
+            return errorResponse.toJson();
+        }
 
         SuccessResponse successResponse = new SuccessResponse();
-        successResponse.setFlights(FlightService.getFlights());
+        successResponse.setFlights(flightService.getFlights());
 
-        res.type("application/json");
         res.status(201);
-
+        res.type("application/json");
         return successResponse.toJson();
     };
 
     public static Route deleteFlight = (Request req, Response res) -> {
         int flightId = Integer.parseInt(req.params(":id"));
-        List<Flight> flights = FlightService.deleteFlight(flightId);
+
+        if (!flightService.deleteFlight(flightId)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while deleting flight");
+            res.status(500);
+
+            return errorResponse.toJson();
+        }
 
         SuccessResponse successResponse = new SuccessResponse();
-        successResponse.setFlights(FlightService.getFlights());
+        successResponse.setFlights(flightService.getFlights());
 
-        res.status(201);
+        res.status(200);
+        res.type("application/json");
         return successResponse.toJson();
     };
 }

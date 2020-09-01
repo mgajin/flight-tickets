@@ -14,9 +14,8 @@ public class FlightDAO {
 
     private static final Connection connection = Database.getConnection();
 
-    public void createFlight(String origin, String destination) {
+    public boolean createFlight(String origin, String destination) {
         String query = "INSERT INTO flights (origin, destination) values (?, ?)";
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, origin);
@@ -24,27 +23,27 @@ public class FlightDAO {
             statement.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public List<Flight> getFlights() {
         List<Flight> flights = new ArrayList<>();
         String query = "SELECT * FROM flights";
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
             readResultSet(resultSet, flights);
-
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return null;
         }
-
         return flights;
     }
 
-    public void deleteFlightTickets(int id) {
+    public boolean deleteFlightTickets(int id) {
         String query = "DELETE FROM tickets WHERE flight = (?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -52,10 +51,12 @@ public class FlightDAO {
             statement.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
+        return true;
     }
 
-    public void deleteFlight(int id) {
+    public boolean deleteFlight(int id) {
         String query = "DELETE FROM flights WHERE id = (?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -63,7 +64,9 @@ public class FlightDAO {
             statement.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     private void readResultSet(ResultSet resultSet, List<Flight> flights) throws SQLException {

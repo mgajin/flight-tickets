@@ -16,6 +16,7 @@ import java.util.List;
 public class TicketController {
 
     private static final Gson gson = new Gson();
+    private static final TicketService ticketService = new TicketService();
 
     public static Route getTickets = (Request req, Response res) -> {
         QueryParamsMap queries = req.queryMap();
@@ -23,9 +24,9 @@ public class TicketController {
 
         if (queries.hasKey("oneWay")) {
             boolean isOneWay = Boolean.parseBoolean(queries.get("oneWay").value());
-            tickets = (isOneWay) ? TicketService.getOneWayTickets() : TicketService.getTwoWayTickets();
+            tickets = (isOneWay) ? ticketService.getOneWayTickets() : ticketService.getTwoWayTickets();
         } else {
-            tickets = TicketService.getTickets();
+            tickets = ticketService.getTickets();
         }
 
         if (tickets == null) {
@@ -40,7 +41,7 @@ public class TicketController {
         if (queries.hasKey("page")) {
             int page = Integer.parseInt(queries.get("page").value());
             PageInfo pageInfo = new PageInfo(page);
-            tickets = TicketService.getPaginated(tickets, pageInfo);
+            tickets = ticketService.getPaginated(tickets, pageInfo);
             successResponse.setPageInfo(pageInfo);
         }
         successResponse.setTickets(tickets);
@@ -51,7 +52,7 @@ public class TicketController {
 
     public static Route getTicket = (Request req, Response res) -> {
         int id = Integer.parseInt(req.params("id"));
-        Ticket ticket = TicketService.getTicket(id);
+        Ticket ticket = ticketService.getTicket(id);
 
         if (ticket == null) {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -85,7 +86,7 @@ public class TicketController {
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
-        if (!TicketService.createTicket(ticket)) {
+        if (!ticketService.createTicket(ticket)) {
             res.status(500);
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setMessage("Error while creating ticket");
@@ -93,7 +94,7 @@ public class TicketController {
             return  errorResponse.toJson();
         }
 
-        List<Ticket> tickets = TicketService.getTickets();
+        List<Ticket> tickets = ticketService.getTickets();
         SuccessResponse successResponse = new SuccessResponse();
         successResponse.setTickets(tickets);
 
@@ -123,7 +124,7 @@ public class TicketController {
         ticket.setCompanyName(companyName);
         ticket.setCount(count);
 
-        if (!TicketService.updateTicket(ticket)) {
+        if (!ticketService.updateTicket(ticket)) {
             res.status(500);
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setMessage("Error while updating ticket");
@@ -131,7 +132,7 @@ public class TicketController {
             return errorResponse.toJson();
         }
 
-        List<Ticket> tickets = TicketService.getTickets();
+        List<Ticket> tickets = ticketService.getTickets();
         SuccessResponse successResponse = new SuccessResponse();
         successResponse.setTickets(tickets);
 
@@ -142,7 +143,7 @@ public class TicketController {
     public static Route deleteTicket = (Request req, Response res) -> {
         int ticketId = Integer.parseInt(req.params(":id"));
 
-        if (!TicketService.deleteTicket(ticketId)) {
+        if (!ticketService.deleteTicket(ticketId)) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setMessage("Error while deleting ticket");
             res.status(500);
@@ -150,7 +151,7 @@ public class TicketController {
             return errorResponse.toJson();
         }
 
-        List<Ticket> tickets = TicketService.getTickets();
+        List<Ticket> tickets = ticketService.getTickets();
         SuccessResponse successResponse = new SuccessResponse();
         successResponse.setTickets(tickets);
         

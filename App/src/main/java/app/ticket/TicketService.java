@@ -8,9 +8,9 @@ import java.util.List;
 
 public class TicketService {
 
-    private static final TicketDao repository = new TicketDao();
+    private final TicketDao repository = new TicketDao();
 
-    public static List<Ticket> getPaginated(List<Ticket> tickets, PageInfo pageInfo) {
+    public List<Ticket> getPaginated(List<Ticket> tickets, PageInfo pageInfo) {
         int totalPages = (tickets.size() + pageInfo.getLimit() - 1) / pageInfo.getLimit();
         pageInfo.setTotalPages(totalPages);
 
@@ -21,31 +21,31 @@ public class TicketService {
         return paginationResponse.getModel();
     }
 
-    public static List<Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return repository.getAll();
     }
 
-    public static List<Ticket> getOneWayTickets() {
+    public List<Ticket> getOneWayTickets() {
         return new ArrayList<>();
     }
 
-    public static List<Ticket> getTwoWayTickets() {
+    public List<Ticket> getTwoWayTickets() {
         return new ArrayList<>();
     }
 
-    public static boolean createTicket(Ticket ticket) {
+    public boolean createTicket(Ticket ticket) {
         return repository.insert(ticket);
     }
 
-    public static boolean updateTicket(Ticket ticket) {
+    public boolean updateTicket(Ticket ticket) {
         return repository.update(ticket);
     }
 
-    public static Ticket getTicket(int ticketId) {
+    public Ticket getTicket(int ticketId) {
         return repository.getById(ticketId);
     }
 
-    public static boolean deleteTicket(int ticketId) {
+    public boolean deleteTicket(int ticketId) {
         return repository.delete(ticketId);
     }
 }

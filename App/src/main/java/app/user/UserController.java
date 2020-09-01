@@ -1,5 +1,7 @@
 package app.user;
 
+import app.utils.ErrorResponse;
+import app.utils.SuccessResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import spark.Request;
@@ -10,21 +12,28 @@ import java.util.List;
 
 public class UserController {
 
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
+    private static final UserService userService = new UserService();
 
     public static Route getUsers = (Request req, Response res) -> {
-
-        String response;
-        List<User> users = UserService.getUsers();
-
+        List<User> users = userService.getUsers();
         res.type("application/json");
-        response = gson.toJson(users);
 
-        return response;
+        if (users == null) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Users not found");
+            res.status(404);
+
+            return errorResponse.toJson();
+        }
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setUsers(users);
+
+        res.status(200);
+        return successResponse.toJson();
     };
 
     public static Route updateUser = (Request req, Response res) -> {
-        String response;
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
@@ -42,11 +51,20 @@ public class UserController {
         user.setPassword(password);
         user.setType(userType);
 
-        List<User> users = UserService.updateUser(user);
-
         res.type("application/json");
-        response = gson.toJson(users);
 
-        return response;
+        if (!userService.updateUser(user)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while updating user");
+            res.status(500);
+
+            return errorResponse.toJson();
+        }
+
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setUsers(userService.getUsers());
+
+        res.status(200);
+        return successResponse.toJson();
     };
 }
