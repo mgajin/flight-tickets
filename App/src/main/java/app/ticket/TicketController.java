@@ -1,5 +1,7 @@
 package app.ticket;
 
+import app.pagination.PageInfo;
+import app.utils.TicketsResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import spark.QueryParamsMap;
@@ -18,6 +20,7 @@ public class TicketController {
 
         List<Ticket> tickets;
         QueryParamsMap queries = req.queryMap();
+        TicketsResponse ticketsResponse = new TicketsResponse();
 
         if (queries.hasKey("oneWay")) {
             boolean isOneWay = Boolean.parseBoolean(queries.get("oneWay").value());
@@ -25,14 +28,18 @@ public class TicketController {
         } else {
             tickets = TicketService.getTickets();
         }
+        ticketsResponse.setTickets(tickets);
 
 //        Pagination
         if (queries.hasKey("page")) {
             int page = Integer.parseInt(queries.get("page").value());
-            tickets = TicketService.getPaginatedTickets(tickets, page);
+            PageInfo pageInfo = new PageInfo(page);
+            tickets = TicketService.getPaginated(tickets, pageInfo);
+            ticketsResponse.setTickets(tickets);
+            ticketsResponse.setPageInfo(pageInfo);
         }
 
-        return gson.toJson(tickets);
+        return ticketsResponse.toJson();
     };
 
     public static Route getTicket = (Request req, Response res) -> {
@@ -59,6 +66,7 @@ public class TicketController {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
+        TicketsResponse ticketsResponse = new TicketsResponse();
 
         String departDate = (json.get("departDate").getAsString());
         String returnDate = (json.get("returnDate").getAsString());
@@ -82,7 +90,8 @@ public class TicketController {
             status = 500;
         } else {
             List<Ticket> tickets = TicketService.getTickets();
-            response = gson.toJson(tickets);
+            ticketsResponse.setTickets(tickets);
+            response = ticketsResponse.toJson();
         }
 
         res.status(status);
@@ -93,6 +102,7 @@ public class TicketController {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
+        TicketsResponse ticketsResponse = new TicketsResponse();
 
         String departDate = (json.get("departDate").getAsString());
         String returnDate = (json.get("returnDate").getAsString());
@@ -119,7 +129,8 @@ public class TicketController {
             status = 500;
         } else {
             List<Ticket> tickets = TicketService.getTickets();
-            response = gson.toJson(tickets);
+            ticketsResponse.setTickets(tickets);
+            response = ticketsResponse.toJson();
         }
 
         res.status(status);
@@ -130,13 +141,15 @@ public class TicketController {
         int ticketId = Integer.parseInt(req.params(":id"));
         String response;
         int status = 200;
+        TicketsResponse ticketsResponse = new TicketsResponse();
 
         if (TicketService.deleteTicket(ticketId)) {
             response = "Error while deleting ticket";
             status = 500;
         } else {
             List<Ticket> tickets = TicketService.getTickets();
-            response = gson.toJson(tickets);
+            ticketsResponse.setTickets(tickets);
+            response = ticketsResponse.toJson();
         }
         
         res.status(status);

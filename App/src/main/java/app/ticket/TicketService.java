@@ -10,11 +10,10 @@ public class TicketService {
 
     private static final TicketDao repository = new TicketDao();
 
-    public static List<Ticket> getPaginatedTickets(List<Ticket> tickets, int page) {
-        PageInfo pageInfo = new PageInfo();
+    public static List<Ticket> getPaginated(List<Ticket> tickets, PageInfo pageInfo) {
         int totalPages = (tickets.size() + pageInfo.getLimit() - 1) / pageInfo.getLimit();
         pageInfo.setTotalPages(totalPages);
-        pageInfo.setCurrentPage(page);
+
         PaginationResponse paginationResponse = new PaginationResponse();
         paginationResponse.setModel(tickets);
         paginationResponse.setPageInfo(pageInfo);

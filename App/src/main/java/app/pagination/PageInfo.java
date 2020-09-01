@@ -4,7 +4,11 @@ public class PageInfo {
 
     private static final int limit = 10;
     private int totalPages;
-    private int currentPage;
+    private final int currentPage;
+
+    public PageInfo(int currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public int getLimit() {
         return limit;
@@ -16,10 +20,6 @@ public class PageInfo {
 
     public int getCurrentPage() {
         return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
     }
 
     public void setTotalPages(int totalPages) {
