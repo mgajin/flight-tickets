@@ -27,8 +27,8 @@ const actions = {
             })
     },
 
-    async GET_USER_RESERVATIONS({ commit }, userId) {
-        Axios.get(`URL/${userId}`)
+    async GET_RESERVATIONS({ commit }, userId) {
+        Axios.get(`${URL}/${userId}`)
             .then(response => {
                 const { reservations } = response.data
                 commit('set_reservations', reservations)
@@ -37,7 +37,7 @@ const actions = {
                 const { message } = err.response.data
                 alert(message)
             })
-    }
+    },
 
 }
 

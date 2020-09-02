@@ -1,5 +1,6 @@
 package app.ticket;
 
+import app.flight.Flight;
 import app.pagination.PageInfo;
 import app.utils.ErrorResponse;
 import app.utils.SuccessResponse;
@@ -82,8 +83,11 @@ public class TicketController {
         int flightId = (json.get("flightId").getAsInt());
         int count = (json.get("count").getAsInt());
 
+        Flight flight = new Flight();
+        flight.setId(flightId);
+
         Ticket ticket = new Ticket();
-        ticket.setFlightId(flightId);
+        ticket.setFlight(flight);
         ticket.setOneWay(oneWay);
         ticket.setDepartDate(Date.valueOf(departDate));
         ticket.setReturnDate(Date.valueOf(returnDate));
@@ -119,9 +123,12 @@ public class TicketController {
         int flightId = (json.get("flightId").getAsInt());
         int count = (json.get("count").getAsInt());
 
+        Flight flight = new Flight();
+        flight.setId(flightId);
+
         Ticket ticket = new Ticket();
         ticket.setId(id);
-        ticket.setFlightId(flightId);
+        ticket.setFlight(flight);
         ticket.setOneWay(oneWay);
         ticket.setDepartDate(Date.valueOf(departDate));
         ticket.setReturnDate(Date.valueOf(returnDate));

@@ -1,5 +1,7 @@
 package app.reservation;
 
+import app.flight.Flight;
+import app.ticket.Ticket;
 import app.utils.ErrorResponse;
 import app.utils.SuccessResponse;
 import com.google.gson.Gson;
@@ -59,8 +61,13 @@ public class ReservationController {
         JsonObject json = gson.fromJson(body, JsonObject.class);
 
         int user = json.get("user").getAsInt();
-        int flight = json.get("flight").getAsInt();
-        int ticket = json.get("ticket").getAsInt();
+        int flightId = json.get("flight").getAsInt();
+        int ticketId = json.get("ticket").getAsInt();
+
+        Ticket ticket = new Ticket();
+        ticket.setId(ticketId);
+        Flight flight = new Flight();
+        flight.setId(flightId);
 
         Reservation reservation = new Reservation();
         reservation.setUser(user);

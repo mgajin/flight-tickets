@@ -1,7 +1,11 @@
 package app.reservation;
 
+import app.city.City;
 import app.database.Dao;
+import app.flight.Flight;
+import app.ticket.Ticket;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +17,9 @@ public class ReservationDao extends Dao<Reservation> {
     @Override
     public List<Reservation> getAll() {
         List<Reservation> reservations = new ArrayList<>();
-        String query = "SELECT * FROM reservations";
+        String query = "SELECT * FROM reservations " +
+                "INNER JOIN tickets ON reservations.ticket = tickets.id " +
+                "INNER JOIN flights ON tickets.flight = flights.id";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.execute();
@@ -42,8 +48,8 @@ public class ReservationDao extends Dao<Reservation> {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, reservation.getUser());
-            statement.setInt(2, reservation.getTicket());
-            statement.setInt(3, reservation.getFlight());
+            statement.setInt(2, reservation.getTicket().getId());
+            statement.setInt(3, reservation.getFlight().getId());
             statement.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -75,8 +81,26 @@ public class ReservationDao extends Dao<Reservation> {
         Reservation reservation = new Reservation();
         int id = resultSet.getInt("id");
         int user = resultSet.getInt("user_id");
-        int ticket = resultSet.getInt("ticket");
-        int flight = resultSet.getInt("flight");
+        int ticketId = resultSet.getInt("ticket");
+        int flightId = resultSet.getInt("flight");
+        String company = resultSet.getString("company");
+        Date departDate = resultSet.getDate("depart_date");
+        Date returnDate = resultSet.getDate("return_date");
+        boolean oneWay = resultSet.getBoolean("one_way");
+        String origin = resultSet.getString("origin");
+        String destination = resultSet.getString("destination");
+
+        Ticket ticket = new Ticket();
+        ticket.setId(ticketId);
+        ticket.setCompanyName(company);
+        ticket.setDepartDate(departDate);
+        ticket.setReturnDate(returnDate);
+        ticket.setOneWay(oneWay);
+
+        Flight flight = new Flight();
+        flight.setId(flightId);
+        flight.setOrigin(new City(origin));
+        flight.setDestination(new City(destination));
 
         reservation.setId(id);
         reservation.setUser(user);

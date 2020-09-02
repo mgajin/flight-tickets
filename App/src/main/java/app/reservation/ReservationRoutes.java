@@ -14,7 +14,7 @@ public class ReservationRoutes {
 
     private void init() {
         get("app/reservations", controller.getReservations);
-        get("app/reservations/:user", controller.getUserReservations);
+        get("app/reservations/:userId", controller.getUserReservations);
         post("app/reservations", controller.createReservation);
     }
 

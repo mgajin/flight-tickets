@@ -7,7 +7,7 @@
             lg=4 
             v-for="ticket in getTickets" 
             :key="ticket.id">
-            <TicketCard :ticket="ticket" :flights="getFlights" />
+            <TicketCard :ticket="ticket" :flight="ticket.flight" />
         </v-col>
     </v-row>
     <v-row>

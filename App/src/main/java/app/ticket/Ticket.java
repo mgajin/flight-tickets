@@ -1,5 +1,7 @@
 package app.ticket;
 
+import app.flight.Flight;
+
 import java.sql.Date;
 
 public class Ticket {
@@ -9,7 +11,7 @@ public class Ticket {
     private boolean oneWay;
     private Date departDate;
     private Date returnDate;
-    private int flightId;
+    private Flight flight;
     private int count;
 
     public int getId() {
@@ -52,12 +54,12 @@ public class Ticket {
         this.returnDate = returnDate;
     }
 
-    public int getFlightId() {
-        return flightId;
+    public Flight getFlight() {
+        return flight;
     }
 
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     public int getCount() {

@@ -22,35 +22,20 @@ import { mapGetters } from 'vuex'
 
 export default {
     name: 'TicketCard',
-    props: ['ticket', 'flights'],
+    props: ['ticket', 'flight'],
     computed: {
         ...mapGetters(['getToken', 'getUser']),
-        flight: function () {
-            return this.getFlight(this.ticket.flightId)
-        },
         returnDate: function () {
             return this.ticket.oneWay ? 'one-way' : this.ticket.returnDate
         }
     },
     methods: {
-        getFlight(id) {
-            let ticketFlight = null
-            this.flights.forEach(flight => {
-                if (flight.id == id) {
-                    ticketFlight = flight
-                }
-            })
-            return ticketFlight
-        },
         reserve: function () {
             if (this.getToken == null || this.getUser == null) {
                 alert("Log in first")
             } else {
                 const user = JSON.parse(this.getUser)
                 const payload = { user: user.id, ticket: this.ticket.id, flight: this.flight.id }
-
-                // alert(JSON.stringify(payload))
-
                 this.$store.dispatch('ADD_RESERVATION', payload)
             }
         }

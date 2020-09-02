@@ -1,11 +1,14 @@
 package app.reservation;
 
+import app.flight.Flight;
+import app.ticket.Ticket;
+
 public class Reservation {
 
     private int id;
     private int user;
-    private int ticket;
-    private int flight;
+    private Ticket ticket;
+    private Flight flight;
     private boolean isAvailable;
 
     public int getId() {
@@ -24,19 +27,19 @@ public class Reservation {
         this.user = user;
     }
 
-    public int getTicket() {
+    public Ticket getTicket() {
         return ticket;
     }
 
-    public void setTicket(int ticket) {
+    public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
 
-    public int getFlight() {
+    public Flight getFlight() {
         return flight;
     }
 
-    public void setFlight(int flight) {
+    public void setFlight(Flight flight) {
         this.flight = flight;
     }
 
