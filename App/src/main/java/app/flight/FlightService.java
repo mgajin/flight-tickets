@@ -1,31 +1,40 @@
 package app.flight;
 
 import app.city.City;
-import app.city.CityService;
+import app.database.Dao;
+import app.ticket.Ticket;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FlightService {
 
-    private final FlightDAO flightsRepo = new FlightDAO();
+    private final Dao<Flight> flightsRepo;
+    private final Dao<City> citiesRepo;
+    private final Dao<Ticket> ticketsRepo;
+
+    public FlightService(Dao<Flight> flightsRepo, Dao<City> citiesRepo, Dao<Ticket> ticketsRepo) {
+        this.flightsRepo = flightsRepo;
+        this.citiesRepo = citiesRepo;
+        this.ticketsRepo = ticketsRepo;
+    }
 
     public boolean createFlight(Flight flight) {
-        City origin = CityService.getCity(flight.getOrigin());
-        City destination = CityService.getCity(flight.getDestination());
+        City origin = citiesRepo.find(flight.getOrigin());
+        City destination = citiesRepo.find(flight.getDestination());
         if (origin != null && destination != null) {
-            return flightsRepo.createFlight(origin.getName(), destination.getName());
+            return flightsRepo.insert(flight);
         }
         return false;
     }
 
     public List<Flight> getFlights() {
-        return flightsRepo.getFlights();
+        return flightsRepo.getAll();
     }
 
     public List<Flight> getByOrigin(String origin) {
         List<Flight> flights;
-        flights = flightsRepo.getFlights().stream().filter(flight ->
+        flights = flightsRepo.getAll().stream().filter(flight ->
                 flight.getOrigin().getName().equals(origin)
         ).collect(Collectors.toList());
 
@@ -35,7 +44,7 @@ public class FlightService {
     public List<Flight> getByDestination(String destination) {
         List<Flight> flights;
 
-        flights = flightsRepo.getFlights()
+        flights = flightsRepo.getAll()
             .stream()
             .filter(flight ->
                 flight.getDestination().getName().equals(destination)
@@ -46,8 +55,10 @@ public class FlightService {
     }
 
     public boolean deleteFlight(int flightId) {
-        if (flightsRepo.deleteFlightTickets(flightId)) {
-            return flightsRepo.deleteFlight(flightId);
+        String query = "DELETE FROM tickets WHERE flight = (?)";
+        if (ticketsRepo.delete(query, flightId)) {
+            query = "DELETE FROM flights WHERE id = (?)";
+            return flightsRepo.delete(query, flightId);
         }
         return false;
     }

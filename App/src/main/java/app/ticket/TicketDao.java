@@ -1,53 +1,57 @@
 package app.ticket;
 
-import app.database.Database;
+import app.database.Dao;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDao {
+public class TicketDao extends Dao<Ticket> {
 
-    private static final Connection connection = Database.getConnection();
-
+    @Override
     public boolean insert(Ticket ticket) {
         String query = "INSERT INTO tickets (company, flight, depart_date, return_date, one_way, count) values (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             setTicketData(ticket, statement);
             statement.execute();
-
-            return true;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
             return false;
         }
+        return true;
     }
 
+    @Override
     public Ticket getById(int id) {
         Ticket ticket = null;
         String query = "SELECT * FROM tickets WHERE id = (?)";
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
-
             if (resultSet.next()) {
-                ticket = getTicketData(resultSet);
+                ticket = getResultData(resultSet);
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-
         return ticket;
     }
 
+    @Override
+    public Ticket find(Object item) {
+        return null;
+    }
+
+    @Override
     public List<Ticket> getAll() {
         List<Ticket> tickets = new ArrayList<>();
         String query = "SELECT * FROM tickets";
-
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.execute();
@@ -55,11 +59,12 @@ public class TicketDao {
             readResultSet(resultSet, tickets);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return null;
         }
-
         return tickets;
     }
 
+    @Override
     public boolean update(Ticket ticket) {
         String query = "UPDATE tickets set company=?, flight=?, depart_date=?, return_date=?, one_way=?, count=? WHERE id=?";
         try {
@@ -67,15 +72,15 @@ public class TicketDao {
             setTicketData(ticket, statement);
             statement.setInt(7, ticket.getId());
             statement.execute();
-            return true;
         } catch (SQLException throwable) {
             throwable.printStackTrace();
             return false;
         }
+        return true;
     }
 
-    public boolean delete(int id) {
-        String query = "DELETE FROM tickets WHERE id = (?)";
+    @Override
+    public boolean delete(String query, int id) {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
@@ -87,14 +92,16 @@ public class TicketDao {
         }
     }
 
-    private void readResultSet(ResultSet resultSet, List<Ticket> tickets) throws SQLException {
+    @Override
+    protected void readResultSet(ResultSet resultSet, List<Ticket> tickets) throws SQLException {
         while (resultSet.next()) {
-            Ticket ticket = getTicketData(resultSet);
+            Ticket ticket = getResultData(resultSet);
             tickets.add(ticket);
         }
     }
 
-    private Ticket getTicketData(ResultSet resultSet) throws SQLException {
+    @Override
+    protected Ticket getResultData(ResultSet resultSet) throws SQLException {
         Ticket ticket = new Ticket();
 
         int id = resultSet.getInt("id");

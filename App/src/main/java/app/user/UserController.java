@@ -12,10 +12,15 @@ import java.util.List;
 
 public class UserController {
 
-    private static final Gson gson = new Gson();
-    private static final UserService userService = new UserService();
+    private UserService userService;
 
-    public static Route getUsers = (Request req, Response res) -> {
+    private final Gson gson = new Gson();
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    public Route getUsers = (Request req, Response res) -> {
         List<User> users = userService.getUsers();
         res.type("application/json");
 
@@ -33,7 +38,7 @@ public class UserController {
         return successResponse.toJson();
     };
 
-    public static Route updateUser = (Request req, Response res) -> {
+    public Route updateUser = (Request req, Response res) -> {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);

@@ -6,9 +6,16 @@ import static spark.Spark.delete;
 
 public class FlightRoutes {
 
-    static {
-        get("app/flights", FlightController.getFlights);
-        post("app/flights", FlightController.createFlight);
-        delete("app/flights/:id", FlightController.deleteFlight);
+    private final FlightController controller;
+
+    public FlightRoutes(FlightController controller) {
+        this.controller = controller;
+        init();
+    }
+
+    private void init() {
+        get("app/flights", controller.getFlights);
+        post("app/flights", controller.createFlight);
+        delete("app/flights/:id", controller.deleteFlight);
     }
 }

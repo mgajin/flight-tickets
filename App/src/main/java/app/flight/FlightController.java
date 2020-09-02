@@ -14,10 +14,15 @@ import java.util.List;
 
 public class FlightController {
 
-    private static final Gson gson = new Gson();
-    private static final FlightService flightService = new FlightService();
+    private FlightService flightService;
 
-    public static Route getFlights = (Request req, Response res) -> {
+    private final Gson gson = new Gson();
+
+    public FlightController(FlightService flightService) {
+        this.flightService = flightService;
+    }
+
+    public Route getFlights = (Request req, Response res) -> {
         List<Flight> flights;
         QueryParamsMap queries = req.queryMap();
 
@@ -47,7 +52,7 @@ public class FlightController {
         return successResponse.toJson();
     };
 
-    public static Route createFlight = (Request req, Response res) -> {
+    public Route createFlight = (Request req, Response res) -> {
         String body = req.body();
         JsonObject json = gson.fromJson(body, JsonObject.class);
 
@@ -74,7 +79,7 @@ public class FlightController {
         return successResponse.toJson();
     };
 
-    public static Route deleteFlight = (Request req, Response res) -> {
+    public Route deleteFlight = (Request req, Response res) -> {
         int flightId = Integer.parseInt(req.params(":id"));
 
         if (!flightService.deleteFlight(flightId)) {

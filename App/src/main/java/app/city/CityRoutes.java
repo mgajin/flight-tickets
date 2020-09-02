@@ -4,9 +4,16 @@ import static spark.Spark.*;
 
 public class CityRoutes {
 
-    static {
-        get("app/cities", CityController.getCities);
-        post("app/cities", CityController.addCity);
+    private final CityController controller;
+
+    public CityRoutes(CityController controller) {
+        this.controller = controller;
+        init();
+    }
+
+    private void init() {
+        get("app/cities", controller.getCities);
+        post("app/cities", controller.addCity);
 
     }
 }

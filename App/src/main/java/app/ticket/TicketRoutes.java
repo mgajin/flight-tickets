@@ -6,11 +6,19 @@ import static spark.Spark.delete;
 import static spark.Spark.put;
 
 public class TicketRoutes {
-    static {
-        get("/app/tickets", TicketController.getTickets);
-        get("/app/tickets/:id", TicketController.getTicket);
-        post("/app/tickets", TicketController.createTicket);
-        delete("/app/tickets/:id", TicketController.deleteTicket);
-        put("/app/tickets/:id", TicketController.updateTicket);
+
+    private final TicketController controller;
+
+    public TicketRoutes(TicketController controller) {
+        this.controller = controller;
+        init();
+    }
+
+    private void init() {
+        get("/app/tickets", controller.getTickets);
+        get("/app/tickets/:id", controller.getTicket);
+        post("/app/tickets", controller.createTicket);
+        delete("/app/tickets/:id", controller.deleteTicket);
+        put("/app/tickets/:id", controller.updateTicket);
     }
 }

@@ -16,9 +16,13 @@ import java.util.List;
 public class TicketController {
 
     private static final Gson gson = new Gson();
-    private static final TicketService ticketService = new TicketService();
+    private TicketService ticketService;
 
-    public static Route getTickets = (Request req, Response res) -> {
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    public Route getTickets = (Request req, Response res) -> {
         QueryParamsMap queries = req.queryMap();
         List<Ticket> tickets;
 
@@ -50,7 +54,7 @@ public class TicketController {
         return successResponse.toJson();
     };
 
-    public static Route getTicket = (Request req, Response res) -> {
+    public Route getTicket = (Request req, Response res) -> {
         int id = Integer.parseInt(req.params("id"));
         Ticket ticket = ticketService.getTicket(id);
 
@@ -66,7 +70,7 @@ public class TicketController {
         return gson.toJson(ticket);
     };
 
-    public static Route createTicket = (Request req, Response res) -> {
+    public Route createTicket = (Request req, Response res) -> {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
@@ -102,7 +106,7 @@ public class TicketController {
         return successResponse.toJson();
     };
 
-    public static Route updateTicket = (Request req, Response res) -> {
+    public Route updateTicket = (Request req, Response res) -> {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
@@ -140,7 +144,7 @@ public class TicketController {
         return successResponse.toJson();
     };
 
-    public static Route deleteTicket = (Request req, Response res) -> {
+    public Route deleteTicket = (Request req, Response res) -> {
         int ticketId = Integer.parseInt(req.params(":id"));
 
         if (!ticketService.deleteTicket(ticketId)) {

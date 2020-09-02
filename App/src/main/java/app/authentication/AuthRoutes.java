@@ -4,8 +4,15 @@ import static spark.Spark.post;
 
 public class AuthRoutes {
 
-    static {
-        post("app/auth/login", AuthController.login);
-        post("app/auth/register", AuthController.register);
+    private final AuthController controller;
+
+    public AuthRoutes(AuthController controller) {
+        this.controller = controller;
+        init();
+    }
+
+    private void init() {
+        post("app/auth/login", controller.login);
+        post("app/auth/register", controller.register);
     }
 }

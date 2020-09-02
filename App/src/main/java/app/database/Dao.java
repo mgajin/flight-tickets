@@ -11,8 +11,11 @@ public abstract class Dao<T> {
 
     public abstract List<T> getAll();
     public abstract T getById(int id);
+    public abstract T find(Object item);
     public abstract boolean insert(T item);
-    public abstract boolean delete(T item);
+    public abstract boolean update(T item);
+    public abstract boolean delete(String query, int id);
+//    public abstract boolean delete(int id);
 
     protected abstract void readResultSet(ResultSet resultSet, List<T> items) throws SQLException;
     protected abstract T getResultData(ResultSet resultSet) throws SQLException;

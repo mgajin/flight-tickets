@@ -32,12 +32,22 @@ public class ReservationDao extends Dao<Reservation> {
     }
 
     @Override
+    public Reservation find(Object item) {
+        return null;
+    }
+
+    @Override
     public boolean insert(Reservation reservation) {
         return false;
     }
 
     @Override
-    public boolean delete(Reservation reservation) {
+    public boolean update(Reservation item) {
+        return true;
+    }
+
+    @Override
+    public boolean delete(String query, int id) {
         return false;
     }
 

@@ -1,14 +1,16 @@
 package app.server;
 
+import app.authentication.AuthController;
 import app.authentication.AuthRoutes;
-import app.city.CityRoutes;
-import app.company.CompanyRoutes;
+import app.authentication.AuthService;
+import app.city.*;
+import app.company.*;
 import app.database.Dao;
 import app.database.Database;
-import app.flight.FlightRoutes;
+import app.flight.*;
 import app.reservation.*;
-import app.ticket.TicketRoutes;
-import app.user.UserRoutes;
+import app.ticket.*;
+import app.user.*;
 
 import java.util.Properties;
 
@@ -26,16 +28,40 @@ public class Server {
         port(PORT);
         initDatabase();
         enableCORS();
-        init();
+        initModules();
     }
 
-    private static void init() {
+    private static void initModules() {
         Dao<Reservation> reservationDao = new ReservationDao();
-        ReservationService reservationService = new ReservationService(reservationDao);
-        ReservationController reservationController = new ReservationController(reservationService);
-        ReservationRoutes reservationRoutes = new ReservationRoutes(reservationController);
+        Dao<Ticket> ticketDao = new TicketDao();
+        Dao<Flight> flightDao = new FlightDao();
+        Dao<User> userDao = new UserDao();
+        Dao<City> cityDao = new CityDao();
+        Dao<Company> companyDao = new CompanyDao();
 
-        initRoutes();
+        TicketService ticketService = new TicketService(ticketDao);
+        UserService userService = new UserService(userDao);
+        AuthService authService = new AuthService();
+        FlightService flightService = new FlightService(flightDao, cityDao, ticketDao);
+        ReservationService reservationService = new ReservationService(reservationDao);
+        CityService cityService = new CityService(cityDao);
+        CompanyService companyService = new CompanyService(companyDao);
+
+        TicketController ticketsController = new TicketController(ticketService);
+        UserController userController = new UserController(userService);
+        AuthController authController = new AuthController(userService, authService);
+        FlightController flightController = new FlightController(flightService);
+        ReservationController reservationController = new ReservationController(reservationService);
+        CityController cityController = new CityController(cityService);
+        CompanyController companyController = new CompanyController(companyService);
+
+        TicketRoutes ticketRoutes = new TicketRoutes(ticketsController);
+        UserRoutes userRoutes = new UserRoutes(userController);
+        AuthRoutes authRoutes = new AuthRoutes(authController);
+        FlightRoutes flightRoutes = new FlightRoutes(flightController);
+        ReservationRoutes reservationRoutes = new ReservationRoutes(reservationController);
+        CityRoutes cityRoutes = new CityRoutes(cityController);
+        CompanyRoutes companyRoutes = new CompanyRoutes(companyController);
     }
 
     private static void initDatabase() {
@@ -45,15 +71,6 @@ public class Server {
         props.put("password", password);
 
         Database.init(props);
-    }
-
-    private static void initRoutes() {
-        TicketRoutes ticketRoutes = new TicketRoutes();
-        FlightRoutes flightRoutes = new FlightRoutes();
-        AuthRoutes authRoutes = new AuthRoutes();
-        UserRoutes userRoutes = new UserRoutes();
-        CityRoutes cityRoutes = new CityRoutes();
-        CompanyRoutes companyRoutes = new CompanyRoutes();
     }
 
     private static void enableCORS() {

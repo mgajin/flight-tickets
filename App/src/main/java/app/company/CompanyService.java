@@ -1,17 +1,23 @@
 package app.company;
 
+import app.database.Dao;
+
 import java.util.List;
 
 public class CompanyService {
 
-    private static final CompanyDAO repository = new CompanyDAO();
+    private final Dao<Company> repository;
 
-    public static void createCompany(Company company) {
-        repository.createCompany(company);
+    public CompanyService(Dao<Company> repository) {
+        this.repository = repository;
     }
 
-    public static List<Company> getCompanies() {
-        return repository.getCompanies();
+    public List<Company> getCompanies() {
+        return repository.getAll();
+    }
+
+    public boolean createCompany(Company company) {
+        return repository.insert(company);
     }
 
 }

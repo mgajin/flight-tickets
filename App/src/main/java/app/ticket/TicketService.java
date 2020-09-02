@@ -1,5 +1,6 @@
 package app.ticket;
 
+import app.database.Dao;
 import app.pagination.PageInfo;
 import app.pagination.PaginationResponse;
 
@@ -8,7 +9,11 @@ import java.util.List;
 
 public class TicketService {
 
-    private final TicketDao repository = new TicketDao();
+    private final Dao<Ticket> repository;
+
+    public TicketService(Dao<Ticket> repository) {
+        this.repository = repository;
+    }
 
     public List<Ticket> getPaginated(List<Ticket> tickets, PageInfo pageInfo) {
         int totalPages = (tickets.size() + pageInfo.getLimit() - 1) / pageInfo.getLimit();
@@ -46,6 +51,7 @@ public class TicketService {
     }
 
     public boolean deleteTicket(int ticketId) {
-        return repository.delete(ticketId);
+        String query = "DELETE FROM tickets WHERE id = (?)";
+        return repository.delete(query, ticketId);
     }
 }

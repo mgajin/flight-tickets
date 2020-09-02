@@ -18,11 +18,11 @@ const actions = {
     async GET_CITIES({ commit }) {
         Axios.get(URL)
             .then(response => {
-                const cities = response.data
+                const { cities } = response.data
                 commit('set_cities', cities)
             })
             .catch(err => {
-                const message = err.response
+                const { message } = err.response.data
                 alert(message)
             })
     },
@@ -30,11 +30,11 @@ const actions = {
     async ADD_CITY({ commit }, payload) {
         Axios.post(URL, payload)
             .then(response => {
-                const cities = response.data
+                const { cities } = response.data
                 commit('set_cities', cities)
             })
             .catch(err => {
-                const message = err.response
+                const { message } = err.response.data
                 alert(message)
             })
     }

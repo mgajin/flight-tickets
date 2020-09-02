@@ -19,7 +19,8 @@ public class ReservationService {
         return repo.insert(reservation);
     }
 
-    public boolean deleteReservation(Reservation reservation) {
-        return repo.delete(reservation);
+    public boolean deleteReservation(int id) {
+        String query = "DELETE FROM reservations WHERE user = (?)";
+        return repo.delete(query, id);
     }
 }

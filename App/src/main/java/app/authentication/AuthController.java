@@ -12,11 +12,17 @@ import spark.Route;
 
 public class AuthController {
 
-    private static final Gson gson = new Gson();
-    private static final AuthService authService = new AuthService();
-    private static final UserService userService = new UserService();
+    private AuthService authService;
+    private UserService userService;
 
-    public static Route login = (Request req, Response res) -> {
+    private final Gson gson = new Gson();
+
+    public AuthController(UserService userService, AuthService authService) {
+        this.userService = userService;
+        this.authService = authService;
+    }
+
+    public Route login = (Request req, Response res) -> {
         String body = req.body();
         System.out.println("Got: " + body);
         JsonObject json = gson.fromJson(body, JsonObject.class);
@@ -48,7 +54,7 @@ public class AuthController {
         return successResponse.toJson();
     };
 
-    public static Route register = (Request req, Response res) -> {
+    public Route register = (Request req, Response res) -> {
         String body = req.body();
         User user = gson.fromJson(body, User.class);
 

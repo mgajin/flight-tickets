@@ -4,9 +4,16 @@ import static spark.Spark.*;
 
 public class CompanyRoutes {
 
-    static {
-        get("app/companies", CompanyController.getCompanies);
-        post("app/companies", CompanyController.addCompany);
+    private final CompanyController controller;
+
+    public CompanyRoutes(CompanyController controller) {
+        this.controller = controller;
+        init();
+    }
+
+    private void init() {
+        get("app/companies", controller.getCompanies);
+        post("app/companies", controller.addCompany);
     }
 
 }

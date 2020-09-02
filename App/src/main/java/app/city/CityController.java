@@ -1,5 +1,7 @@
 package app.city;
 
+import app.utils.ErrorResponse;
+import app.utils.SuccessResponse;
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
@@ -9,28 +11,47 @@ import java.util.List;
 
 public class CityController {
 
-    private static Gson gson = new Gson();
+    private CityService cityService;
 
-    public static Route getCities = (Request req, Response res) -> {
+    private final Gson gson = new Gson();
 
-        String response;
-        List<City> cities = CityService.getCities();
-        response = gson.toJson(cities);
+    public CityController(CityService cityService) {
+        this.cityService = cityService;
+    }
 
-        return response;
+    public Route getCities = (Request req, Response res) -> {
+        List<City> cities = cityService.getCities();
+
+        if (cities == null) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Cities not found");
+            res.status(404);
+            return errorResponse.toJson();
+        }
+
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setCities(cities);
+
+        res.status(200);
+        return successResponse.toJson();
     };
 
-    public static Route addCity = (Request req, Response res) -> {
-
-        int status;
-        String response;
+    public Route addCity = (Request req, Response res) -> {
         String body = req.body();
         City city = gson.fromJson(body, City.class);
 
-        CityService.createCity(city);
-        response = gson.toJson(city);
+        if (!cityService.createCity(city)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while creating city");
+            res.status(501);
+            return errorResponse.toJson();
+        }
 
-        return response;
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setCities(cityService.getCities());
+
+        res.status(201);
+        return successResponse.toJson();
     };
 
 }

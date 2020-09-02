@@ -1,21 +1,27 @@
 package app.city;
 
+import app.database.Dao;
+
 import java.util.List;
 
 public class CityService {
 
-    private static final CityDAO repository = new CityDAO();
+    private final Dao<City> repository;
 
-    public static void createCity(City city) {
-        repository.createCity(city);
+    public CityService(Dao<City> repository) {
+        this.repository = repository;
     }
 
-    public static City getCity(City city) {
-        return repository.getCity(city.getName());
+    public List<City> getCities() {
+        return repository.getAll();
     }
 
-    public static List<City> getCities() {
-        return repository.getCities();
+    public City getCity(City city) {
+        return repository.find(city.getName());
+    }
+
+    public boolean createCity(City city) {
+        return repository.insert(city);
     }
 
 }
