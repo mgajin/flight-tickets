@@ -1,19 +1,21 @@
 package app.reservation;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class ReservationRoutes {
 
-    private final ReservationController reservationController;
+    private final ReservationController controller;
 
-    public ReservationRoutes(ReservationController reservationController) {
-        this.reservationController = reservationController;
+    public ReservationRoutes(ReservationController controller) {
+        this.controller = controller;
         init();
     }
 
     private void init() {
-        get("app/reservations", reservationController.getReservations);
-        get("app/reservations/:user", reservationController.getUserReservations);
+        get("app/reservations", controller.getReservations);
+        get("app/reservations/:user", controller.getUserReservations);
+        post("app/reservations", controller.createReservation);
     }
 
 }

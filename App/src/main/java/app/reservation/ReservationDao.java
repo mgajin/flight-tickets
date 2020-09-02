@@ -38,7 +38,18 @@ public class ReservationDao extends Dao<Reservation> {
 
     @Override
     public boolean insert(Reservation reservation) {
-        return false;
+        String query = "INSERT INTO reservations (user_id, ticket, flight) values (?, ?, ?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, reservation.getUser());
+            statement.setInt(2, reservation.getTicket());
+            statement.setInt(3, reservation.getFlight());
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -63,8 +74,14 @@ public class ReservationDao extends Dao<Reservation> {
     protected Reservation getResultData(ResultSet resultSet) throws SQLException {
         Reservation reservation = new Reservation();
         int id = resultSet.getInt("id");
+        int user = resultSet.getInt("user_id");
+        int ticket = resultSet.getInt("ticket");
+        int flight = resultSet.getInt("flight");
 
         reservation.setId(id);
+        reservation.setUser(user);
+        reservation.setTicket(ticket);
+        reservation.setFlight(flight);
 
         return reservation;
     }

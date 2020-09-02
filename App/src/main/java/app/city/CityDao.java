@@ -23,6 +23,24 @@ public class CityDao extends Dao<City> {
         return true;
     }
 
+    public City getCity(String name) {
+        City city = null;
+        String query = "SELECT * FROM cities WHERE name= ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, name);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                city = getResultData(resultSet);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+        return city;
+    }
+
     @Override
     public City find(Object name) {
         City city = null;

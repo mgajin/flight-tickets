@@ -41,19 +41,6 @@ public class FlightDao extends Dao<Flight> {
         return flights;
     }
 
-    public boolean deleteFlightTickets(int id) {
-        String query = "DELETE FROM tickets WHERE flight = (?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-            statement.execute();
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public Flight getById(int id) {
         return null;

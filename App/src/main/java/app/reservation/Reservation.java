@@ -1,16 +1,12 @@
 package app.reservation;
 
-import app.flight.Flight;
-import app.ticket.Ticket;
-import app.user.User;
-
 public class Reservation {
 
     private int id;
+    private int user;
+    private int ticket;
+    private int flight;
     private boolean isAvailable;
-    private Flight flight;
-    private Ticket ticket;
-    private User user;
 
     public int getId() {
         return id;
@@ -20,35 +16,35 @@ public class Reservation {
         this.id = id;
     }
 
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+
+    public int getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(int ticket) {
+        this.ticket = ticket;
+    }
+
+    public int getFlight() {
+        return flight;
+    }
+
+    public void setFlight(int flight) {
+        this.flight = flight;
+    }
+
     public boolean isAvailable() {
         return isAvailable;
     }
 
     public void setAvailable(boolean available) {
         isAvailable = available;
-    }
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

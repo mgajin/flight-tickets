@@ -20,8 +20,8 @@ public class FlightService {
     }
 
     public boolean createFlight(Flight flight) {
-        City origin = citiesRepo.find(flight.getOrigin());
-        City destination = citiesRepo.find(flight.getDestination());
+        City origin = citiesRepo.find(flight.getOrigin().getName());
+        City destination = citiesRepo.find(flight.getDestination().getName());
         if (origin != null && destination != null) {
             return flightsRepo.insert(flight);
         }

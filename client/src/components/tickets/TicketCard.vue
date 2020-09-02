@@ -1,7 +1,8 @@
 <template>
   <v-card id="ticket-card">
-      <v-card-title>
+      <v-card-title class="d-flex justify-space-between">
           <h4 class="primary--text"><v-icon color=primary style="transform: rotate(45deg);">mdi-airplane</v-icon> {{ ticket.companyName }}</h4>
+            <v-btn text color=primary @click="reserve"><v-icon>mdi-ticket</v-icon></v-btn>
       </v-card-title>
       <v-card-text class="d-flex flex-column">
           <div class="d-flex justify-space-between pb-1">
@@ -17,11 +18,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'TicketCard',
     props: ['ticket', 'flights'],
     computed: {
+        ...mapGetters(['getToken', 'getUser']),
         flight: function () {
             return this.getFlight(this.ticket.flightId)
         },
@@ -38,6 +41,18 @@ export default {
                 }
             })
             return ticketFlight
+        },
+        reserve: function () {
+            if (this.getToken == null || this.getUser == null) {
+                alert("Log in first")
+            } else {
+                const user = JSON.parse(this.getUser)
+                const payload = { user: user.id, ticket: this.ticket.id, flight: this.flight.id }
+
+                // alert(JSON.stringify(payload))
+
+                this.$store.dispatch('ADD_RESERVATION', payload)
+            }
         }
     }
 }
