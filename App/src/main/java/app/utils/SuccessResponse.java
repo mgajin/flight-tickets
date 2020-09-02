@@ -4,6 +4,7 @@ import app.city.City;
 import app.company.Company;
 import app.flight.Flight;
 import app.pagination.PageInfo;
+import app.reservation.Reservation;
 import app.ticket.Ticket;
 import app.user.User;
 import com.google.gson.Gson;
@@ -17,6 +18,7 @@ public class SuccessResponse {
     private List<Ticket> tickets;
     private List<Flight> flights;
     private List<User> users;
+    private List<Reservation> reservations;
     private List<Company> companies;
     private List<City> cities;
 
@@ -29,6 +31,7 @@ public class SuccessResponse {
         tickets = null;
         flights = null;
         users = null;
+        reservations = null;
         companies = null;
         cities = null;
         pageInfo = null;
@@ -47,6 +50,10 @@ public class SuccessResponse {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public void setCompanies(List<Company> companies) {
