@@ -35,6 +35,18 @@ const actions = {
             .catch(err => {
                 alert(err)
             })
+    },
+
+    async DELETE_USER({ commit }, payload) {
+        Axios.delete(`${URL}/${payload.id}`)
+            .then(response => {
+                const { users } = response.data
+                commit('ser_users', users)
+            })
+            .catch(err => {
+                const { message } = err.response.data
+                alert(message)
+            })
     }
 }
 

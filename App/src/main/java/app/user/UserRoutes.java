@@ -14,5 +14,6 @@ public class UserRoutes {
     private void init() {
         get("app/users", controller.getUsers);
         put("app/users/:id", controller.updateUser);
+        delete("app/users/:id", controller.deleteUser);
     }
 }

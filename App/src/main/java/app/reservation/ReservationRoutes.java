@@ -1,7 +1,6 @@
 package app.reservation;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class ReservationRoutes {
 
@@ -16,6 +15,7 @@ public class ReservationRoutes {
         get("app/reservations", controller.getReservations);
         get("app/reservations/:userId", controller.getUserReservations);
         post("app/reservations", controller.createReservation);
+        delete("app/reservations/:id", controller.deleteReservation);
     }
 
 }

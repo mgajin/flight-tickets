@@ -25,6 +25,9 @@
             <v-col cols=12>
                 <UsersDataTable />
             </v-col>
+            <v-col cols=12>
+                <CompaniesDataTable />
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -35,6 +38,7 @@ import StatusCard from '../components/custom/StatusCard'
 import TicketsDataTable from '../components/tickets/TicketsDataTable'
 import FlightsDataTable from '../components/flights/FlightsDataTable'
 import UsersDataTable from '../components/users/UsersDataTable'
+import CompaniesDataTable from '../components/companies/CompanyDataTable'
 
 import { mapActions, mapGetters } from 'vuex'
 
@@ -44,7 +48,8 @@ export default {
         StatusCard,
         TicketsDataTable,
         FlightsDataTable,
-        UsersDataTable
+        UsersDataTable,
+        CompaniesDataTable
     },
     computed: {
         ...mapGetters(['getFlights', 'getTickets', 'getCompanies', 'getUsers']),
@@ -67,10 +72,7 @@ export default {
             'GET_TICKETS', 
             'GET_COMPANIES', 
             'GET_USERS'
-        ]),
-        openCompanyDialog: function () {
-            alert('Company dialog not implemented')
-        }
+        ])
     },
     created() {
         this.GET_FLIGHTS()

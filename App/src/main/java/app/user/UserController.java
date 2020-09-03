@@ -72,4 +72,21 @@ public class UserController {
         res.status(200);
         return successResponse.toJson();
     };
+
+    public Route deleteUser = (Request req, Response res) -> {
+        int id = Integer.parseInt(req.params("id"));
+
+        if (!userService.deleteUser(id)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while deleting user");
+            res.status(501);
+            return errorResponse.toJson();
+        }
+
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setUsers(userService.getUsers());
+
+        res.status(200);
+        return successResponse.toJson();
+    };
 }

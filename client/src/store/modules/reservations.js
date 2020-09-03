@@ -39,6 +39,18 @@ const actions = {
             })
     },
 
+    async REMOVE_RESERVATION({ commit }, payload) {
+        Axios.delete(URL, payload)
+            .then(response => {
+                const { reservations } = response.data
+                commit('set_reservations', reservations)
+            })
+            .catch(err => {
+                const { message } = err.response.data
+                alert(message)
+            })
+    }
+
 }
 
 export default {

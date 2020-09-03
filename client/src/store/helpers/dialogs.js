@@ -1,13 +1,15 @@
 const state = {
     flightDialog: false,
     ticketDialog: false,
-    userDialog: false
+    userDialog: false,
+    companyDialog: false
 }
 
 const getters = {
     getFlightDialog: state => state.flightDialog,
     getTicketDialog: state => state.ticketDialog,
-    getUserDialog: state => state.userDialog
+    getUserDialog: state => state.userDialog,
+    getCompanyDialog: state => state.companyDialog
 }
 
 const mutations = {
@@ -16,7 +18,9 @@ const mutations = {
     show_ticket_dialog: state => state.ticketDialog = true,
     hide_ticket_dialog: state => state.ticketDialog = false,
     show_user_dialog: state => state.userDialog = true,
-    hide_user_dialog: state => state.userDialog = false
+    hide_user_dialog: state => state.userDialog = false,
+    show_company_dialog: state => state.companyDialog = true,
+    hide_company_dialog: state => state.companyDialog = false
 }
 
 export default {

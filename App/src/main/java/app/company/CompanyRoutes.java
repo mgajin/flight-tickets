@@ -14,6 +14,6 @@ public class CompanyRoutes {
     private void init() {
         get("app/companies", controller.getCompanies);
         post("app/companies", controller.addCompany);
+        delete("app/companies/:id", controller.deleteCompany);
     }
-
 }

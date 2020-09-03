@@ -27,4 +27,9 @@ public class UserService {
     public boolean updateUser(User user) {
         return repository.update(user);
     }
+
+    public boolean deleteUser(int id) {
+        String query = "DELETE FROM users WHERE id = ?";
+        return repository.delete(query, id);
+    }
 }

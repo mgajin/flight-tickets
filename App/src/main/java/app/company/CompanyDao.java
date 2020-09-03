@@ -57,7 +57,15 @@ public class CompanyDao extends Dao<Company> {
 
     @Override
     public boolean delete(String query, int id) {
-        return false;
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -20,4 +20,9 @@ public class CompanyService {
         return repository.insert(company);
     }
 
+    public boolean deleteCompany(int id) {
+        String query = "DELETE FROM companies WHERE id = ?";
+        return repository.delete(query, id);
+    }
+
 }

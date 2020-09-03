@@ -15,7 +15,6 @@ public abstract class Dao<T> {
     public abstract boolean insert(T item);
     public abstract boolean update(T item);
     public abstract boolean delete(String query, int id);
-//    public abstract boolean delete(int id);
 
     protected abstract void readResultSet(ResultSet resultSet, List<T> items) throws SQLException;
     protected abstract T getResultData(ResultSet resultSet) throws SQLException;

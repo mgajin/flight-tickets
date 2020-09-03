@@ -58,7 +58,6 @@ public class FlightDao extends Dao<Flight> {
 
     @Override
     public boolean delete(String query, int id) {
-//        String query = "DELETE FROM flights WHERE id = (?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);

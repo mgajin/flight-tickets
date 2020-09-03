@@ -7,7 +7,7 @@
             lg=4 
             v-for="ticket in getTickets" 
             :key="ticket.id">
-            <TicketCard :ticket="ticket" :flight="ticket.flight" />
+            <TicketCard :ticket="ticket" :flight="ticket.flight" @action="reserve" />
         </v-col>
     </v-row>
     <v-row>
@@ -35,7 +35,7 @@ export default {
         TicketCard
     },
     computed: {
-        ...mapGetters(['getTickets', 'getFlights', 'getPageInfo']),
+        ...mapGetters(['getTickets', 'getFlights', 'getPageInfo', 'getUser', 'getToken']),
         totalPages: function () {
             return this.getPageInfo.totalPages
         },
@@ -49,7 +49,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_TICKETS'])
+        ...mapActions(['GET_TICKETS', 'ADD_RESERVATION']),
+        reserve: function () {
+            if (this.getToken == null || this.getUser == null) {
+                alert("Log in first")
+            } else {
+                const user = JSON.parse(this.getUser)
+                const payload = { user: user.id, ticket: this.ticket.id, flight: this.flight.id }
+                this.ADD_RESERVATION(payload)
+            }
+        }
     },
     created() {
         this.GET_TICKETS(this.pageQuery)

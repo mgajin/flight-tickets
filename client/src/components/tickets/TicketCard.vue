@@ -2,7 +2,7 @@
   <v-card id="ticket-card">
       <v-card-title class="d-flex justify-space-between">
           <h4 class="primary--text"><v-icon color=primary style="transform: rotate(45deg);">mdi-airplane</v-icon> {{ ticket.companyName }}</h4>
-            <v-btn text color=primary @click="reserve"><v-icon>mdi-ticket</v-icon></v-btn>
+            <v-btn text color=primary @click="action"><v-icon>mdi-ticket</v-icon></v-btn>
       </v-card-title>
       <v-card-text class="d-flex flex-column">
           <div class="d-flex justify-space-between pb-1">
@@ -30,14 +30,8 @@ export default {
         }
     },
     methods: {
-        reserve: function () {
-            if (this.getToken == null || this.getUser == null) {
-                alert("Log in first")
-            } else {
-                const user = JSON.parse(this.getUser)
-                const payload = { user: user.id, ticket: this.ticket.id, flight: this.flight.id }
-                this.$store.dispatch('ADD_RESERVATION', payload)
-            }
+        action: function () {
+            this.$emit('action')
         }
     }
 }

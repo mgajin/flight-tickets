@@ -7,7 +7,7 @@
                 lg=4 
                 v-for="reservation in reservations" 
                 :key="reservation.id">
-                <TicketCard :ticket="reservation.ticket" :flight="reservation.flight"/>
+                <TicketCard :ticket="reservation.ticket" :flight="reservation.flight" @action="removeReservation(reservation.id)"/>
             </v-col>
         </v-row>
     </v-container>
@@ -38,7 +38,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_RESERVATIONS', 'DELETE_RESERVATION'])
+        ...mapActions(['GET_RESERVATIONS', 'REMOVE_RESERVATION']),
+        removeReservation: function (reservationId) {
+            if (this.token == null || this.user == null) {
+                alert("Log in first")
+            } else {
+                const user = JSON.parse(this.user)
+                const payload = { user: user.id, reservation: reservationId }
+                this.REMOVE_RESERVATION(payload)
+            }
+        }
     },
     created() {
         const user = JSON.parse(this.user)

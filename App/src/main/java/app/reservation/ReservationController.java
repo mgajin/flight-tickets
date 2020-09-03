@@ -40,7 +40,8 @@ public class ReservationController {
     };
 
     public Route getUserReservations = (Request req, Response res) -> {
-        List<Reservation> reservations = reservationService.getReservations();
+        int user = Integer.parseInt(req.params("userId"));
+        List<Reservation> reservations = reservationService.getUserReservations(user);
 
         if (reservations == null) {
             ErrorResponse errorResponse = new ErrorResponse();
@@ -82,9 +83,26 @@ public class ReservationController {
         }
 
         SuccessResponse successResponse = new SuccessResponse();
-        successResponse.setReservations(reservationService.getUserReservations());
+        successResponse.setReservations(reservationService.getUserReservations(user));
 
         res.status(201);
+        return successResponse.toJson();
+    };
+
+    public Route deleteReservation = (Request req, Response res) -> {
+        int id = Integer.parseInt(req.params("id"));
+
+        if (!reservationService.deleteReservation(id)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while deleting reservation");
+            res.status(501);
+            return errorResponse.toJson();
+        }
+
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setReservations(reservationService.getReservations());
+
+        res.status(200);
         return successResponse.toJson();
     };
 }

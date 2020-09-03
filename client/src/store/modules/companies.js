@@ -25,6 +25,30 @@ const actions = {
                 const { message } = err.response.data
                 alert(message)
             })
+    },
+
+    async ADD_COMPANY({ commit }, payload) {
+        Axios.post(URL, payload)
+            .then(response => {
+                const { companies } = response.data
+                commit('set_companies', companies)
+            })
+            .catch(err => {
+                const { message } = err.response.data
+                alert(message)
+            })
+    },
+
+    async DELETE_COMPANY({ commit }, payload) {
+        Axios.delete(`${URL}/${payload.id}`)
+            .then(response => {
+                const { companies } = response.data
+                commit('set_companies', companies)
+            })
+            .catch(err => {
+                const { message } = err.response.data
+                alert(message)
+            })
     }
 }
 

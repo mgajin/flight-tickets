@@ -56,4 +56,25 @@ public class CompanyController {
         res.status(201);
         return successResponse.toJson();
     };
+
+    public Route deleteCompany = (Request req, Response res) -> {
+
+        int id = Integer.parseInt(req.params("id"));
+        System.out.println(id);
+
+        res.type("application/json");
+
+        if (!companyService.deleteCompany(id)) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("Error while deleting company");
+            res.status(501);
+            return errorResponse.toJson();
+        }
+
+        SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setCompanies(companyService.getCompanies());
+
+        res.status(200);
+        return successResponse.toJson();
+    };
 }

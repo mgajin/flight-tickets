@@ -1,9 +1,7 @@
 package app.user;
 
 import app.database.Dao;
-import app.database.Database;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao extends Dao<User> {
-
-    private final Connection connection = Database.getConnection();
 
     @Override
     public boolean insert(User user) {
@@ -88,7 +84,15 @@ public class UserDao extends Dao<User> {
 
     @Override
     public boolean delete(String query, int id) {
-        return false;
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override

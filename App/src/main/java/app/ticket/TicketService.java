@@ -4,8 +4,8 @@ import app.database.Dao;
 import app.pagination.PageInfo;
 import app.pagination.PaginationResponse;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TicketService {
 
@@ -31,11 +31,19 @@ public class TicketService {
     }
 
     public List<Ticket> getOneWayTickets() {
-        return new ArrayList<>();
+        return repository
+            .getAll()
+            .stream()
+            .filter(Ticket::isOneWay)
+            .collect(Collectors.toList());
     }
 
     public List<Ticket> getTwoWayTickets() {
-        return new ArrayList<>();
+        return repository
+            .getAll()
+            .stream()
+            .filter(ticket -> !ticket.isOneWay())
+            .collect(Collectors.toList());
     }
 
     public boolean createTicket(Ticket ticket) {
