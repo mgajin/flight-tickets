@@ -6,7 +6,8 @@
                 sm=6
                 lg=4 
                 v-for="reservation in reservations" 
-                :key="reservation.id">
+                :key="reservation.id"
+            >
                 <TicketCard :ticket="reservation.ticket" :flight="reservation.flight" @action="removeReservation(reservation.id)"/>
             </v-col>
         </v-row>

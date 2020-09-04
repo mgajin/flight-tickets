@@ -26,6 +26,13 @@ const routes = [{
         name: 'Bookings',
         component: () =>
             import ('../views/Reservations.vue')
+    },
+    {
+        path: '/companies/:id',
+        name: 'Company',
+        props: true,
+        component: () =>
+            import ('../views/Company.vue')
     }
 ]
 

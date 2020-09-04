@@ -1,5 +1,6 @@
 package app.ticket;
 
+import app.company.Company;
 import app.flight.Flight;
 import app.pagination.PageInfo;
 import app.utils.ErrorResponse;
@@ -78,20 +79,26 @@ public class TicketController {
 
         String departDate = (json.get("departDate").getAsString());
         String returnDate = (json.get("returnDate").getAsString());
-        String companyName = (json.get("companyName").getAsString());
+        int companyId = (json.get("company").getAsInt());
         boolean oneWay = (json.get("oneWay").getAsBoolean());
         int flightId = (json.get("flightId").getAsInt());
         int count = (json.get("count").getAsInt());
 
         Flight flight = new Flight();
         flight.setId(flightId);
+        Company company = new Company();
+        company.setId(companyId);
 
         Ticket ticket = new Ticket();
         ticket.setFlight(flight);
         ticket.setOneWay(oneWay);
         ticket.setDepartDate(Date.valueOf(departDate));
-        ticket.setReturnDate(Date.valueOf(returnDate));
-        ticket.setCompanyName(companyName);
+        if (returnDate.equals("")) {
+            ticket.setReturnDate(null);
+        } else {
+            ticket.setReturnDate(Date.valueOf(returnDate));
+        }
+        ticket.setCompany(company);
         ticket.setCount(count);
 
         if (!ticketService.createTicket(ticket)) {
@@ -117,7 +124,7 @@ public class TicketController {
 
         String departDate = (json.get("departDate").getAsString());
         String returnDate = (json.get("returnDate").getAsString());
-        String companyName = (json.get("companyName").getAsString());
+        int companyId = (json.get("company").getAsInt());
         boolean oneWay = (json.get("oneWay").getAsBoolean());
         int id = (json.get("id").getAsInt());
         int flightId = (json.get("flightId").getAsInt());
@@ -125,6 +132,8 @@ public class TicketController {
 
         Flight flight = new Flight();
         flight.setId(flightId);
+        Company company = new Company();
+        company.setId(companyId);
 
         Ticket ticket = new Ticket();
         ticket.setId(id);
@@ -132,7 +141,7 @@ public class TicketController {
         ticket.setOneWay(oneWay);
         ticket.setDepartDate(Date.valueOf(departDate));
         ticket.setReturnDate(Date.valueOf(returnDate));
-        ticket.setCompanyName(companyName);
+        ticket.setCompany(company);
         ticket.setCount(count);
 
         if (!ticketService.updateTicket(ticket)) {

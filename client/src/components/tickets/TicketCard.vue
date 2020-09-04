@@ -1,7 +1,7 @@
 <template>
   <v-card id="ticket-card">
       <v-card-title class="d-flex justify-space-between">
-          <h4 class="primary--text"><v-icon color=primary style="transform: rotate(45deg);">mdi-airplane</v-icon> {{ ticket.companyName }}</h4>
+          <h4 @click="companyPage" class="primary--text"><v-icon color=primary style="transform: rotate(45deg);">mdi-airplane</v-icon> {{ ticket.company.name }}</h4>
             <v-btn text color=primary @click="action"><v-icon>mdi-ticket</v-icon></v-btn>
       </v-card-title>
       <v-card-text class="d-flex flex-column">
@@ -32,6 +32,10 @@ export default {
     methods: {
         action: function () {
             this.$emit('action')
+        },
+        companyPage: function () {
+            const { id } = this.ticket.company 
+            this.$router.push(`/companies/${id}`)
         }
     }
 }

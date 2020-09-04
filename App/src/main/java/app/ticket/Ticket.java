@@ -1,5 +1,6 @@
 package app.ticket;
 
+import app.company.Company;
 import app.flight.Flight;
 
 import java.sql.Date;
@@ -7,7 +8,7 @@ import java.sql.Date;
 public class Ticket {
 
     private int id;
-    private String companyName;
+    private Company company;
     private boolean oneWay;
     private Date departDate;
     private Date returnDate;
@@ -22,12 +23,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public boolean isOneWay() {

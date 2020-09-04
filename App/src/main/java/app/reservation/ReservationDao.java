@@ -1,6 +1,7 @@
 package app.reservation;
 
 import app.city.City;
+import app.company.Company;
 import app.database.Dao;
 import app.flight.Flight;
 import app.ticket.Ticket;
@@ -19,7 +20,8 @@ public class ReservationDao extends Dao<Reservation> {
         List<Reservation> reservations = new ArrayList<>();
         String query = "SELECT * FROM reservations " +
                 "INNER JOIN tickets ON reservations.ticket = tickets.id " +
-                "INNER JOIN flights ON tickets.flight = flights.id";
+                "INNER JOIN flights ON tickets.flight = flights.id " +
+                "INNER JOIN companies ON tickets.company = companies.id";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.execute();
@@ -91,16 +93,20 @@ public class ReservationDao extends Dao<Reservation> {
         int user = resultSet.getInt("user_id");
         int ticketId = resultSet.getInt("ticket");
         int flightId = resultSet.getInt("flight");
-        String company = resultSet.getString("company");
+        int companyId = resultSet.getInt("company");
+        String companyName = resultSet.getString("name");
         Date departDate = resultSet.getDate("depart_date");
         Date returnDate = resultSet.getDate("return_date");
         boolean oneWay = resultSet.getBoolean("one_way");
         String origin = resultSet.getString("origin");
         String destination = resultSet.getString("destination");
 
+        Company company = new Company();
+        company.setId(companyId);
+        company.setName(companyName);
         Ticket ticket = new Ticket();
         ticket.setId(ticketId);
-        ticket.setCompanyName(company);
+        ticket.setCompany(company);
         ticket.setDepartDate(departDate);
         ticket.setReturnDate(returnDate);
         ticket.setOneWay(oneWay);

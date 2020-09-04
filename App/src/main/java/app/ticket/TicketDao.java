@@ -1,6 +1,7 @@
 package app.ticket;
 
 import app.city.City;
+import app.company.Company;
 import app.database.Dao;
 import app.flight.Flight;
 
@@ -53,7 +54,9 @@ public class TicketDao extends Dao<Ticket> {
     @Override
     public List<Ticket> getAll() {
         List<Ticket> tickets = new ArrayList<>();
-        String query = "SELECT * FROM tickets INNER JOIN flights ON tickets.flight = flights.id";
+        String query = "SELECT * FROM tickets " +
+                "INNER JOIN flights ON tickets.flight = flights.id " +
+                "INNER JOIN companies ON tickets.company = companies.id";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.execute();
@@ -107,13 +110,18 @@ public class TicketDao extends Dao<Ticket> {
         Ticket ticket = new Ticket();
 
         int id = resultSet.getInt("id");
-        String company = resultSet.getString("company");
+        int companyId = resultSet.getInt("company");
+        String companyName = resultSet.getString("name");
         int flightId = resultSet.getInt("flight");
         Date departDate = resultSet.getDate("depart_date");
         Date returnDate = resultSet.getDate("return_date");
         boolean oneWay = resultSet.getBoolean("one_way");
         String origin = resultSet.getString("origin");
         String destination = resultSet.getString("destination");
+
+        Company company = new Company();
+        company.setId(companyId);
+        company.setName(companyName);
 
         Flight flight = new Flight();
         flight.setId(flightId);
@@ -122,7 +130,7 @@ public class TicketDao extends Dao<Ticket> {
 
         ticket.setId(id);
         ticket.setFlight(flight);
-        ticket.setCompanyName(company);
+        ticket.setCompany(company);
         ticket.setDepartDate(departDate);
         ticket.setReturnDate(returnDate);
         ticket.setOneWay(oneWay);
@@ -131,7 +139,7 @@ public class TicketDao extends Dao<Ticket> {
     }
 
     private void setTicketData(Ticket ticket, PreparedStatement statement) throws SQLException {
-        statement.setString(1, ticket.getCompanyName());
+        statement.setInt(1, ticket.getCompany().getId());
         statement.setInt(2, ticket.getFlight().getId());
         statement.setDate(3, ticket.getDepartDate());
         statement.setDate(4, ticket.getReturnDate());

@@ -25,6 +25,7 @@ public class SuccessResponse {
     private PageInfo pageInfo;
     private String token;
     private User user;
+    private Company company;
     private boolean success;
 
     public SuccessResponse() {
@@ -76,8 +77,8 @@ public class SuccessResponse {
         this.user = user;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public String toJson() {

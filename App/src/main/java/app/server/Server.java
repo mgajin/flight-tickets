@@ -19,12 +19,11 @@ import static spark.Spark.*;
 public class Server {
 
     private static final int PORT = 3000;
-    private static final String database = "jdbc:postgresql://localhost:5432/online_tickets";
+    private static final String database = "jdbc:postgresql://localhost:5432/flight_tickets";
     private static final String username = "postgres";
-    private static final String password = "tringusija4";
+    private static final String password = "postgres";
 
     public static void main(String[] args) {
-
         port(PORT);
         initDatabase();
         enableCORS();
@@ -45,7 +44,7 @@ public class Server {
         FlightService flightService = new FlightService(flightDao, cityDao, ticketDao);
         ReservationService reservationService = new ReservationService(reservationDao);
         CityService cityService = new CityService(cityDao);
-        CompanyService companyService = new CompanyService(companyDao);
+        CompanyService companyService = new CompanyService(companyDao, ticketDao);
 
         TicketController ticketsController = new TicketController(ticketService);
         UserController userController = new UserController(userService);
@@ -53,7 +52,7 @@ public class Server {
         FlightController flightController = new FlightController(flightService);
         ReservationController reservationController = new ReservationController(reservationService);
         CityController cityController = new CityController(cityService);
-        CompanyController companyController = new CompanyController(companyService);
+        CompanyController companyController = new CompanyController(companyService, ticketService);
 
         TicketRoutes ticketRoutes = new TicketRoutes(ticketsController);
         UserRoutes userRoutes = new UserRoutes(userController);

@@ -42,7 +42,21 @@ public class CompanyDao extends Dao<Company> {
 
     @Override
     public Company getById(int id) {
-        return null;
+        Company company = null;
+        String query = "SELECT * FROM companies WHERE id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                company = getResultData(resultSet);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+        return company;
     }
 
     @Override
@@ -51,8 +65,17 @@ public class CompanyDao extends Dao<Company> {
     }
 
     @Override
-    public boolean update(Company item) {
-        return false;
+    public boolean update(Company company) {
+        String query = "UPDATE companies SET name=? WHERE id=?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, company.getName());
+            statement.execute();
+            return true;
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     @Override

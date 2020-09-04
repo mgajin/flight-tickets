@@ -46,6 +46,14 @@ public class TicketService {
             .collect(Collectors.toList());
     }
 
+    public List<Ticket> getCompanyTickets(int company) {
+        return repository
+            .getAll()
+            .stream()
+            .filter(ticket -> ticket.getCompany().getId() == company)
+            .collect(Collectors.toList());
+    }
+
     public boolean createTicket(Ticket ticket) {
         return repository.insert(ticket);
     }
