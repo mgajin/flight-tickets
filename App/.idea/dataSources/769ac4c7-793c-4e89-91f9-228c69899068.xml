@@ -1381,15 +1381,16 @@ true posix/WET
 false posix/Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1599210224</StartupTime>
+      <StartupTime>1599232838</StartupTime>
     </root>
     <database id="2" parent="1" name="flight_tickets">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>544</IntrospectionStateNumber>
+      <IntrospectionStateNumber>567</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16385|16387|3
 sequence|table|16397|16399|1
+sequence|table|16458|16460|1
 sequence|table|16410|16412|1
 sequence|table|16423|16425|1
 sequence|table|16443|16445|1
@@ -1449,7 +1450,7 @@ sequence|table|16443|16445|1
       <Comment>standard public schema</Comment>
       <StateNumber>275</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>545</IntrospectionStateNumber>
+      <IntrospectionStateNumber>568</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
@@ -1537,44 +1538,55 @@ sequence|table|16443|16445|1
       <StateNumber>490</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="31" parent="15" name="tickets_id_seq">
+    <sequence id="31" parent="15" name="reservations_id_seq">
+      <ObjectId>16458</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>564</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="32" parent="15" name="tickets_id_seq">
       <ObjectId>16423</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>507</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="32" parent="15" name="users_id_seq">
+    <sequence id="33" parent="15" name="users_id_seq">
       <ObjectId>16443</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>515</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="33" parent="15" name="cities">
+    <table id="34" parent="15" name="cities">
       <ObjectId>16412</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>501</StateNumber>
     </table>
-    <table id="34" parent="15" name="companies">
+    <table id="35" parent="15" name="companies">
       <ObjectId>16399</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>507</StateNumber>
     </table>
-    <table id="35" parent="15" name="flights">
+    <table id="36" parent="15" name="flights">
       <ObjectId>16387</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>507</StateNumber>
     </table>
-    <table id="36" parent="15" name="tickets">
+    <table id="37" parent="15" name="reservations">
+      <ObjectId>16460</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>564</StateNumber>
+    </table>
+    <table id="38" parent="15" name="tickets">
       <ObjectId>16425</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>527</StateNumber>
     </table>
-    <table id="37" parent="15" name="users">
+    <table id="39" parent="15" name="users">
       <ObjectId>16445</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>543</StateNumber>
+      <StateNumber>564</StateNumber>
     </table>
-    <column id="38" parent="33" name="id">
+    <column id="40" parent="34" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1582,40 +1594,40 @@ sequence|table|16443|16445|1
       <DefaultExpression>nextval(&apos;cities_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="39" parent="33" name="name">
+    <column id="41" parent="34" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>501</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="40" parent="33" name="cities_id_uindex">
+    <index id="42" parent="34" name="cities_id_uindex">
       <ObjectId>16419</ObjectId>
       <StateNumber>502</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="41" parent="33" name="cities_pk">
+    <index id="43" parent="34" name="cities_pk">
       <ObjectId>16421</ObjectId>
       <StateNumber>504</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="42" parent="33" name="cities_name_uindex">
+    <index id="44" parent="34" name="cities_name_uindex">
       <ObjectId>16420</ObjectId>
       <StateNumber>503</StateNumber>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="43" parent="33" name="cities_pk">
+    <key id="45" parent="34" name="cities_pk">
       <ObjectId>16422</ObjectId>
       <StateNumber>504</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>cities_pk</UnderlyingIndexName>
     </key>
-    <column id="44" parent="34" name="id">
+    <column id="46" parent="35" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1623,54 +1635,54 @@ sequence|table|16443|16445|1
       <DefaultExpression>nextval(&apos;companies_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="45" parent="34" name="name">
+    <column id="47" parent="35" name="name">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>495</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="46" parent="34" name="companies_id_uindex">
+    <index id="48" parent="35" name="companies_id_uindex">
       <ObjectId>16406</ObjectId>
       <StateNumber>496</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="47" parent="34" name="companies_pk">
+    <index id="49" parent="35" name="companies_pk">
       <ObjectId>16408</ObjectId>
       <StateNumber>498</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="48" parent="34" name="companies_name_uindex">
+    <index id="50" parent="35" name="companies_name_uindex">
       <ObjectId>16407</ObjectId>
       <StateNumber>497</StateNumber>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="49" parent="34" name="companies_pk">
+    <key id="51" parent="35" name="companies_pk">
       <ObjectId>16409</ObjectId>
       <StateNumber>498</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>companies_pk</UnderlyingIndexName>
     </key>
-    <column id="50" parent="35" name="origin">
+    <column id="52" parent="36" name="origin">
       <Position>1</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>490</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="51" parent="35" name="destination">
+    <column id="53" parent="36" name="destination">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>490</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="52" parent="35" name="id">
+    <column id="54" parent="36" name="id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1678,27 +1690,113 @@ sequence|table|16443|16445|1
       <DefaultExpression>nextval(&apos;flights_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="53" parent="35" name="flights_id_uindex">
+    <index id="55" parent="36" name="flights_id_uindex">
       <ObjectId>16394</ObjectId>
       <StateNumber>491</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="54" parent="35" name="flights_pk">
+    <index id="56" parent="36" name="flights_pk">
       <ObjectId>16395</ObjectId>
       <StateNumber>492</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="55" parent="35" name="flights_pk">
+    <key id="57" parent="36" name="flights_pk">
       <ObjectId>16396</ObjectId>
       <StateNumber>492</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>flights_pk</UnderlyingIndexName>
     </key>
-    <column id="56" parent="36" name="id">
+    <column id="58" parent="37" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>564</StateNumber>
+      <DefaultExpression>nextval(&apos;reservations_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="59" parent="37" name="user_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>564</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="60" parent="37" name="ticket">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>564</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="61" parent="37" name="flight">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>564</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="62" parent="37" name="is_available">
+      <Position>5</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>564</StateNumber>
+      <DefaultExpression>true</DefaultExpression>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="63" parent="37" name="reservations_id_uindex">
+      <ObjectId>16480</ObjectId>
+      <StateNumber>565</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="64" parent="37" name="reservations_pk">
+      <ObjectId>16481</ObjectId>
+      <StateNumber>566</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="65" parent="37" name="reservations_pk">
+      <ObjectId>16482</ObjectId>
+      <StateNumber>566</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>reservations_pk</UnderlyingIndexName>
+    </key>
+    <foreign-key id="66" parent="37" name="user_id">
+      <ObjectId>16475</ObjectId>
+      <StateNumber>564</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16445</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>users_pk</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="67" parent="37" name="ticket">
+      <ObjectId>16470</ObjectId>
+      <StateNumber>564</StateNumber>
+      <ColNames>ticket</ColNames>
+      <RefTableId>16425</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tickets</RefTableName>
+      <RefKeyName>tickets_pk</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="68" parent="37" name="flight">
+      <ObjectId>16465</ObjectId>
+      <StateNumber>564</StateNumber>
+      <ColNames>flight</ColNames>
+      <RefTableId>16387</RefTableId>
+      <RefColPositions>3</RefColPositions>
+      <RefTableName>flights</RefTableName>
+      <RefKeyName>flights_pk</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="69" parent="38" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1706,66 +1804,66 @@ sequence|table|16443|16445|1
       <DefaultExpression>nextval(&apos;tickets_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="57" parent="36" name="depart_date">
+    <column id="70" parent="38" name="depart_date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>507</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="58" parent="36" name="return_date">
+    <column id="71" parent="38" name="return_date">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <StateNumber>507</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="59" parent="36" name="company">
+    <column id="72" parent="38" name="company">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>507</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="60" parent="36" name="one_way">
+    <column id="73" parent="38" name="one_way">
       <Position>5</Position>
       <DataType>boolean|0s</DataType>
       <StateNumber>507</StateNumber>
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <column id="61" parent="36" name="flight">
+    <column id="74" parent="38" name="flight">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>507</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="62" parent="36" name="count">
+    <column id="75" parent="38" name="count">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>527</StateNumber>
       <DefaultExpression>2</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <index id="63" parent="36" name="tickets_id_uindex">
+    <index id="76" parent="38" name="tickets_id_uindex">
       <ObjectId>16440</ObjectId>
       <StateNumber>508</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="64" parent="36" name="tickets_pk">
+    <index id="77" parent="38" name="tickets_pk">
       <ObjectId>16441</ObjectId>
       <StateNumber>509</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="65" parent="36" name="tickets_pk">
+    <key id="78" parent="38" name="tickets_pk">
       <ObjectId>16442</ObjectId>
       <StateNumber>509</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tickets_pk</UnderlyingIndexName>
     </key>
-    <foreign-key id="66" parent="36" name="company">
+    <foreign-key id="79" parent="38" name="company">
       <ObjectId>16430</ObjectId>
       <StateNumber>507</StateNumber>
       <ColNames>company</ColNames>
@@ -1775,7 +1873,7 @@ sequence|table|16443|16445|1
       <RefKeyName>companies_pk</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="67" parent="36" name="flight">
+    <foreign-key id="80" parent="38" name="flight">
       <ObjectId>16435</ObjectId>
       <StateNumber>507</StateNumber>
       <ColNames>flight</ColNames>
@@ -1785,7 +1883,7 @@ sequence|table|16443|16445|1
       <RefKeyName>flights_pk</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="68" parent="37" name="id">
+    <column id="81" parent="39" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1793,47 +1891,47 @@ sequence|table|16443|16445|1
       <DefaultExpression>nextval(&apos;users_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="69" parent="37" name="username">
+    <column id="82" parent="39" name="username">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>515</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="70" parent="37" name="password">
+    <column id="83" parent="39" name="password">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>515</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="71" parent="37" name="is_admin">
+    <column id="84" parent="39" name="is_admin">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <StateNumber>543</StateNumber>
       <DefaultExpression>false</DefaultExpression>
       <TypeId>16</TypeId>
     </column>
-    <index id="72" parent="37" name="users_id_uindex">
+    <index id="85" parent="39" name="users_id_uindex">
       <ObjectId>16452</ObjectId>
       <StateNumber>516</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="73" parent="37" name="users_pk">
+    <index id="86" parent="39" name="users_pk">
       <ObjectId>16454</ObjectId>
       <StateNumber>518</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="74" parent="37" name="users_username_uindex">
+    <index id="87" parent="39" name="users_username_uindex">
       <ObjectId>16453</ObjectId>
       <StateNumber>517</StateNumber>
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="75" parent="37" name="users_pk">
+    <key id="88" parent="39" name="users_pk">
       <ObjectId>16455</ObjectId>
       <StateNumber>518</StateNumber>
       <ColNames>id</ColNames>

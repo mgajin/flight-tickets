@@ -62,7 +62,7 @@ public class AuthController {
 
         if (userService.getUser(user.getUsername()) != null) {
             ErrorResponse errorResponse = new ErrorResponse();
-            errorResponse.setMessage("User already exists found");
+            errorResponse.setMessage("User already exists");
             res.status(401);
             return errorResponse.toJson();
         } else if (!userService.addUser(user)) {

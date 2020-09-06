@@ -7,7 +7,11 @@
     </v-row>
     <v-row>
       <v-col cols="12" sm="6" lg="4" v-for="ticket in getTickets" :key="ticket.id">
-        <TicketCard :ticket="ticket" :flight="ticket.flight" @action="reserve" />
+        <TicketCard
+          :ticket="ticket"
+          :flight="ticket.flight"
+          @action="reserve(ticket, ticket.flight)"
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -70,15 +74,15 @@ export default {
       loadTickets: "GET_TICKETS",
       addReservation: "ADD_RESERVATION",
     }),
-    reserve: function () {
+    reserve: function (ticket, flight) {
       if (this.getToken == null || this.getUser == null) {
         alert("Log in first");
       } else {
         const user = JSON.parse(this.getUser);
         const payload = {
           user: user.id,
-          ticket: this.ticket.id,
-          flight: this.flight.id,
+          ticket: ticket.id,
+          flight: flight.id,
         };
         this.addReservation(payload);
       }
